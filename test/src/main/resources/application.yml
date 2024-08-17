@@ -15,6 +15,6 @@ spring:
       hibernate:
         format_sql: true
         highlight_sql: true
-        hbm2ddl.auto: create
+        hbm2ddl.auto: create-drop
     open-in-view: false
     show-sql: true
