@@ -23,7 +23,10 @@ public class LibraryServiceTest {
     private LibraryServiceV3 libraryServiceV3;
 
     /**
-     * V1은 클래스 단위로 @Transactional이 선언되어 있으며, N+1 문제가 발생할 수 있음.
+     * @formatter:off
+     * V1 Service: 클래스 레벨 @Transactional을 사용하는 경우 N+1 문제가 발생하는지 확인합니다.
+     * LibraryServiceV1에서 N+1 문제가 발생해야 합니다.
+     * @formatter:on
      */
     @Test
     void testNPlusOneDetectionInV1(CapturedOutput output) {
@@ -33,7 +36,10 @@ public class LibraryServiceTest {
     }
 
     /**
-     * V2는 메서드 단위로 @Transactional이 선언되어 있으며, 여전히 N+1 문제가 발생할 수 있음.
+     * @formatter:off
+     * V2 Service: 메서드 레벨 @Transactional을 사용하는 경우 N+1 문제가 발생하는지 확인합니다.
+     * LibraryServiceV2에서 N+1 문제가 발생해야 합니다.
+     * @formatter:on
      */
     @Test
     void testNPlusOneDetectionInV2(CapturedOutput output) {
@@ -43,7 +49,10 @@ public class LibraryServiceTest {
     }
 
     /**
-     * V3는 OSIV(Open Session In View)를 이용한 지연 조회를 사용하며, N+1 문제가 발생하지 않아야 정상임.
+     * @formatter:off
+     * V3 Service: OSIV를 사용하는 경우 N+1 문제가 발생하지 않는지 확인합니다.
+     * LibraryServiceV3에서 N+1 문제가 발생하지 않아야 합니다.
+     * @formatter:on
      */
     @Test
     void testNPlusOneDetectionInV3(CapturedOutput output) {
