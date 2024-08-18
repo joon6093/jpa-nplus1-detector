@@ -1,1 +1,8 @@
-GET http://localhost:8080/api/library/authors
+### 클래스 단위의 @Transactional 선언
+GET http://localhost:8080/api/library/v1/authors
+
+### 메서드 단위의 @Transactional 선언
+GET http://localhost:8080/api/library/v2/authors
+
+### OSIV를 이용한 지연 조회
+GET http://localhost:8080/api/library/v3/authors
