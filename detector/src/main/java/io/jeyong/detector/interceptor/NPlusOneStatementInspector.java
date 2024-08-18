@@ -7,7 +7,6 @@ import org.hibernate.resource.jdbc.spi.StatementInspector;
 public final class NPlusOneStatementInspector implements StatementInspector {
 
     private static final String SELECT_KEYWORD = "select";
-
     private final LoggingContext loggingContext;
 
     public NPlusOneStatementInspector(final LoggingContext loggingContext) {
@@ -23,7 +22,7 @@ public final class NPlusOneStatementInspector implements StatementInspector {
         return sql;
     }
 
-    private boolean isSelectQuery(String sql) {
+    private boolean isSelectQuery(final String sql) {
         return sql.trim().toLowerCase().startsWith(SELECT_KEYWORD);
     }
 }

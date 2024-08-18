@@ -24,18 +24,18 @@ public class NPlusOneDetectorConfig {
     }
 
     @Bean
-    public NPlusOneDetectionAop nPlusOneDetectionAop(LoggingContext loggingContext) {
+    public NPlusOneDetectionAop nPlusOneDetectionAop(final LoggingContext loggingContext) {
         return new NPlusOneDetectionAop(loggingContext);
     }
-    
+
     @Bean
-    public NPlusOneStatementInspector nPlusOneStatementInspector(LoggingContext loggingContext) {
+    public NPlusOneStatementInspector nPlusOneStatementInspector(final LoggingContext loggingContext) {
         return new NPlusOneStatementInspector(loggingContext);
     }
 
     @Bean
     public HibernatePropertiesCustomizer hibernatePropertyConfig(
-            NPlusOneStatementInspector nPlusOneStatementInspector) {
+            final NPlusOneStatementInspector nPlusOneStatementInspector) {
         return hibernateProperties ->
                 hibernateProperties.put(AvailableSettings.STATEMENT_INSPECTOR, nPlusOneStatementInspector);
     }
