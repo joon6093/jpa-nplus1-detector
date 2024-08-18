@@ -1,7 +1,7 @@
-package io.jeyong.test.controller;
+package io.jeyong.test.case1.controller;
 
-import io.jeyong.test.entity.Author;
-import io.jeyong.test.service.LibraryService;
+import io.jeyong.test.case1.entity.Author;
+import io.jeyong.test.case1.service.LibraryService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

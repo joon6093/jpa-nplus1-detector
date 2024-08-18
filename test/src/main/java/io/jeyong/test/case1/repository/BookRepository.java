@@ -1,6 +1,6 @@
-package io.jeyong.test.repository;
+package io.jeyong.test.case1.repository;
 
-import io.jeyong.test.entity.Book;
+import io.jeyong.test.case1.entity.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BookRepository extends JpaRepository<Book, Long> {

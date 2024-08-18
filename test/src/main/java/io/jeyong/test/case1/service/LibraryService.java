@@ -1,15 +1,15 @@
-package io.jeyong.test.service;
+package io.jeyong.test.case1.service;
 
-import io.jeyong.test.entity.Author;
-import io.jeyong.test.repository.AuthorRepository;
+import io.jeyong.test.case1.entity.Author;
+import io.jeyong.test.case1.repository.AuthorRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
+@RequiredArgsConstructor
 public class LibraryService {
 
     private final AuthorRepository authorRepository;

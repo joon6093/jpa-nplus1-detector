@@ -1,12 +1,13 @@
-package io.jeyong.test.entity;
+package io.jeyong.test.case1.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import java.util.List;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,14 +16,16 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Author {
+public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String title;
 
-    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
-    private List<Book> books;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id")
+    private Author author;
 }

@@ -1,9 +1,9 @@
 package io.jeyong.test;
 
-import io.jeyong.test.entity.Author;
-import io.jeyong.test.entity.Book;
-import io.jeyong.test.repository.AuthorRepository;
-import io.jeyong.test.repository.BookRepository;
+import io.jeyong.test.case1.entity.Author;
+import io.jeyong.test.case1.entity.Book;
+import io.jeyong.test.case1.repository.AuthorRepository;
+import io.jeyong.test.case1.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -22,6 +22,10 @@ public class InitData {
     @EventListener(ApplicationReadyEvent.class)
     @Transactional
     public void initData() {
+        initCase1();
+    }
+
+    private void initCase1() {
         Author author1 = new Author();
         author1.setName("Author 1");
 
