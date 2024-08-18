@@ -15,9 +15,12 @@ public final class NPlusOneDetectionAop {
 
     private static final Logger logger = LoggerFactory.getLogger(NPlusOneDetectionAop.class);
     private final LoggingContext loggingContext;
+    private final int queryThreshold;
 
-    public NPlusOneDetectionAop(final LoggingContext loggingContext) {
+    public NPlusOneDetectionAop(final LoggingContext loggingContext,
+                                final int queryThreshold) {
         this.loggingContext = loggingContext;
+        this.queryThreshold = queryThreshold;
     }
 
     @Around("execution(* javax.sql.DataSource.getConnection())")
@@ -28,9 +31,13 @@ public final class NPlusOneDetectionAop {
 
     private void logNPlusOneIssues() {
         final RequestLogDto logDto = loggingContext.getCurrentLoggingForm();
+
         logDto.getNPlusOneQueries().forEach((sql, count) -> {
-            logger.warn("N+1 issue detected: Query '{}' was executed {} times.", sql, count);
+            if (count >= queryThreshold) {
+                logger.warn("N+1 issue detected: Query '{}' was executed {} times.", sql, count);
+            }
         });
+
         loggingContext.clearLoggingContext();
     }
 }

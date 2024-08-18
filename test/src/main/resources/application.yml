@@ -16,6 +16,9 @@ spring:
         format_sql: true
         highlight_sql: true
         hbm2ddl.auto: create-drop
-        detector: true
+        detector:
+          enabled: true     # N+1 문제 감지 기능 활성화 여부 / 기본 값 : false
+          threshold: 2      # 쿼리 실행 횟수 기준 설정 (예: 3회 이상 실행된 쿼리에 대해 N+1 문제 감지) / 기본 값 : 2
+
     #    open-in-view: false
     show-sql: true

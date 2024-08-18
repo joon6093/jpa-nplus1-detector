@@ -2,7 +2,6 @@ package io.jeyong.detector.dto;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public final class RequestLogDto {
 
@@ -13,8 +12,6 @@ public final class RequestLogDto {
     }
 
     public Map<String, Long> getNPlusOneQueries() {
-        return queryOccurrences.entrySet().stream()
-                .filter(entry -> entry.getValue() > 1)
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        return queryOccurrences;
     }
 }
