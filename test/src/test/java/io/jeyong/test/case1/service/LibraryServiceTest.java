@@ -24,8 +24,8 @@ public class LibraryServiceTest {
 
     /**
      * @formatter:off
-     * V1 Service: 클래스 레벨 @Transactional을 사용하는 경우 N+1 문제가 발생하는지 확인합니다.
-     * LibraryServiceV1에서 N+1 문제가 발생해야 합니다.
+     * V1 Service: Verify if N+1 issue occurs when using class-level @Transactional.
+     * The N+1 issue should occur in LibraryServiceV1.
      * @formatter:on
      */
     @Test
@@ -37,8 +37,8 @@ public class LibraryServiceTest {
 
     /**
      * @formatter:off
-     * V2 Service: 메서드 레벨 @Transactional을 사용하는 경우 N+1 문제가 발생하는지 확인합니다.
-     * LibraryServiceV2에서 N+1 문제가 발생해야 합니다.
+     * V2 Service: Verify if N+1 issue occurs when using method-level @Transactional.
+     * The N+1 issue should occur in LibraryServiceV2.
      * @formatter:on
      */
     @Test
@@ -50,8 +50,8 @@ public class LibraryServiceTest {
 
     /**
      * @formatter:off
-     * V3 Service: OSIV를 사용하는 경우 N+1 문제가 발생하지 않는지 확인합니다.
-     * LibraryServiceV3에서 N+1 문제가 발생하지 않아야 합니다.
+     * V3 Service: Verify if N+1 issue does not occur when using OSIV.
+     * The N+1 issue should not occur in LibraryServiceV3.
      * @formatter:on
      */
     @Test

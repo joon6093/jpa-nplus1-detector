@@ -26,8 +26,8 @@ class LibraryControllerTest {
 
     /**
      * @formatter:off
-     * V1 Controller: N+1 문제가 발생하는지 테스트
-     * /api/library/v1/authors 엔드포인트에서 N+1 문제가 감지되어야 합니다.
+     * V1 Controller: Test if N+1 issue occurs
+     * The N+1 issue should be detected at the /api/library/v1/authors endpoint.
      * @formatter:on
      */
     @Test
@@ -41,8 +41,8 @@ class LibraryControllerTest {
 
     /**
      * @formatter:off
-     * V2 Controller: N+1 문제가 발생하는지 테스트
-     * /api/library/v2/authors 엔드포인트에서 N+1 문제가 감지되어야 합니다.
+     * V2 Controller: Test if N+1 issue occurs
+     * The N+1 issue should be detected at the /api/library/v2/authors endpoint.
      * @formatter:on
      */
     @Test
@@ -56,8 +56,8 @@ class LibraryControllerTest {
 
     /**
      * @formatter:off
-     * V3 Controller: N+1 문제가 발생하는지 테스트
-     * /api/library/v3/authors 엔드포인트에서 OSIV를 사용하여 N+1 문제가 감지되어야 합니다.
+     * V3 Controller: Test if N+1 issue occurs
+     * The N+1 issue should be detected at the /api/library/v3/authors endpoint using OSIV.
      * @formatter:on
      */
     @Test
