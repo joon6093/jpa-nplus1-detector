@@ -27,7 +27,7 @@ public class NPlusOneDetectorConfig {
     public NPlusOneDetectionAop nPlusOneDetectionAop(LoggingContext loggingContext) {
         return new NPlusOneDetectionAop(loggingContext);
     }
-
+    
     @Bean
     public NPlusOneStatementInspector nPlusOneStatementInspector(LoggingContext loggingContext) {
         return new NPlusOneStatementInspector(loggingContext);
