@@ -16,5 +16,6 @@ spring:
         format_sql: true
         highlight_sql: true
         hbm2ddl.auto: create-drop
+        detector: true
     open-in-view: false
     show-sql: true
