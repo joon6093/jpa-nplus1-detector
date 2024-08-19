@@ -1,9 +1,9 @@
 # N+1 Query Detector for JPA (Hibernate)
 
-## 🚀 Getting Started
+## 📦 Dependence
 To integrate the N+1 Query Detector into your project, follow the steps below depending on your build tool
 
-#### Gradle
+#### Gradle (build.gradle)
 
 ```
 repositories {
@@ -15,7 +15,7 @@ dependencies {
 }
 ```
 
-#### Maven
+#### Maven (pom.xml)
 
 ```
 <repositories>  
@@ -61,3 +61,7 @@ Here’s an example of what the log will look like when an N+1 issue is detected
 - Please be aware that the N+1 query detector is disabled by default (enabled: false) due to potential performance implications. It is recommended to enable this feature only in your local or development environment to avoid any negative impact on production performance.
 - If you encounter any types of N+1 issues that the detector does not catch, please report them by creating an issue in the project repository. This will help us improve the tool by updating and enhancing its detection capabilities.
 - If you found this project helpful or interesting, please consider giving it a star on GitHub! ⭐
+
+## 🗓️ Release
+- [Version 1.0.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.0.0) - Released on 2024/08/19
+
