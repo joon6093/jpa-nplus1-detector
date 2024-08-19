@@ -1,11 +1,11 @@
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.2'
-    id 'io.spring.dependency-management' version '1.1.6'
+    id 'maven-publish'
 }
 
 group = 'io.jeyong'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 
 java {
     toolchain {
@@ -15,11 +15,12 @@ java {
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter:3.3.2'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.3.2'
 }
 
 bootJar {
@@ -28,4 +29,15 @@ bootJar {
 
 jar {
     enabled = true
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            groupId = project.group
+            artifactId = 'jpa-nplus1-detector'
+            version = project.version
+        }
+    }
 }
