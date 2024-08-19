@@ -29,6 +29,7 @@ bootJar {
 
 jar {
     enabled = true
+    archiveFileName = "jpa-nplus1-detector-${version}.jar"
 }
 
 publishing {
