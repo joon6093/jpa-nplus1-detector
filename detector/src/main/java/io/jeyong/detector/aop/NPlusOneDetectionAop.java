@@ -23,7 +23,7 @@ public final class NPlusOneDetectionAop {
         this.queryThreshold = queryThreshold;
     }
 
-    @Around("execution(* javax.sql.DataSource.getConnection())")
+    @Around("execution(* javax.sql.DataSource.getConnection())")  // TODO. ThreadLocal Optimization
     public Object wrapConnectionWithProxy(final ProceedingJoinPoint joinPoint) throws Throwable {
         final Connection originalConnection = (Connection) joinPoint.proceed();
         return ConnectionMethodInterceptor.createProxy(originalConnection, this::logNPlusOneIssues);
