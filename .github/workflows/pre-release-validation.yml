@@ -1,0 +1,84 @@
+name: 'pre-release-validation'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+
+permissions: write-all
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      validation-cache-key: ${{ steps.validation-cache.outputs.key }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Change directory to test
+        run: cd test
+
+      - name: Generate validation cache key
+        id: validation-cache
+        run: echo "key=$(echo validation-${{ runner.os }}-gradle-${{ hashFiles('test/**/*.gradle*', 'test/**/gradle-wrapper.properties') }})" >> $GITHUB_OUTPUT
+
+      - name: validation start time
+        shell: bash
+        run: echo "START_TIME=$(TZ=":Asia/Seoul" date -R|sed 's/.....$//')"
+
+  validation:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Change directory to test
+        run: cd test
+
+      - name: Cache Gradle packages
+        id: cache-gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ needs.setup.outputs.validation-cache-key }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Cache Check
+        if: steps.cache-gradle.outputs.cache-hit == 'true'
+        run: echo 'Gradle cache hit!'
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: 'temurin'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      - name: Run validation
+        run: ./gradlew test
+
+      - name: Upload validation HTML report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validation-report
+          path: ${{ github.workspace }}/test/build/reports/tests/test/
+
+      - name: publish validation results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: ${{ github.workspace }}/test/build/test-results/test/TEST-*.xml
+
+      - name: add comments to a pull request
+        uses: mikepenz/action-junit-report@v4
+        if: github.event_name == 'pull_request' && always()
+        with:
+          report_paths: ${{ github.workspace }}/test/build/test-results/test/TEST-*.xml
