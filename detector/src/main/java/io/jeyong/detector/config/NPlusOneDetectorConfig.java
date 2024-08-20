@@ -1,7 +1,7 @@
 package io.jeyong.detector.config;
 
 import io.jeyong.detector.aop.NPlusOneDetectionAop;
-import io.jeyong.detector.context.LoggingContext;
+import io.jeyong.detector.context.QueryLoggingContext;
 import io.jeyong.detector.interceptor.NPlusOneStatementInspector;
 import org.hibernate.cfg.AvailableSettings;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -27,18 +27,18 @@ public class NPlusOneDetectorConfig {
     }
 
     @Bean
-    public LoggingContext loggingContext() {
-        return new LoggingContext();
+    public QueryLoggingContext loggingContext() {
+        return new QueryLoggingContext();
     }
 
     @Bean
-    public NPlusOneDetectionAop nPlusOneDetectionAop(final LoggingContext loggingContext) {
-        return new NPlusOneDetectionAop(loggingContext, nPlusOneDetectorProperties.getThreshold());
+    public NPlusOneDetectionAop nPlusOneDetectionAop(final QueryLoggingContext queryLoggingContext) {
+        return new NPlusOneDetectionAop(queryLoggingContext, nPlusOneDetectorProperties.getThreshold());
     }
 
     @Bean
-    public NPlusOneStatementInspector nPlusOneStatementInspector(final LoggingContext loggingContext) {
-        return new NPlusOneStatementInspector(loggingContext);
+    public NPlusOneStatementInspector nPlusOneStatementInspector(final QueryLoggingContext queryLoggingContext) {
+        return new NPlusOneStatementInspector(queryLoggingContext);
     }
 
     @Bean
