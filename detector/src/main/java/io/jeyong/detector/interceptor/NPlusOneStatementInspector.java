@@ -1,7 +1,6 @@
 package io.jeyong.detector.interceptor;
 
 import io.jeyong.detector.context.LoggingContext;
-import io.jeyong.detector.dto.RequestLogDto;
 import org.hibernate.resource.jdbc.spi.StatementInspector;
 
 public final class NPlusOneStatementInspector implements StatementInspector {
@@ -16,8 +15,7 @@ public final class NPlusOneStatementInspector implements StatementInspector {
     @Override
     public String inspect(final String sql) {
         if (isSelectQuery(sql)) {
-            final RequestLogDto logDto = loggingContext.getCurrentLoggingForm();
-            logDto.addQueryOccurrence(sql);
+            loggingContext.logQueryOccurrence(sql);
         }
         return sql;
     }

@@ -1,7 +1,6 @@
 package io.jeyong.detector.aop;
 
 import io.jeyong.detector.context.LoggingContext;
-import io.jeyong.detector.dto.RequestLogDto;
 import io.jeyong.detector.interceptor.ConnectionMethodInterceptor;
 import java.sql.Connection;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -23,16 +22,14 @@ public final class NPlusOneDetectionAop {
         this.queryThreshold = queryThreshold;
     }
 
-    @Around("execution(* javax.sql.DataSource.getConnection())")  // TODO. ThreadLocal Optimization
+    @Around("execution(* javax.sql.DataSource.getConnection())")
     public Object wrapConnectionWithProxy(final ProceedingJoinPoint joinPoint) throws Throwable {
         final Connection originalConnection = (Connection) joinPoint.proceed();
         return ConnectionMethodInterceptor.createProxy(originalConnection, this::logNPlusOneIssues);
     }
 
     private void logNPlusOneIssues() {
-        final RequestLogDto logDto = loggingContext.getCurrentLoggingForm();
-
-        logDto.getNPlusOneQueries().forEach((sql, count) -> {
+        loggingContext.getCurrentQueryOccurrences().forEach((sql, count) -> {
             if (count >= queryThreshold) {
                 logger.warn("N+1 issue detected: Query '{}' was executed {} times.", sql, count);
             }
