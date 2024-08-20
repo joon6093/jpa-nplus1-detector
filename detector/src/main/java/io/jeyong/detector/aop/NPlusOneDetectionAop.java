@@ -1,6 +1,6 @@
 package io.jeyong.detector.aop;
 
-import io.jeyong.detector.context.LoggingContext;
+import io.jeyong.detector.context.QueryLoggingContext;
 import io.jeyong.detector.interceptor.ConnectionMethodInterceptor;
 import java.sql.Connection;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -13,12 +13,12 @@ import org.slf4j.LoggerFactory;
 public final class NPlusOneDetectionAop {
 
     private static final Logger logger = LoggerFactory.getLogger(NPlusOneDetectionAop.class);
-    private final LoggingContext loggingContext;
+    private final QueryLoggingContext queryLoggingContext;
     private final int queryThreshold;
 
-    public NPlusOneDetectionAop(final LoggingContext loggingContext,
+    public NPlusOneDetectionAop(final QueryLoggingContext queryLoggingContext,
                                 final int queryThreshold) {
-        this.loggingContext = loggingContext;
+        this.queryLoggingContext = queryLoggingContext;
         this.queryThreshold = queryThreshold;
     }
 
@@ -29,12 +29,12 @@ public final class NPlusOneDetectionAop {
     }
 
     private void logNPlusOneIssues() {
-        loggingContext.getCurrentQueryOccurrences().forEach((sql, count) -> {
+        queryLoggingContext.getCurrentQueryOccurrences().forEach((sql, count) -> {
             if (count >= queryThreshold) {
                 logger.warn("N+1 issue detected: Query '{}' was executed {} times.", sql, count);
             }
         });
 
-        loggingContext.clearLoggingContext();
+        queryLoggingContext.clearLoggingContext();
     }
 }

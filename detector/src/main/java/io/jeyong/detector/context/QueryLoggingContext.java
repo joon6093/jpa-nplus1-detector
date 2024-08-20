@@ -2,7 +2,7 @@ package io.jeyong.detector.context;
 
 import java.util.Map;
 
-public final class LoggingContext {
+public final class QueryLoggingContext {
 
     private final ThreadLocal<QueryLog> currentLoggingForm = ThreadLocal.withInitial(QueryLog::new);
 
