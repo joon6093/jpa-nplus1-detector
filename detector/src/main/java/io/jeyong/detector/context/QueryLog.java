@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-final class RequestLogDto {
+final class QueryLog {
 
     private final Map<String, Long> queryOccurrences = new HashMap<>();
 
