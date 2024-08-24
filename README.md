@@ -1,7 +1,14 @@
 # N+1 Query Detector for JPA (Hibernate)
 
+## ⚙️ Requirements
+To use the N+1 Query Detector, ensure that your project meets the following requirements.
+
+- **Spring Boot:** 3.0.0 or higher
+- **Java:** 17 or higher
+- **Hibernate:** 6.x (compatible with Spring Boot 3.x)
+
 ## 📦 Dependence
-To integrate the N+1 Query Detector into your project, follow the steps below depending on your build tool
+To integrate the N+1 Query Detector into your project, follow the steps below depending on your build tool.
 
 #### Gradle (build.gradle)
 
@@ -11,7 +18,7 @@ repositories {
 }
 
 dependencies {  
-    implementation 'com.github.joon6093:jpa-nplus1-detector:1.1.0'  
+    implementation 'com.github.joon6093:jpa-nplus1-detector:1.1.1'  
 }
 ```
 
@@ -28,7 +35,7 @@ dependencies {
 <dependency>  
     <groupId>com.github.joon6093</groupId>  
     <artifactId>jpa-nplus1-detector</artifactId>  
-    <version>1.1.0</version>  
+    <version>1.1.1</version>  
 </dependency>
 ```
 
@@ -52,7 +59,7 @@ jpa.properties.hibernate.detector.threshold=3      # Set the threshold for query
 ```
 
 ## 📄 Logging Example
-Here’s an example of what the log will look like when an N+1 issue is detected
+Here’s an example of what the log will look like when an N+1 issue is detected.
 ```
 2024-08-19T13:04:22.645+09:00 WARN 4296 --- i.j.detector.aop.NPlusOneDetectionAop : N+1 issue detected: 'select b1_0.author_id,b1_0.id,b1_0.title from book b1_0 where b1_0.author_id=?' was executed 2 times.
 ```
@@ -65,3 +72,4 @@ Here’s an example of what the log will look like when an N+1 issue is detected
 ## 🗓️ Release
 - [Version 1.0.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.0.0) - Released on 2024/08/19
 - [Version 1.1.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.1.0) - Released on 2024/08/21
+- [Version 1.1.1](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.1.1) - Released on 2024/08/24
