@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {  
-    implementation 'com.github.joon6093:jpa-nplus1-detector:1.1.1'  
+    implementation 'com.github.joon6093:jpa-nplus1-detector:1.1.2'  
 }
 ```
 
@@ -35,12 +35,12 @@ dependencies {
 <dependency>  
     <groupId>com.github.joon6093</groupId>  
     <artifactId>jpa-nplus1-detector</artifactId>  
-    <version>1.1.1</version>  
+    <version>1.1.2</version>  
 </dependency>
 ```
 
 ## 🔧 Configuration
-To enable the N+1 query detector, update your Spring Boot configuration file
+To enable the N+1 query detector, update your Spring Boot configuration file.
 
 #### YAML (application.yml)
 ```
@@ -58,8 +58,13 @@ jpa.properties.hibernate.detector.enabled=true     # Enable N+1 query detection 
 jpa.properties.hibernate.detector.threshold=3      # Set the threshold for query execution count (default: 2)
 ```
 
-## 📄 Logging Example
-Here’s an example of what the log will look like when an N+1 issue is detected.
+## 📄 Log
+When the N+1 Detector is enabled, a startup log shows the activation and threshold.
+```
+2024-08-27T14:59:54.307+09:00 INFO 9448 --- i.j.d.config.NPlusOneDetectorConfig : N+1 Detector is enabled with threshold: 2
+```
+
+Example log when an N+1 issue is detected.
 ```
 2024-08-19T13:04:22.645+09:00 WARN 4296 --- i.j.detector.aop.NPlusOneDetectionAop : N+1 issue detected: 'select b1_0.author_id,b1_0.id,b1_0.title from book b1_0 where b1_0.author_id=?' was executed 2 times.
 ```
@@ -73,3 +78,4 @@ Here’s an example of what the log will look like when an N+1 issue is detected
 - [Version 1.0.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.0.0) - Released on 2024/08/19
 - [Version 1.1.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.1.0) - Released on 2024/08/21
 - [Version 1.1.1](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.1.1) - Released on 2024/08/24
+- [Version 1.1.2](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.1.2) - Released on 2024/08/27
