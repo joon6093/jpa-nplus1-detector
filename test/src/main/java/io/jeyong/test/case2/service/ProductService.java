@@ -16,7 +16,7 @@ public class ProductService {
     @Transactional
     public List<Product> findAllProducts() {
         List<Product> products = productRepository.findAll();
-        products.forEach(product -> product.getOrder().getOrderNumber());  // N+1 문제 발생 가능
+        products.forEach(product -> product.getOrder().getOrderNumber());  // N+1 문제 발생
         return products;
     }
 }
