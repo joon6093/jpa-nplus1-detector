@@ -1,0 +1,2 @@
+### Product와 Order는 다대일(N:1) 관계이며, 모든 Product를 조회한 후 각 Product에 대해 별도의 쿼리로 Order를 조회
+GET http://localhost:8080/api/products
