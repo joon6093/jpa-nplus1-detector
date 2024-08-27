@@ -3,7 +3,10 @@ package io.jeyong.detector.config;
 import io.jeyong.detector.aop.NPlusOneDetectionAop;
 import io.jeyong.detector.context.QueryLoggingContext;
 import io.jeyong.detector.interceptor.NPlusOneStatementInspector;
+import jakarta.annotation.PostConstruct;
 import org.hibernate.cfg.AvailableSettings;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -20,10 +23,17 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties(NPlusOneDetectorProperties.class)
 public class NPlusOneDetectorConfig {
 
+    private static final Logger logger = LoggerFactory.getLogger(NPlusOneDetectorConfig.class);
+
     private final NPlusOneDetectorProperties nPlusOneDetectorProperties;
 
     public NPlusOneDetectorConfig(NPlusOneDetectorProperties nPlusOneDetectorProperties) {
         this.nPlusOneDetectorProperties = nPlusOneDetectorProperties;
+    }
+
+    @PostConstruct
+    public void logInitialization() {
+        logger.info("N+1 Detector is enabled with threshold: {}", nPlusOneDetectorProperties.getThreshold());
     }
 
     @Bean
