@@ -27,7 +27,7 @@ public class NPlusOneDetectorConfig {
     }
 
     @Bean
-    public QueryLoggingContext loggingContext() {
+    public QueryLoggingContext queryLoggingContext() {
         return new QueryLoggingContext();
     }
 
