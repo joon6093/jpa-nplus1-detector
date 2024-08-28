@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 import java.util.List;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +25,8 @@ class ProductControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    /**
-     * @formatter:off
-     * Product and Order have a many-to-one (N:1) relationship.
-     * This test verifies if an N+1 issue occurs when accessing the /api/products endpoint,
-     * which fetches all Products and triggers separate queries to fetch the associated Order for each Product.
-     * @formatter:on
-     */
     @Test
+    @DisplayName("다(N)를 조회하는 상황에서 감지하는 것을 검증")
     void testGetProducts(CapturedOutput output) {
         String url = "http://localhost:" + port + "/api/products";
         ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);

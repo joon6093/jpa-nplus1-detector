@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 import java.util.List;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +25,8 @@ class LibraryControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    /**
-     * @formatter:off
-     * V1 Controller: Test if N+1 issue occurs
-     * The N+1 issue should be detected at the /api/library/v1/authors endpoint.
-     * @formatter:on
-     */
     @Test
+    @DisplayName("클래스 단위의 @Transactional 상황에서 감지하는 것을 검증")
     void testGetAuthorsV1(CapturedOutput output) {
         String url = "http://localhost:" + port + "/api/library/v1/authors";
         ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
@@ -39,13 +35,8 @@ class LibraryControllerTest {
         assertThat(output).contains("N+1 issue detected");
     }
 
-    /**
-     * @formatter:off
-     * V2 Controller: Test if N+1 issue occurs
-     * The N+1 issue should be detected at the /api/library/v2/authors endpoint.
-     * @formatter:on
-     */
     @Test
+    @DisplayName("메서드 단위의 @Transactional 상황에서 감지하는 것을 검증")
     void testGetAuthorsV2(CapturedOutput output) {
         String url = "http://localhost:" + port + "/api/library/v2/authors";
         ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
@@ -54,13 +45,8 @@ class LibraryControllerTest {
         assertThat(output).contains("N+1 issue detected");
     }
 
-    /**
-     * @formatter:off
-     * V3 Controller: Test if N+1 issue occurs
-     * The N+1 issue should be detected at the /api/library/v3/authors endpoint using OSIV.
-     * @formatter:on
-     */
     @Test
+    @DisplayName("OSIV를 이용한 지연 조회 상황에서 감지하는 것을 검증")
     void testGetAuthorsV3(CapturedOutput output) {
         String url = "http://localhost:" + port + "/api/library/v3/authors";
         ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);

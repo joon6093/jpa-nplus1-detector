@@ -2,6 +2,7 @@ package io.jeyong.test.case2.service;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +17,9 @@ public class ProductServiceTest {
     @Autowired
     private ProductService productService;
 
-    /**
-     * @formatter:off
-     * Product and Order have a many-to-one (N:1) relationship.
-     * This test verifies if an N+1 issue occurs when fetching all Products,
-     * which then trigger separate queries to fetch the associated Order for each Product.
-     * @formatter:on
-     */
     @Test
-    void testNPlusOneDetection(CapturedOutput output) {
+    @DisplayName("다(N)를 조회하는 상황에서 감지하는 것을 검증")
+    void testFindAllProducts(CapturedOutput output) {
         productService.findAllProducts();
 
         assertThat(output).contains("N+1 issue detected");
