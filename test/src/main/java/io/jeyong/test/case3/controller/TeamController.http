@@ -1,2 +1,2 @@
-### @BatchSize 상황에서 N+1 감지기가 이를 감지하지 않는 것을 검증
+### @BatchSize 상황에서 감지하지 않는 것을 검증
 GET http://localhost:8080/api/teams
