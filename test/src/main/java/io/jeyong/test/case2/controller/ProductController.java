@@ -19,6 +19,7 @@ public class ProductController {
      * @formatter:off
      * Product와 Order는 다대일(N:1) 관계이며,
      * 모든 Product를 조회한 후 각 Product에 대해 별도의 쿼리로 Order를 조회
+     * 다(N)를 조회하는 상황에서 감지하는 것을 검증
      * @formatter:on
      */
     @GetMapping
