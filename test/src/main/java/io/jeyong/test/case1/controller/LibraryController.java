@@ -28,8 +28,7 @@ public class LibraryController {
      */
     @GetMapping("/v1/authors")
     public List<Author> getAuthorsV1() {
-        List<Author> allAuthors = libraryServiceV1.findAllAuthors();
-        return allAuthors;
+        return libraryServiceV1.findAllAuthors();
     }
 
     /**
@@ -41,8 +40,7 @@ public class LibraryController {
      */
     @GetMapping("/v2/authors")
     public List<Author> getAuthorsV2() {
-        List<Author> allAuthors = libraryServiceV2.findAllAuthors();
-        return allAuthors;
+        return libraryServiceV2.findAllAuthors();
     }
 
     /**
