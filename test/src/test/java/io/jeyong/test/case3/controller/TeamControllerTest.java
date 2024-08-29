@@ -1,4 +1,4 @@
-package io.jeyong.test.case2.controller;
+package io.jeyong.test.case3.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
@@ -17,7 +17,7 @@ import org.springframework.http.ResponseEntity;
 
 @ExtendWith(OutputCaptureExtension.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-class ProductControllerTest {
+class TeamControllerTest {
 
     @LocalServerPort
     private int port;
@@ -26,12 +26,12 @@ class ProductControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    @DisplayName("다(N)를 조회하는 상황에서 감지하는 것을 검증")
-    void testGetProducts(CapturedOutput output) {
-        String url = "http://localhost:" + port + "/api/products";
+    @DisplayName("@BatchSize 상황에서 감지하지 않는 것을 검증")
+    void testGetAllTeams(CapturedOutput output) {
+        String url = "http://localhost:" + port + "/api/teams";
         ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
 
         assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
-        assertThat(output).contains("N+1 issue detected");
+        assertThat(output).doesNotContain("N+1 issue detected");
     }
 }

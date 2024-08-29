@@ -15,7 +15,6 @@ public class LibraryServiceV3 {
 
     @Transactional
     public List<Author> findAllAuthors() {
-        List<Author> authors = authorRepository.findAll();
-        return authors;
+        return authorRepository.findAll();
     }
 }

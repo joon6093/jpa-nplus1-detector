@@ -19,27 +19,36 @@ public class LibraryController {
     private final LibraryServiceV2 libraryServiceV2;
     private final LibraryServiceV3 libraryServiceV3;
 
-
     /**
-     * 클래스 단위의 @Transactional 선언
+     * @formatter:off
+     * Author과 Book는 일대다(1:N) 관계이며,
+     * 모든 Author을 조회한 후 각 Author에 대해 별도의 쿼리로 Book을 조회
+     * 클래스 단위의 @Transactional 상황에서 감지하는 것을 검증
+     * @formatter:on
      */
     @GetMapping("/v1/authors")
     public List<Author> getAuthorsV1() {
-        List<Author> allAuthors = libraryServiceV1.findAllAuthors();
-        return allAuthors;
+        return libraryServiceV1.findAllAuthors();
     }
 
     /**
-     * 메서드 단위의 @Transactional 선언
+     * @formatter:off
+     * Author과 Book는 일대다(1:N) 관계이며,
+     * 모든 Author을 조회한 후 각 Author에 대해 별도의 쿼리로 Book을 조회
+     * 메서드 단위의 @Transactional 상황에서 감지하는 것을 검증
+     * @formatter:on
      */
     @GetMapping("/v2/authors")
     public List<Author> getAuthorsV2() {
-        List<Author> allAuthors = libraryServiceV2.findAllAuthors();
-        return allAuthors;
+        return libraryServiceV2.findAllAuthors();
     }
 
     /**
-     * OSIV를 이용한 지연 조회
+     * @formatter:off
+     * Author과 Book는 일대다(1:N) 관계이며,
+     * 모든 Author을 조회한 후 각 Author에 대해 별도의 쿼리로 Book을 조회
+     * OSIV를 이용한 지연 조회 상황에서 감지하는 것을 검증
+     * @formatter:on
      */
     @GetMapping("/v3/authors")
     public List<Author> getAuthorsV3() {

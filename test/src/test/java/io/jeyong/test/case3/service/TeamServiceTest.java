@@ -1,4 +1,4 @@
-package io.jeyong.test.case2.service;
+package io.jeyong.test.case3.service;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -12,16 +12,16 @@ import org.springframework.boot.test.system.OutputCaptureExtension;
 
 @ExtendWith(OutputCaptureExtension.class)
 @SpringBootTest
-public class ProductServiceTest {
+public class TeamServiceTest {
 
     @Autowired
-    private ProductService productService;
+    private TeamService teamService;
 
     @Test
-    @DisplayName("다(N)를 조회하는 상황에서 감지하는 것을 검증")
-    void testFindAllProducts(CapturedOutput output) {
-        productService.findAllProducts();
+    @DisplayName("@BatchSize 상황에서 감지하지 않는 것을 검증")
+    void testFindAllTeams(CapturedOutput output) {
+        teamService.findAllTeams();
 
-        assertThat(output).contains("N+1 issue detected");
+        assertThat(output).doesNotContain("N+1 issue detected");
     }
 }

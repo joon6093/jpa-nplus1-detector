@@ -8,6 +8,10 @@ import io.jeyong.test.case2.entity.Order;
 import io.jeyong.test.case2.entity.Product;
 import io.jeyong.test.case2.repository.OrderRepository;
 import io.jeyong.test.case2.repository.ProductRepository;
+import io.jeyong.test.case3.entity.Member;
+import io.jeyong.test.case3.entity.Team;
+import io.jeyong.test.case3.repository.MemberRepository;
+import io.jeyong.test.case3.repository.TeamRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,12 +29,15 @@ public class InitData {
     private final BookRepository bookRepository;
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
+    private final TeamRepository teamRepository;
+    private final MemberRepository memberRepository;
 
     @EventListener(ApplicationReadyEvent.class)
     @Transactional
     public void initData() {
         initCase1();
         initCase2();
+        initCase3();
     }
 
     private void initCase1() {
@@ -97,4 +104,36 @@ public class InitData {
         productRepository.saveAll(List.of(product1, product2, product3, product4));
     }
 
+    private void initCase3() {
+        Team team1 = new Team();
+        team1.setName("Team 1");
+
+        Team team2 = new Team();
+        team2.setName("Team 2");
+
+        Team team3 = new Team();
+        team3.setName("Team 3");
+
+        teamRepository.save(team1);
+        teamRepository.save(team2);
+        teamRepository.save(team3);
+
+        Member member1 = new Member();
+        member1.setName("Member 1");
+        member1.setTeam(team1);
+
+        Member member2 = new Member();
+        member2.setName("Member 2");
+        member2.setTeam(team1);
+
+        Member member3 = new Member();
+        member3.setName("Member 3");
+        member3.setTeam(team2);
+
+        Member member4 = new Member();
+        member4.setName("Member 4");
+        member4.setTeam(team3);
+
+        memberRepository.saveAll(List.of(member1, member2, member3, member4));
+    }
 }
