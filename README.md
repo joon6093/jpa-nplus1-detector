@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {  
-    implementation 'com.github.joon6093:jpa-nplus1-detector:1.2.0'  
+    implementation 'com.github.joon6093:jpa-nplus1-detector:1.3.0'  
 }
 ```
 
@@ -35,7 +35,7 @@ dependencies {
 <dependency>  
     <groupId>com.github.joon6093</groupId>  
     <artifactId>jpa-nplus1-detector</artifactId>  
-    <version>1.2.0</version>  
+    <version>1.3.0</version>  
 </dependency>
 ```
 
@@ -80,3 +80,4 @@ Example log when an N+1 issue is detected.
 - [Version 1.1.1](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.1.1) - Released on 2024/08/24
 - [Version 1.1.2](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.1.2) - Released on 2024/08/27
 - [Version 1.2.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.2.0) - Released on 2024/08/29
+- [Version 1.3.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.3.0) - Released on 2024/09/04
