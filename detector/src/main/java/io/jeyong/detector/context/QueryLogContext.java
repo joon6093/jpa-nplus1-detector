@@ -11,7 +11,7 @@ final class QueryLogContext {
         queryExecutionCounts.put(query, queryExecutionCounts.getOrDefault(query, 0L) + 1);
     }
 
-    public Map<String, Long> getLoggedQueries() {
+    Map<String, Long> getLoggedQueries() {
         return Map.copyOf(queryExecutionCounts);
     }
 }
