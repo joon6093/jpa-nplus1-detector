@@ -1,10 +1,12 @@
 package io.jeyong.detector.config;
 
-import io.jeyong.detector.aop.NPlusOneDetectionAop;
+import static org.hibernate.cfg.AvailableSettings.STATEMENT_INSPECTOR;
+
+import io.jeyong.detector.aop.NPlusOneDetectionAspect;
 import io.jeyong.detector.context.QueryLoggingContext;
 import io.jeyong.detector.interceptor.NPlusOneStatementInspector;
+import io.jeyong.detector.logging.NPlusOneQueryLogger;
 import jakarta.annotation.PostConstruct;
-import org.hibernate.cfg.AvailableSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -24,7 +26,6 @@ import org.springframework.context.annotation.Configuration;
 public class NPlusOneDetectorConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(NPlusOneDetectorConfig.class);
-
     private final NPlusOneDetectorProperties nPlusOneDetectorProperties;
 
     public NPlusOneDetectorConfig(NPlusOneDetectorProperties nPlusOneDetectorProperties) {
@@ -42,8 +43,13 @@ public class NPlusOneDetectorConfig {
     }
 
     @Bean
-    public NPlusOneDetectionAop nPlusOneDetectionAop(final QueryLoggingContext queryLoggingContext) {
-        return new NPlusOneDetectionAop(queryLoggingContext, nPlusOneDetectorProperties.getThreshold());
+    public NPlusOneQueryLogger nPlusOneQueryLogger(final QueryLoggingContext queryLoggingContext) {
+        return new NPlusOneQueryLogger(queryLoggingContext, nPlusOneDetectorProperties.getThreshold());
+    }
+
+    @Bean
+    public NPlusOneDetectionAspect nPlusOneDetectionAspect(final NPlusOneQueryLogger nPlusOneQueryLogger) {
+        return new NPlusOneDetectionAspect(nPlusOneQueryLogger);
     }
 
     @Bean
@@ -54,7 +60,6 @@ public class NPlusOneDetectorConfig {
     @Bean
     public HibernatePropertiesCustomizer hibernatePropertyConfig(
             final NPlusOneStatementInspector nPlusOneStatementInspector) {
-        return hibernateProperties ->
-                hibernateProperties.put(AvailableSettings.STATEMENT_INSPECTOR, nPlusOneStatementInspector);
+        return hibernateProperties -> hibernateProperties.put(STATEMENT_INSPECTOR, nPlusOneStatementInspector);
     }
 }
