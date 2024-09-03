@@ -1,10 +1,11 @@
 package io.jeyong.detector.config;
 
-import io.jeyong.detector.aop.NPlusOneDetectionAop;
-import io.jeyong.detector.context.QueryLoggingContext;
-import io.jeyong.detector.interceptor.NPlusOneStatementInspector;
+import static org.hibernate.cfg.AvailableSettings.STATEMENT_INSPECTOR;
+
+import io.jeyong.detector.aspect.ConnectionProxyAspect;
+import io.jeyong.detector.interceptor.QueryStatementInspector;
+import io.jeyong.detector.logging.NPlusOneQueryLogger;
 import jakarta.annotation.PostConstruct;
-import org.hibernate.cfg.AvailableSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -24,7 +25,6 @@ import org.springframework.context.annotation.Configuration;
 public class NPlusOneDetectorConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(NPlusOneDetectorConfig.class);
-
     private final NPlusOneDetectorProperties nPlusOneDetectorProperties;
 
     public NPlusOneDetectorConfig(NPlusOneDetectorProperties nPlusOneDetectorProperties) {
@@ -37,24 +37,23 @@ public class NPlusOneDetectorConfig {
     }
 
     @Bean
-    public QueryLoggingContext queryLoggingContext() {
-        return new QueryLoggingContext();
+    public NPlusOneQueryLogger nPlusOneQueryLogger() {
+        return new NPlusOneQueryLogger(nPlusOneDetectorProperties.getThreshold());
     }
 
     @Bean
-    public NPlusOneDetectionAop nPlusOneDetectionAop(final QueryLoggingContext queryLoggingContext) {
-        return new NPlusOneDetectionAop(queryLoggingContext, nPlusOneDetectorProperties.getThreshold());
+    public ConnectionProxyAspect connectionProxyAspect(final NPlusOneQueryLogger nPlusOneQueryLogger) {
+        return new ConnectionProxyAspect(nPlusOneQueryLogger);
     }
 
     @Bean
-    public NPlusOneStatementInspector nPlusOneStatementInspector(final QueryLoggingContext queryLoggingContext) {
-        return new NPlusOneStatementInspector(queryLoggingContext);
+    public QueryStatementInspector queryStatementInspector() {
+        return new QueryStatementInspector();
     }
 
     @Bean
-    public HibernatePropertiesCustomizer hibernatePropertyConfig(
-            final NPlusOneStatementInspector nPlusOneStatementInspector) {
-        return hibernateProperties ->
-                hibernateProperties.put(AvailableSettings.STATEMENT_INSPECTOR, nPlusOneStatementInspector);
+    public HibernatePropertiesCustomizer hibernatePropertiesCustomizer(
+            final QueryStatementInspector queryStatementInspector) {
+        return hibernateProperties -> hibernateProperties.put(STATEMENT_INSPECTOR, queryStatementInspector);
     }
 }
