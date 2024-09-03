@@ -1,4 +1,4 @@
-package io.jeyong.detector.aop;
+package io.jeyong.detector.aspect;
 
 import io.jeyong.detector.factory.ConnectionProxyFactory;
 import io.jeyong.detector.logging.NPlusOneQueryLogger;
@@ -8,11 +8,11 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
 @Aspect
-public final class NPlusOneDetectionAspect {
+public final class ConnectionProxyAspect {
 
     private final NPlusOneQueryLogger nPlusOneQueryLogger;
 
-    public NPlusOneDetectionAspect(final NPlusOneQueryLogger nPlusOneQueryLogger) {
+    public ConnectionProxyAspect(final NPlusOneQueryLogger nPlusOneQueryLogger) {
         this.nPlusOneQueryLogger = nPlusOneQueryLogger;
     }
 
