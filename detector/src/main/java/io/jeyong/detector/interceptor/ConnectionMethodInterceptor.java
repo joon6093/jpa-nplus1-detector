@@ -4,6 +4,8 @@ import java.sql.Connection;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.aop.framework.ProxyFactory;
+import org.springframework.aop.support.DefaultPointcutAdvisor;
+import org.springframework.aop.support.NameMatchMethodPointcut;
 
 public final class ConnectionMethodInterceptor implements MethodInterceptor {
 
@@ -16,16 +18,18 @@ public final class ConnectionMethodInterceptor implements MethodInterceptor {
 
     @Override
     public Object invoke(final MethodInvocation invocation) throws Throwable {
-        if (CLOSE_METHOD_NAME.equals(invocation.getMethod().getName())) {
-            onClose.run();
-        }
+        onClose.run();
         return invocation.proceed();
     }
 
     public static Connection createProxy(final Connection originalConnection, final Runnable onClose) {
         final ProxyFactory proxyFactory = new ProxyFactory(originalConnection);
         proxyFactory.setInterfaces(Connection.class);
-        proxyFactory.addAdvice(new ConnectionMethodInterceptor(onClose));
+        final NameMatchMethodPointcut pointcut = new NameMatchMethodPointcut();
+        pointcut.setMappedName(CLOSE_METHOD_NAME);
+        final DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(pointcut,
+                new ConnectionMethodInterceptor(onClose));
+        proxyFactory.addAdvisor(advisor);
         return (Connection) proxyFactory.getProxy();
     }
 }
