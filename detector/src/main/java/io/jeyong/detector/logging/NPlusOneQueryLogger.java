@@ -1,6 +1,6 @@
 package io.jeyong.detector.logging;
 
-import io.jeyong.detector.context.QueryLogContextHolder;
+import io.jeyong.detector.context.QueryContextHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,12 +14,12 @@ public final class NPlusOneQueryLogger {
     }
 
     public void logNPlusOneIssues() {
-        QueryLogContextHolder.getCurrentQueryLog().forEach((sql, count) -> {
+        QueryContextHolder.getSavedQueries().forEach((sql, count) -> {
             if (count >= queryThreshold) {
                 logger.warn("N+1 issue detected: Query '{}' was executed {} times.", sql, count);
             }
         });
 
-        QueryLogContextHolder.clearQueryLog();
+        QueryContextHolder.clearSavedQueries();
     }
 }

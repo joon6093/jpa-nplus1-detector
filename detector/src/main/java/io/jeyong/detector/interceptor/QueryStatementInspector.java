@@ -1,6 +1,6 @@
 package io.jeyong.detector.interceptor;
 
-import io.jeyong.detector.context.QueryLogContextHolder;
+import io.jeyong.detector.context.QueryContextHolder;
 import org.hibernate.resource.jdbc.spi.StatementInspector;
 
 public final class QueryStatementInspector implements StatementInspector {
@@ -11,7 +11,7 @@ public final class QueryStatementInspector implements StatementInspector {
     @Override
     public String inspect(final String sql) {
         if (isSelectQuery(sql) && !isBatchSizeQuery(sql)) {
-            QueryLogContextHolder.logQuery(sql);
+            QueryContextHolder.saveQuery(sql);
         }
         return sql;
     }
