@@ -3,7 +3,7 @@ package io.jeyong.detector.interceptor;
 import io.jeyong.detector.context.QueryLogContextHolder;
 import org.hibernate.resource.jdbc.spi.StatementInspector;
 
-public final class NPlusOneStatementInspector implements StatementInspector {
+public final class QueryStatementInspector implements StatementInspector {
 
     private static final String SELECT_KEYWORD = "select";
     private static final String IN_CLAUSE_KEYWORD = " in(";

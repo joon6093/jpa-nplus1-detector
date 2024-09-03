@@ -3,7 +3,7 @@ package io.jeyong.detector.config;
 import static org.hibernate.cfg.AvailableSettings.STATEMENT_INSPECTOR;
 
 import io.jeyong.detector.aspect.ConnectionProxyAspect;
-import io.jeyong.detector.interceptor.NPlusOneStatementInspector;
+import io.jeyong.detector.interceptor.QueryStatementInspector;
 import io.jeyong.detector.logging.NPlusOneQueryLogger;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
@@ -47,13 +47,13 @@ public class NPlusOneDetectorConfig {
     }
 
     @Bean
-    public NPlusOneStatementInspector nPlusOneStatementInspector() {
-        return new NPlusOneStatementInspector();
+    public QueryStatementInspector queryStatementInspector() {
+        return new QueryStatementInspector();
     }
 
     @Bean
     public HibernatePropertiesCustomizer hibernatePropertiesCustomizer(
-            final NPlusOneStatementInspector nPlusOneStatementInspector) {
-        return hibernateProperties -> hibernateProperties.put(STATEMENT_INSPECTOR, nPlusOneStatementInspector);
+            final QueryStatementInspector queryStatementInspector) {
+        return hibernateProperties -> hibernateProperties.put(STATEMENT_INSPECTOR, queryStatementInspector);
     }
 }
