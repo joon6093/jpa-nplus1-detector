@@ -9,18 +9,18 @@ public final class QueryStatementInspector implements StatementInspector {
     private static final String IN_CLAUSE_KEYWORD = " in(";
 
     @Override
-    public String inspect(final String sql) {
-        if (isSelectQuery(sql) && !isBatchSizeQuery(sql)) {
-            QueryContextHolder.saveQuery(sql);
+    public String inspect(final String query) {
+        if (isSelectQuery(query) && !isBatchSizeQuery(query)) {
+            QueryContextHolder.saveQuery(query);
         }
-        return sql;
+        return query;
     }
 
-    private boolean isSelectQuery(final String sql) {
-        return sql.trim().toLowerCase().startsWith(SELECT_KEYWORD);
+    private boolean isSelectQuery(final String query) {
+        return query.trim().toLowerCase().startsWith(SELECT_KEYWORD);
     }
 
-    private boolean isBatchSizeQuery(final String sql) {
-        return sql.toLowerCase().contains(IN_CLAUSE_KEYWORD);
+    private boolean isBatchSizeQuery(final String query) {
+        return query.toLowerCase().contains(IN_CLAUSE_KEYWORD);
     }
 }
