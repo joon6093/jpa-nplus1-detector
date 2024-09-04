@@ -18,7 +18,7 @@ public class TeamServiceTest {
     private TeamService teamService;
 
     @Test
-    @DisplayName("@BatchSize 상황에서 감지하지 않는 것을 검증")
+    @DisplayName("@BatchSize 상황에서 감지하지 않는다.")
     void testFindAllTeams(CapturedOutput output) {
         teamService.findAllTeams();
 

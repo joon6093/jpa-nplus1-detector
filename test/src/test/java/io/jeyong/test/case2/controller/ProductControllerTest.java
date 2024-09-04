@@ -26,7 +26,7 @@ class ProductControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    @DisplayName("다(N)를 조회하는 상황에서 감지하는 것을 검증")
+    @DisplayName("다(N)를 조회하는 상황에서 감지한다.")
     void testGetProducts(CapturedOutput output) {
         String url = "http://localhost:" + port + "/api/products";
         ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);

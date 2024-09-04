@@ -26,7 +26,7 @@ class LibraryControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    @DisplayName("클래스 단위의 @Transactional 상황에서 감지하는 것을 검증")
+    @DisplayName("클래스 단위의 @Transactional 상황에서 감지한다.")
     void testGetAuthorsV1(CapturedOutput output) {
         String url = "http://localhost:" + port + "/api/library/v1/authors";
         ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
@@ -36,7 +36,7 @@ class LibraryControllerTest {
     }
 
     @Test
-    @DisplayName("메서드 단위의 @Transactional 상황에서 감지하는 것을 검증")
+    @DisplayName("메서드 단위의 @Transactional 상황에서 감지한다.")
     void testGetAuthorsV2(CapturedOutput output) {
         String url = "http://localhost:" + port + "/api/library/v2/authors";
         ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
@@ -46,7 +46,7 @@ class LibraryControllerTest {
     }
 
     @Test
-    @DisplayName("OSIV를 이용한 지연 조회 상황에서 감지하는 것을 검증")
+    @DisplayName("OSIV를 이용한 지연 조회 상황에서 감지한다.")
     void testGetAuthorsV3(CapturedOutput output) {
         String url = "http://localhost:" + port + "/api/library/v3/authors";
         ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);

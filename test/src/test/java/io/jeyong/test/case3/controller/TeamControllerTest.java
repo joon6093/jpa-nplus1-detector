@@ -26,7 +26,7 @@ class TeamControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    @DisplayName("@BatchSize 상황에서 감지하지 않는 것을 검증")
+    @DisplayName("@BatchSize 상황에서 감지하지 않는다.")
     void testGetAllTeams(CapturedOutput output) {
         String url = "http://localhost:" + port + "/api/teams";
         ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
