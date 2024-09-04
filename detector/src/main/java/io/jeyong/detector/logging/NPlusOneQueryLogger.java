@@ -14,12 +14,12 @@ public final class NPlusOneQueryLogger {
     }
 
     public void logNPlusOneIssues() {
-        QueryContextHolder.getSavedQueries().forEach((sql, count) -> {
+        QueryContextHolder.getContext().getQueryCounts().forEach((sql, count) -> {
             if (count >= queryThreshold) {
                 logger.warn("N+1 issue detected: Query '{}' was executed {} times.", sql, count);
             }
         });
 
-        QueryContextHolder.clearSavedQueries();
+        QueryContextHolder.clearContext();
     }
 }
