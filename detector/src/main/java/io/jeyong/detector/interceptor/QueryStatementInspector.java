@@ -17,10 +17,10 @@ public final class QueryStatementInspector implements StatementInspector {
     }
 
     private boolean isSelectQuery(final String query) {
-        return query.stripLeading().toLowerCase().startsWith(SELECT_KEYWORD);
+        return query.stripLeading().startsWith(SELECT_KEYWORD);
     }
 
     private boolean isBatchSizeQuery(final String query) {
-        return query.toLowerCase().contains(IN_CLAUSE_KEYWORD);
+        return query.contains(IN_CLAUSE_KEYWORD);
     }
 }
