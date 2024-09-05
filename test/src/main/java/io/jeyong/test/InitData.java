@@ -26,7 +26,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
-@Slf4j
 public class InitData {
 
     private final AuthorRepository authorRepository;
