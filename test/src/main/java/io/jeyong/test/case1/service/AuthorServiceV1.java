@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class LibraryServiceV1 {
+public class AuthorServiceV1 {
 
     private final AuthorRepository authorRepository;
     
