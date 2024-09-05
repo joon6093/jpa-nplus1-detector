@@ -14,13 +14,14 @@ public final class ConnectionProxyFactory {
     }
 
     public static Connection createProxy(final Connection originalConnection, final Runnable onClose) {
-        ProxyFactory proxyFactory = new ProxyFactory(originalConnection);
+        final ProxyFactory proxyFactory = new ProxyFactory(originalConnection);
         proxyFactory.setInterfaces(Connection.class);
 
-        NameMatchMethodPointcut pointcut = new NameMatchMethodPointcut();
+        final NameMatchMethodPointcut pointcut = new NameMatchMethodPointcut();
         pointcut.setMappedName(CLOSE_METHOD_NAME);
 
-        DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(pointcut, new ConnectionMethodInterceptor(onClose));
+        final DefaultPointcutAdvisor advisor =
+                new DefaultPointcutAdvisor(pointcut, new ConnectionMethodInterceptor(onClose));
         proxyFactory.addAdvisor(advisor);
 
         return (Connection) proxyFactory.getProxy();
