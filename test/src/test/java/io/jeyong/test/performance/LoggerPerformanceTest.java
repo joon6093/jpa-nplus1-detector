@@ -48,7 +48,7 @@ public class LoggerPerformanceTest {
         long startTime = System.nanoTime();
         queryContext.getQueryCounts().forEach((query, count) -> {
             if (count >= queryThreshold) {
-                logger.warn("N+1 issue detected: Query '{}' was executed {} times.", query, count);
+                logger.warn("N+1 issue detected: '{}' was executed {} times.", query, count);
             }
         });
         long endTime = System.nanoTime();
@@ -67,7 +67,7 @@ public class LoggerPerformanceTest {
             String query = entry.getKey();
             Long count = entry.getValue();
             if (count >= queryThreshold) {
-                logger.warn("N+1 issue detected: Query '{}' was executed {} times.", query, count);
+                logger.warn("N+1 issue detected: '{}' was executed {} times.", query, count);
             }
         });
         long endTime = System.nanoTime();
@@ -86,7 +86,7 @@ public class LoggerPerformanceTest {
             String query = entry.getKey();
             Long count = entry.getValue();
             if (count >= queryThreshold) {
-                logger.warn("N+1 issue detected: Query '{}' was executed {} times.", query, count);
+                logger.warn("N+1 issue detected: '{}' was executed {} times.", query, count);
             }
         });
         long endTime = System.nanoTime();
