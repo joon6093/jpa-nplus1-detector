@@ -12,6 +12,10 @@ import io.jeyong.test.case3.entity.Member;
 import io.jeyong.test.case3.entity.Team;
 import io.jeyong.test.case3.repository.MemberRepository;
 import io.jeyong.test.case3.repository.TeamRepository;
+import io.jeyong.test.case4.entity.Address;
+import io.jeyong.test.case4.entity.Person;
+import io.jeyong.test.case4.repository.AddressRepository;
+import io.jeyong.test.case4.repository.PersonRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +26,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
-@Slf4j
 public class InitData {
 
     private final AuthorRepository authorRepository;
@@ -31,6 +34,8 @@ public class InitData {
     private final ProductRepository productRepository;
     private final TeamRepository teamRepository;
     private final MemberRepository memberRepository;
+    private final PersonRepository personRepository;
+    private final AddressRepository addressRepository;
 
     @EventListener(ApplicationReadyEvent.class)
     @Transactional
@@ -38,6 +43,7 @@ public class InitData {
         initCase1();
         initCase2();
         initCase3();
+        initCase4();
     }
 
     private void initCase1() {
@@ -135,5 +141,35 @@ public class InitData {
         member4.setTeam(team3);
 
         memberRepository.saveAll(List.of(member1, member2, member3, member4));
+    }
+
+    private void initCase4() {
+        Address address1 = new Address();
+        address1.setStreet("123 Main St");
+        address1.setCity("City A");
+
+        Address address2 = new Address();
+        address2.setStreet("456 Elm St");
+        address2.setCity("City B");
+
+        Address address3 = new Address();
+        address3.setStreet("789 Oak St");
+        address3.setCity("City C");
+
+        addressRepository.saveAll(List.of(address1, address2, address3));
+
+        Person person1 = new Person();
+        person1.setName("Person 1");
+        person1.setAddress(address1);
+
+        Person person2 = new Person();
+        person2.setName("Person 2");
+        person2.setAddress(address2);
+
+        Person person3 = new Person();
+        person3.setName("Person 3");
+        person3.setAddress(address3);
+
+        personRepository.saveAll(List.of(person1, person2, person3));
     }
 }

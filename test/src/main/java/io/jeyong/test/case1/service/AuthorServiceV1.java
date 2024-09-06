@@ -10,10 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class LibraryServiceV1 {
+public class AuthorServiceV1 {
 
     private final AuthorRepository authorRepository;
-    
+
     public List<Author> findAllAuthors() {
         List<Author> authors = authorRepository.findAll();
         authors.forEach(author -> author.getBooks().size());  // N+1 문제 발생 가능

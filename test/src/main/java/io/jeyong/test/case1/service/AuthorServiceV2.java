@@ -9,12 +9,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class LibraryServiceV3 {
+public class AuthorServiceV2 {
 
     private final AuthorRepository authorRepository;
 
     @Transactional
     public List<Author> findAllAuthors() {
-        return authorRepository.findAll();
+        List<Author> authors = authorRepository.findAll();
+        authors.forEach(author -> author.getBooks().size());  // N+1 문제 발생 가능
+        return authors;
     }
 }

@@ -16,7 +16,7 @@ public class TeamService {
     @Transactional
     public List<Team> findAllTeams() {
         List<Team> teams = teamRepository.findAll();
-        teams.forEach(team -> team.getMembers().size());  // N+1 문제 발생 가능
+        teams.forEach(team -> team.getMembers().size());  // N+1 문제 발생
         return teams;
     }
 }

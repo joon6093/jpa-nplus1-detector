@@ -1,9 +1,9 @@
 package io.jeyong.test.case1.controller;
 
 import io.jeyong.test.case1.entity.Author;
-import io.jeyong.test.case1.service.LibraryServiceV1;
-import io.jeyong.test.case1.service.LibraryServiceV2;
-import io.jeyong.test.case1.service.LibraryServiceV3;
+import io.jeyong.test.case1.service.AuthorServiceV1;
+import io.jeyong.test.case1.service.AuthorServiceV2;
+import io.jeyong.test.case1.service.AuthorServiceV3;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/library")
+@RequestMapping("/api")
 @RequiredArgsConstructor
-public class LibraryController {
+public class AuthorController {
 
-    private final LibraryServiceV1 libraryServiceV1;
-    private final LibraryServiceV2 libraryServiceV2;
-    private final LibraryServiceV3 libraryServiceV3;
+    private final AuthorServiceV1 authorServiceV1;
+    private final AuthorServiceV2 authorServiceV2;
+    private final AuthorServiceV3 authorServiceV3;
 
     /**
      * @formatter:off
@@ -28,7 +28,7 @@ public class LibraryController {
      */
     @GetMapping("/v1/authors")
     public List<Author> getAuthorsV1() {
-        return libraryServiceV1.findAllAuthors();
+        return authorServiceV1.findAllAuthors();
     }
 
     /**
@@ -40,7 +40,7 @@ public class LibraryController {
      */
     @GetMapping("/v2/authors")
     public List<Author> getAuthorsV2() {
-        return libraryServiceV2.findAllAuthors();
+        return authorServiceV2.findAllAuthors();
     }
 
     /**
@@ -52,7 +52,7 @@ public class LibraryController {
      */
     @GetMapping("/v3/authors")
     public List<Author> getAuthorsV3() {
-        List<Author> allAuthors = libraryServiceV3.findAllAuthors();
+        List<Author> allAuthors = authorServiceV3.findAllAuthors();
         allAuthors.forEach(author -> author.getBooks().size());  // N+1 문제 발생 가능
         return allAuthors;
     }

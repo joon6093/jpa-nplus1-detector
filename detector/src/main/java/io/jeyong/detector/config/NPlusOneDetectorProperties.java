@@ -13,7 +13,7 @@ public class NPlusOneDetectorProperties {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(final boolean enabled) {
         this.enabled = enabled;
     }
 
@@ -21,7 +21,7 @@ public class NPlusOneDetectorProperties {
         return threshold;
     }
 
-    public void setThreshold(int threshold) {
+    public void setThreshold(final int threshold) {
         this.threshold = threshold;
     }
 }

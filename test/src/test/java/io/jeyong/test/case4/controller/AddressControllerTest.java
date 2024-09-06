@@ -1,4 +1,4 @@
-package io.jeyong.test.case2.controller;
+package io.jeyong.test.case4.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
@@ -17,7 +17,7 @@ import org.springframework.http.ResponseEntity;
 
 @ExtendWith(OutputCaptureExtension.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-class ProductControllerTest {
+class AddressControllerTest {
 
     @LocalServerPort
     private int port;
@@ -26,9 +26,9 @@ class ProductControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    @DisplayName("N:1 관계에서 다(N)를 조회하는 상황에서 감지한다.")
-    void testGetProducts(CapturedOutput output) {
-        String url = "http://localhost:" + port + "/api/products";
+    @DisplayName("1:1 관계에서 연관관계의 주인이 아닌 일(1)을 조회하는 상황에서 감지한다.")
+    void testGetAddresses(CapturedOutput output) {
+        String url = "http://localhost:" + port + "/api/addresses";
         ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
 
         assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();

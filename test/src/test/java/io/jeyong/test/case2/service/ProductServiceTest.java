@@ -18,7 +18,7 @@ public class ProductServiceTest {
     private ProductService productService;
 
     @Test
-    @DisplayName("다(N)를 조회하는 상황에서 감지하는 것을 검증")
+    @DisplayName("다(N)를 조회하는 상황에서 감지한다.")
     void testFindAllProducts(CapturedOutput output) {
         productService.findAllProducts();
 

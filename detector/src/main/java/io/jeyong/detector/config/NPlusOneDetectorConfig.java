@@ -27,7 +27,7 @@ public class NPlusOneDetectorConfig {
     private static final Logger logger = LoggerFactory.getLogger(NPlusOneDetectorConfig.class);
     private final NPlusOneDetectorProperties nPlusOneDetectorProperties;
 
-    public NPlusOneDetectorConfig(NPlusOneDetectorProperties nPlusOneDetectorProperties) {
+    public NPlusOneDetectorConfig(final NPlusOneDetectorProperties nPlusOneDetectorProperties) {
         this.nPlusOneDetectorProperties = nPlusOneDetectorProperties;
     }
 
