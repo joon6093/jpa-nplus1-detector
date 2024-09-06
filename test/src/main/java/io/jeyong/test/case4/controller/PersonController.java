@@ -19,7 +19,7 @@ public class PersonController {
      * @formatter:off
      * Person과 Address는 일대일(1:1) 관계이며,
      * 모든 Person을 조회한 후 각 Person에 대해 별도의 쿼리로 Address를 조회
-     * 1:1 관계에서 일(1)을 조회하는 상황에서 감지하는 것을 검증
+     * 1:1 관계에서 연관관계의 주인인 일(1)을 조회하는 상황에서 감지하는 것을 검증
      * @formatter:on
      */
     @GetMapping

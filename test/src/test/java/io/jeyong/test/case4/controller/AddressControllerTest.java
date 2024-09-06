@@ -26,7 +26,7 @@ class AddressControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    @DisplayName("1:1 관계에서 일(1)을 즉시로딩으로 조회하는 상황에서 감지한다.")
+    @DisplayName("1:1 관계에서 연관관계의 주인이 아닌 일(1)을 조회하는 상황에서 감지한다.")
     void testGetAddresses(CapturedOutput output) {
         String url = "http://localhost:" + port + "/api/addresses";
         ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
