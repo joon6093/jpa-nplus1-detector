@@ -16,9 +16,12 @@ import io.jeyong.test.case4.entity.Address;
 import io.jeyong.test.case4.entity.Person;
 import io.jeyong.test.case4.repository.AddressRepository;
 import io.jeyong.test.case4.repository.PersonRepository;
+import io.jeyong.test.case5.entity.Course;
+import io.jeyong.test.case5.entity.Student;
+import io.jeyong.test.case5.repository.CourseRepository;
+import io.jeyong.test.case5.repository.StudentRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -36,6 +39,8 @@ public class InitData {
     private final MemberRepository memberRepository;
     private final PersonRepository personRepository;
     private final AddressRepository addressRepository;
+    private final CourseRepository courseRepository;
+    private final StudentRepository studentRepository;
 
     @EventListener(ApplicationReadyEvent.class)
     @Transactional
@@ -44,6 +49,7 @@ public class InitData {
         initCase2();
         initCase3();
         initCase4();
+        initCase5();
     }
 
     private void initCase1() {
@@ -171,5 +177,32 @@ public class InitData {
         person3.setAddress(address3);
 
         personRepository.saveAll(List.of(person1, person2, person3));
+    }
+
+    private void initCase5() {
+        Course course1 = new Course();
+        course1.setTitle("Course 1");
+
+        Course course2 = new Course();
+        course2.setTitle("Course 2");
+
+        Course course3 = new Course();
+        course3.setTitle("Course 3");
+
+        courseRepository.saveAll(List.of(course1, course2, course3));
+
+        Student student1 = new Student();
+        student1.setName("Student 1");
+        student1.getCourses().addAll(List.of(course1, course2));
+
+        Student student2 = new Student();
+        student2.setName("Student 2");
+        student2.getCourses().add(course2);
+
+        Student student3 = new Student();
+        student3.setName("Student 3");
+        student3.getCourses().addAll(List.of(course2, course3));
+
+        studentRepository.saveAll(List.of(student1, student2, student3));
     }
 }
