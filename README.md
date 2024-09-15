@@ -49,13 +49,13 @@ jpa:
     hibernate:  
       detector:  
         enabled: true     # Enable N+1 query detection (default: false)  
-        threshold: 3      # Set the threshold for query execution count (default: 2)
+        threshold: 2      # Set the threshold for query execution count (default: 2)
 ```
 
 #### Properties (application.properties)
 ```
 jpa.properties.hibernate.detector.enabled=true     # Enable N+1 query detection (default: false)
-jpa.properties.hibernate.detector.threshold=3      # Set the threshold for query execution count (default: 2)
+jpa.properties.hibernate.detector.threshold=2      # Set the threshold for query execution count (default: 2)
 ```
 
 ## 📄 Log
@@ -82,4 +82,4 @@ Example log when an N+1 issue is detected.
 - [Version 1.2.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.2.0) - Released on 2024/08/29
 - [Version 1.3.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.3.0) - Released on 2024/09/04
 - [Version 1.3.1](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.3.1) - Released on 2024/09/07
-- [Version 1.3.1](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.3.2) - Released on 2024/09/16
+- [Version 1.3.2](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.3.2) - Released on 2024/09/16
