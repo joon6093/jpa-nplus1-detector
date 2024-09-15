@@ -1,0 +1,2 @@
+### N:N 관계에서 연관관계의 주인인 다(N)를 조회하는 상황에서 감지하는 것을 검증
+GET http://localhost:8080/api/students

@@ -19,37 +19,37 @@ public class AuthorController {
     private final AuthorServiceV2 authorServiceV2;
     private final AuthorServiceV3 authorServiceV3;
 
+    // @formatter:off
     /**
-     * @formatter:off
      * Author과 Book는 일대다(1:N) 관계이며,
      * 모든 Author을 조회한 후 각 Author에 대해 별도의 쿼리로 Book을 조회
      * 클래스 단위의 @Transactional 상황에서 감지하는 것을 검증
-     * @formatter:on
      */
+    // @formatter:on
     @GetMapping("/v1/authors")
     public List<Author> getAuthorsV1() {
         return authorServiceV1.findAllAuthors();
     }
 
+    // @formatter:off
     /**
-     * @formatter:off
      * Author과 Book는 일대다(1:N) 관계이며,
      * 모든 Author을 조회한 후 각 Author에 대해 별도의 쿼리로 Book을 조회
      * 메서드 단위의 @Transactional 상황에서 감지하는 것을 검증
-     * @formatter:on
      */
+    // @formatter:on
     @GetMapping("/v2/authors")
     public List<Author> getAuthorsV2() {
         return authorServiceV2.findAllAuthors();
     }
 
+    // @formatter:off
     /**
-     * @formatter:off
      * Author과 Book는 일대다(1:N) 관계이며,
      * 모든 Author을 조회한 후 각 Author에 대해 별도의 쿼리로 Book을 조회
      * OSIV를 이용한 지연 조회 상황에서 감지하는 것을 검증
-     * @formatter:on
      */
+    // @formatter:on
     @GetMapping("/v3/authors")
     public List<Author> getAuthorsV3() {
         List<Author> allAuthors = authorServiceV3.findAllAuthors();
