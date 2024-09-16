@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {  
-    implementation 'com.github.joon6093:jpa-nplus1-detector:1.3.2'  
+    implementation 'com.github.joon6093:jpa-nplus1-detector:1.4.0'  
 }
 ```
 
@@ -35,7 +35,7 @@ dependencies {
 <dependency>  
     <groupId>com.github.joon6093</groupId>  
     <artifactId>jpa-nplus1-detector</artifactId>  
-    <version>1.3.2</version>  
+    <version>1.4.0</version>  
 </dependency>
 ```
 
@@ -44,18 +44,21 @@ To enable the N+1 query detector, update your Spring Boot configuration file.
 
 #### YAML (application.yml)
 ```
-jpa:  
-  properties:  
-    hibernate:  
-      detector:  
-        enabled: true     # Enable N+1 query detection (default: false)  
-        threshold: 2      # Set the threshold for query execution count (default: 2)
+spring:
+  jpa:  
+    properties:  
+      hibernate:  
+        detector:  
+          enabled: true     # Enable N+1 query detection (default: false)  
+          threshold: 2      # Set the threshold for query execution count (default: 2)
+          level: warn       # Set the log level for detected N+1 issues (default: warn)
 ```
 
 #### Properties (application.properties)
 ```
-jpa.properties.hibernate.detector.enabled=true     # Enable N+1 query detection (default: false)
-jpa.properties.hibernate.detector.threshold=2      # Set the threshold for query execution count (default: 2)
+spring.jpa.properties.hibernate.detector.enabled=true     # Enable N+1 query detection (default: false)
+spring.jpa.properties.hibernate.detector.threshold=2      # Set the threshold for query execution count (default: 2)
+spring.jpa.properties.hibernate.detector.level=warn       # Set the log level for detected N+1 issues (default: warn)
 ```
 
 ## 📄 Log
@@ -83,3 +86,4 @@ Example log when an N+1 issue is detected.
 - [Version 1.3.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.3.0) - Released on 2024/09/04
 - [Version 1.3.1](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.3.1) - Released on 2024/09/07
 - [Version 1.3.2](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.3.2) - Released on 2024/09/16
+- [Version 1.4.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.4.0) - Released on 2024/09/17
