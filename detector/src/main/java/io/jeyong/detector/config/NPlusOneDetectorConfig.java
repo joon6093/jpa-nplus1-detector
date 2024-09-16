@@ -38,7 +38,8 @@ public class NPlusOneDetectorConfig {
 
     @Bean
     public NPlusOneQueryLogger nPlusOneQueryLogger() {
-        return new NPlusOneQueryLogger(nPlusOneDetectorProperties.getThreshold());
+        return new NPlusOneQueryLogger(nPlusOneDetectorProperties.getThreshold(),
+                nPlusOneDetectorProperties.getLevel());
     }
 
     @Bean

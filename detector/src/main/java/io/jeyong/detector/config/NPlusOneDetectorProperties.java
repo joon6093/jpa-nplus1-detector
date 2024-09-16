@@ -1,5 +1,6 @@
 package io.jeyong.detector.config;
 
+import org.slf4j.event.Level;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 // @formatter:off
@@ -17,6 +18,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * <ul>
  *     <li><b>spring.jpa.properties.hibernate.detector.enabled:</b> Enable or disable the detector (default: false).</li>
  *     <li><b>spring.jpa.properties.hibernate.detector.threshold:</b> Set the threshold for the number of query executions to detect an N+1 issue (default: 2).</li>
+ *     <li><b>spring.jpa.properties.hibernate.detector.level:</b> Set the log level for detected N+1 issues (default: WARN).</li>
  * </ul>
  *
  * <pre>
@@ -27,12 +29,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *       detector:
  *         enabled: true
  *         threshold: 2
+ *         level: WARN
  * </pre>
  *
  * <pre>
  * Example configuration (Properties):
  * jpa.properties.hibernate.detector.enabled=true
- * jpa.properties.hibernate.detector.threshold=3
+ * jpa.properties.hibernate.detector.threshold=2
+ * jpa.properties.hibernate.detector.level=WARN
  * </pre>
  *
  * <p>
@@ -51,6 +55,8 @@ public class NPlusOneDetectorProperties {
 
     private int threshold = 2;
 
+    private Level level = Level.WARN;
+
     public boolean isEnabled() {
         return enabled;
     }
@@ -65,5 +71,13 @@ public class NPlusOneDetectorProperties {
 
     public void setThreshold(final int threshold) {
         this.threshold = threshold;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(final Level level) {
+        this.level = level;
     }
 }
