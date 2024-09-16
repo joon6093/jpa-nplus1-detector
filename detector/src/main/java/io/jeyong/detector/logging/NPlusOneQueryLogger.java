@@ -17,12 +17,15 @@ public final class NPlusOneQueryLogger {
     }
 
     public void logNPlusOneIssues() {
-        QueryContextHolder.getContext().getQueryCounts().forEach((query, count) -> {
-            if (count >= queryThreshold) {
-                logBasedOnLevel(query, count);
-            }
-        });
-        QueryContextHolder.clearContext();
+        try {
+            QueryContextHolder.getContext().getQueryCounts().forEach((query, count) -> {
+                if (count >= queryThreshold) {
+                    logBasedOnLevel(query, count);
+                }
+            });
+        } finally {
+            QueryContextHolder.clearContext();
+        }
     }
 
     private void logBasedOnLevel(String query, long count) {
