@@ -33,7 +33,9 @@ public class NPlusOneDetectorConfig {
 
     @PostConstruct
     public void logInitialization() {
-        logger.info("N+1 Detector is enabled with threshold: {}", nPlusOneDetectorProperties.getThreshold());
+        logger.info("N+1 Detector is enabled with threshold: {}, log level: {}",
+                nPlusOneDetectorProperties.getThreshold(),
+                nPlusOneDetectorProperties.getLevel().toString());
     }
 
     @Bean
