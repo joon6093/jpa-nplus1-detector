@@ -4,7 +4,8 @@ import static org.hibernate.cfg.AvailableSettings.STATEMENT_INSPECTOR;
 
 import io.jeyong.detector.aspect.ConnectionProxyAspect;
 import io.jeyong.detector.interceptor.QueryStatementInspector;
-import io.jeyong.detector.logging.NPlusOneQueryLogger;
+import io.jeyong.detector.template.NPlusOneQueryLogger;
+import io.jeyong.detector.template.NPlusOneQueryTemplate;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,14 +40,15 @@ public class NPlusOneDetectorConfig {
     }
 
     @Bean
-    public NPlusOneQueryLogger nPlusOneQueryLogger() {
-        return new NPlusOneQueryLogger(nPlusOneDetectorProperties.getThreshold(),
+    public NPlusOneQueryTemplate nPlusOneQueryLogger() {
+        return new NPlusOneQueryLogger(
+                nPlusOneDetectorProperties.getThreshold(),
                 nPlusOneDetectorProperties.getLevel());
     }
 
     @Bean
-    public ConnectionProxyAspect connectionProxyAspect(final NPlusOneQueryLogger nPlusOneQueryLogger) {
-        return new ConnectionProxyAspect(nPlusOneQueryLogger);
+    public ConnectionProxyAspect connectionProxyAspect(final NPlusOneQueryTemplate nPlusOneQueryTemplate) {
+        return new ConnectionProxyAspect(nPlusOneQueryTemplate);
     }
 
     @Bean
