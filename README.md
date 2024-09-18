@@ -64,12 +64,12 @@ spring.jpa.properties.hibernate.detector.level=warn       # Set the log level fo
 ## 📄 Log
 When the N+1 Detector is enabled, a startup log shows the activation and threshold.
 ```
-2024-08-27T14:59:54.307+09:00 INFO 9448 --- i.j.d.config.NPlusOneDetectorConfig : N+1 Detector is enabled with threshold: 2
+2024-08-27T14:59:54.307+09:00 INFO 9448 --- i.j.detector.config.NPlusOneDetectorConfig : N+1 Detector is enabled with threshold: 2, log level: warn
 ```
 
 Example log when an N+1 issue is detected.
 ```
-2024-08-19T13:04:22.645+09:00 WARN 4296 --- i.j.detector.aop.NPlusOneDetectionAop : N+1 issue detected: 'select b1_0.author_id,b1_0.id,b1_0.title from book b1_0 where b1_0.author_id=?' was executed 2 times.
+2024-08-19T13:04:22.645+09:00 WARN 4296 --- i.j.detector.aspect.ConnectionProxyAspect : N+1 issue detected: 'select b1_0.author_id,b1_0.id,b1_0.title from book b1_0 where b1_0.author_id=?' was executed 2 times.
 ```
 
 ## ✏️ Note
@@ -87,3 +87,4 @@ Example log when an N+1 issue is detected.
 - [Version 1.3.1](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.3.1) - Released on 2024/09/07
 - [Version 1.3.2](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.3.2) - Released on 2024/09/16
 - [Version 1.4.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.4.0) - Released on 2024/09/17
+- [Version 2.0.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/2.0.0) - Released on 2024/09/19
