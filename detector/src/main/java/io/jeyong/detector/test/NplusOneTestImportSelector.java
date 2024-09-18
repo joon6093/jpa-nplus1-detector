@@ -20,6 +20,7 @@ public class NplusOneTestImportSelector implements ImportSelector {
         Level logLevel = (Level) attributes.get("level");
         NPlusOneTest.Mode mode = (NPlusOneTest.Mode) attributes.get("mode");
 
+        System.setProperty("spring.jpa.properties.hibernate.detector.enabled", "true");
         System.setProperty("spring.jpa.properties.hibernate.detector.threshold", String.valueOf(threshold));
         System.setProperty("spring.jpa.properties.hibernate.detector.level", logLevel.toString());
         return new String[]{
