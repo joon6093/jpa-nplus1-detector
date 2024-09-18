@@ -3,10 +3,12 @@ package io.jeyong.test.mode;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
+import io.jeyong.detector.config.NPlusOneDetectorProperties;
 import io.jeyong.detector.test.NPlusOneTest;
 import io.jeyong.test.case2.service.ProductService;
 import java.util.List;
 import org.assertj.core.api.Assertions;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,9 @@ class AnnotationExceptionModeTest {
     @Autowired
     private ApplicationContext applicationContext;
 
+    @Autowired
+    private NPlusOneDetectorProperties nPlusOneDetectorProperties;
+
     @LocalServerPort
     private int port;
 
@@ -61,7 +66,8 @@ class AnnotationExceptionModeTest {
     @Test
     @DisplayName("EXCEPTION 모드의 설정이 동작한다.")
     void testExceptionModeConfiguration() {
-        assertThat(System.getProperty("spring.jpa.properties.hibernate.detector.threshold")).isEqualTo("5");
+        AssertionsForClassTypes.assertThat(nPlusOneDetectorProperties.isEnabled()).isTrue();
+        AssertionsForClassTypes.assertThat(nPlusOneDetectorProperties.getThreshold()).isEqualTo(5);
 
         assertThat(applicationContext.containsBean("nPlusOneQueryExceptionCollector")).isTrue();
         assertThat(applicationContext.containsBean("exceptionContext")).isTrue();

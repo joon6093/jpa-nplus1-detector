@@ -3,6 +3,7 @@ package io.jeyong.test.mode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
+import io.jeyong.detector.config.NPlusOneDetectorProperties;
 import io.jeyong.detector.test.NPlusOneTest;
 import io.jeyong.test.case2.service.ProductService;
 import java.util.List;
@@ -26,12 +27,15 @@ import org.springframework.http.ResponseEntity;
 @SpringBootTest(
         webEnvironment = RANDOM_PORT,
         properties = {
-                "logging.level.io.jeyong=debug",
+                "logging.level.io.jeyong=debug"
         })
 class AnnotationLoggingModeTest {
 
     @Autowired
     private ApplicationContext applicationContext;
+
+    @Autowired
+    private NPlusOneDetectorProperties nPlusOneDetectorProperties;
 
     @LocalServerPort
     private int port;
@@ -45,8 +49,9 @@ class AnnotationLoggingModeTest {
     @Test
     @DisplayName("LOGGING 모드의 설정이 동작한다.")
     void testLoggingModeConfiguration() {
-        assertThat(System.getProperty("spring.jpa.properties.hibernate.detector.threshold")).isEqualTo("3");
-        assertThat(System.getProperty("spring.jpa.properties.hibernate.detector.level")).isEqualTo("DEBUG");
+        assertThat(nPlusOneDetectorProperties.isEnabled()).isTrue();
+        assertThat(nPlusOneDetectorProperties.getThreshold()).isEqualTo(3);
+        assertThat(nPlusOneDetectorProperties.getLevel()).isEqualTo(Level.DEBUG);
 
         assertThat(applicationContext.containsBean("nPlusOneQueryLogger")).isTrue();
     }
