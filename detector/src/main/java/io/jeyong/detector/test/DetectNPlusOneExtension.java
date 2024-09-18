@@ -7,6 +7,7 @@ import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -20,16 +21,16 @@ public class DetectNPlusOneExtension implements BeforeAllCallback, BeforeEachCal
         exceptionContext = getExceptionContext(applicationContext);
     }
 
-    private ExceptionContext getExceptionContext(ApplicationContext applicationContext) {
+    private ExceptionContext getExceptionContext(final ApplicationContext applicationContext) {
         try {
             return applicationContext.getBean(ExceptionContext.class);
-        } catch (Exception e) {
+        } catch (BeansException e) {
             return null;
         }
     }
 
     @Override
-    public void beforeEach(ExtensionContext extensionContext) throws Exception {
+    public void beforeEach(final ExtensionContext extensionContext) throws Exception {
         QueryContextHolder.clearContext();
         getOptionalExceptionContext().ifPresent(ExceptionContext::clearException);
     }
