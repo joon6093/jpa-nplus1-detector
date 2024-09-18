@@ -1,34 +1,21 @@
-package io.jeyong.detector.logging;
+package io.jeyong.detector.template;
 
-import io.jeyong.detector.context.QueryContextHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.event.Level;
 
-public final class NPlusOneQueryLogger {
+public final class NPlusOneQueryLogger extends NPlusOneQueryTemplate {
 
     private static final Logger logger = LoggerFactory.getLogger(NPlusOneQueryLogger.class);
-    private final int queryThreshold;
     private final Level level;
 
     public NPlusOneQueryLogger(final int queryThreshold, final Level level) {
-        this.queryThreshold = queryThreshold;
+        super(queryThreshold);
         this.level = level;
     }
 
-    public void logNPlusOneIssues() {
-        try {
-            QueryContextHolder.getContext().getQueryCounts().forEach((query, count) -> {
-                if (count >= queryThreshold) {
-                    logBasedOnLevel(query, count);
-                }
-            });
-        } finally {
-            QueryContextHolder.clearContext();
-        }
-    }
-
-    private void logBasedOnLevel(String query, long count) {
+    @Override
+    protected void handleDetectedNPlusOneIssue(final String query, final Long count) {
         if (level == Level.WARN && logger.isWarnEnabled()) {
             logger.warn("N+1 issue detected: '{}' was executed {} times.", query, count);
         } else if (level == Level.TRACE && logger.isTraceEnabled()) {

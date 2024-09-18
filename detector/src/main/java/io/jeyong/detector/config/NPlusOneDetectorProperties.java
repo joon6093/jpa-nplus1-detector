@@ -23,20 +23,21 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *
  * <pre>
  * Example configuration (YAML):
- * jpa:
- *   properties:
- *     hibernate:
- *       detector:
- *         enabled: true
- *         threshold: 2
- *         level: WARN
+ * spring:
+ *   jpa:
+ *     properties:
+ *       hibernate:
+ *         detector:
+ *           enabled: true
+ *           threshold: 2
+ *           level: warn
  * </pre>
  *
  * <pre>
  * Example configuration (Properties):
- * jpa.properties.hibernate.detector.enabled=true
- * jpa.properties.hibernate.detector.threshold=2
- * jpa.properties.hibernate.detector.level=WARN
+ * spring.jpa.properties.hibernate.detector.enabled=true
+ * spring.jpa.properties.hibernate.detector.threshold=2
+ * spring.jpa.properties.hibernate.detector.level=warn
  * </pre>
  *
  * <p>
