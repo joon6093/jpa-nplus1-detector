@@ -2,6 +2,7 @@ package io.jeyong.detector.test;
 
 import io.jeyong.detector.config.NPlusOneDetectorConfig;
 import io.jeyong.detector.config.NPlusOneDetectorProperties;
+import io.jeyong.detector.context.ExceptionContext;
 import io.jeyong.detector.template.NPlusOneQueryExceptionCollector;
 import io.jeyong.detector.template.NPlusOneQueryTemplate;
 import jakarta.annotation.PostConstruct;
@@ -30,10 +31,15 @@ public class NPlusOneTestConfig {
         logger.info("N+1 issues detected will throw exceptions.");
     }
 
+    @Bean
+    public ExceptionContext exceptionContext() {
+        return new ExceptionContext();
+    }
+    
     @Primary
     @Bean
-    public NPlusOneQueryTemplate nPlusOneQueryExceptionCollector() {
+    public NPlusOneQueryTemplate nPlusOneQueryExceptionCollector(final ExceptionContext exceptionContext) {
         return new NPlusOneQueryExceptionCollector(
-                nPlusOneDetectorProperties.getThreshold());
+                nPlusOneDetectorProperties.getThreshold(), exceptionContext);
     }
 }

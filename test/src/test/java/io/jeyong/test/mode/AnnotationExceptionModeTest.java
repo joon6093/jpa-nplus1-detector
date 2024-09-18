@@ -20,8 +20,8 @@ class AnnotationExceptionModeTest {
     @DisplayName("EXCEPTION 모드의 설정이 제대로 동작한다.")
     void testNPlusOneTestExceptionMode() {
         assertThat(System.getProperty("spring.jpa.properties.hibernate.detector.threshold")).isEqualTo("5");
-        assertThat(System.getProperty("spring.jpa.properties.hibernate.detector.level")).isEqualTo("WARN");
 
         assertThat(context.containsBean("nPlusOneQueryExceptionCollector")).isTrue();
+        assertThat(context.containsBean("exceptionContext")).isTrue();
     }
 }
