@@ -10,7 +10,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-public class NPlusOneTestExtension implements BeforeAllCallback, BeforeEachCallback, AfterEachCallback {
+public final class NPlusOneTestExtension implements BeforeAllCallback, BeforeEachCallback, AfterEachCallback {
 
     private ExceptionContext exceptionContext;
 

@@ -3,7 +3,7 @@ package io.jeyong.detector.context;
 import io.jeyong.detector.exception.NPlusOneQueryException;
 import java.util.Optional;
 
-public final class ExceptionContext { // Todo: Consider concurrency issues
+public final class ExceptionContext {
 
     private NPlusOneQueryException primaryException;
 
