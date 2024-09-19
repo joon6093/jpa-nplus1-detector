@@ -1,14 +1,14 @@
 package io.jeyong.test.mode;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 import io.jeyong.detector.config.NPlusOneDetectorProperties;
+import io.jeyong.detector.template.NPlusOneQueryExceptionCollector;
+import io.jeyong.detector.template.NPlusOneQueryTemplate;
 import io.jeyong.detector.test.NPlusOneTest;
 import io.jeyong.test.case2.service.ProductService;
 import java.util.List;
-import org.assertj.core.api.Assertions;
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ import org.springframework.test.context.TestPropertySource;
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @TestPropertySource(
         properties = {
-                "spring.jpa.properties.hibernate.detector.enabled=false",
+                "spring.jpa.properties.hibernate.detector.enabled=true",
                 "spring.jpa.properties.hibernate.detector.threshold=10",
         })
 class AnnotationExceptionModeTest {
@@ -68,15 +68,14 @@ class AnnotationExceptionModeTest {
     @Autowired
     private ProductService productService;
 
-
     @Test
     @DisplayName("EXCEPTION 모드의 설정이 우선적으로 적용된다.")
     void testExceptionModeConfiguration() {
-        AssertionsForClassTypes.assertThat(nPlusOneDetectorProperties.isEnabled()).isTrue();
-        AssertionsForClassTypes.assertThat(nPlusOneDetectorProperties.getThreshold()).isEqualTo(5);
+        assertThat(nPlusOneDetectorProperties.isEnabled()).isFalse();
+        assertThat(nPlusOneDetectorProperties.getThreshold()).isEqualTo(5);
 
-        assertThat(applicationContext.containsBean("nPlusOneQueryExceptionCollector")).isTrue();
-        assertThat(applicationContext.containsBean("exceptionContext")).isTrue();
+        NPlusOneQueryTemplate template = applicationContext.getBean(NPlusOneQueryTemplate.class);
+        assertThat(template).isInstanceOf(NPlusOneQueryExceptionCollector.class);
     }
 
     @Test
@@ -85,7 +84,7 @@ class AnnotationExceptionModeTest {
         String url = "http://localhost:" + port + "/api/products";
         ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
 
-        Assertions.assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
+        assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
     }
 
     @Test

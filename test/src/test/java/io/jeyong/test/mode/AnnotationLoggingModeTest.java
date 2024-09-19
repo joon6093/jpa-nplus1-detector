@@ -1,14 +1,14 @@
 package io.jeyong.test.mode;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 import io.jeyong.detector.config.NPlusOneDetectorProperties;
+import io.jeyong.detector.template.NPlusOneQueryLogger;
+import io.jeyong.detector.template.NPlusOneQueryTemplate;
 import io.jeyong.detector.test.NPlusOneTest;
 import io.jeyong.test.case2.service.ProductService;
 import java.util.List;
-import org.assertj.core.api.Assertions;
-import org.assertj.core.api.AssertionsForInterfaceTypes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -60,7 +60,8 @@ class AnnotationLoggingModeTest {
         assertThat(nPlusOneDetectorProperties.getThreshold()).isEqualTo(3);
         assertThat(nPlusOneDetectorProperties.getLevel()).isEqualTo(Level.DEBUG);
 
-        assertThat(applicationContext.containsBean("nPlusOneQueryLogger")).isTrue();
+        NPlusOneQueryTemplate template = applicationContext.getBean(NPlusOneQueryTemplate.class);
+        assertThat(template).isInstanceOf(NPlusOneQueryLogger.class);
     }
 
     @Test
@@ -69,8 +70,8 @@ class AnnotationLoggingModeTest {
         String url = "http://localhost:" + port + "/api/products";
         ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
 
-        Assertions.assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
-        Assertions.assertThat(output).contains("N+1 issue detected");
+        assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
+        assertThat(output).contains("N+1 issue detected");
     }
 
     @Test
@@ -78,6 +79,6 @@ class AnnotationLoggingModeTest {
     void testLoggingModeInBusinessLogicCall(CapturedOutput output) {
         productService.findAllProducts();
 
-        AssertionsForInterfaceTypes.assertThat(output).contains("N+1 issue detected");
+        assertThat(output).contains("N+1 issue detected");
     }
 }
