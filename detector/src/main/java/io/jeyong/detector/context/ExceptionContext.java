@@ -1,6 +1,7 @@
 package io.jeyong.detector.context;
 
 import io.jeyong.detector.exception.NPlusOneQueryException;
+import java.util.Optional;
 
 public final class ExceptionContext { // Todo: Consider concurrency issues
 
@@ -14,11 +15,11 @@ public final class ExceptionContext { // Todo: Consider concurrency issues
         }
     }
 
-    public NPlusOneQueryException getException() {
-        return primaryException;
+    public Optional<NPlusOneQueryException> getContext() {
+        return Optional.ofNullable(primaryException);
     }
 
-    public void clearException() {
+    public void clearContext() {
         primaryException = null;
     }
 }

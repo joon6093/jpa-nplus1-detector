@@ -2,8 +2,6 @@ package io.jeyong.detector.annotation;
 
 import io.jeyong.detector.context.ExceptionContext;
 import io.jeyong.detector.context.QueryContextHolder;
-import io.jeyong.detector.exception.NPlusOneQueryException;
-import java.util.Optional;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
@@ -33,24 +31,22 @@ public class NPlusOneTestExtension implements BeforeAllCallback, BeforeEachCallb
     @Override
     public void beforeEach(final ExtensionContext extensionContext) {
         QueryContextHolder.clearContext();
-        getOptionalExceptionContext().ifPresent(ExceptionContext::clearException);
+        if (exceptionContext != null) {
+            exceptionContext.clearContext();
+        }
     }
 
     @Override
     public void afterEach(final ExtensionContext extensionContext) {
-        getOptionalExceptionContext().ifPresent(context -> {
-            try {
-                final NPlusOneQueryException primaryException = context.getException();
-                if (primaryException != null) {
-                    throw primaryException;
-                }
-            } finally {
-                context.clearException();
-            }
-        });
-    }
-
-    private Optional<ExceptionContext> getOptionalExceptionContext() {
-        return Optional.ofNullable(exceptionContext);
+        if (exceptionContext == null) {
+            return;
+        }
+        try {
+            exceptionContext.getContext().ifPresent(exception -> {
+                throw exception;
+            });
+        } finally {
+            exceptionContext.clearContext();
+        }
     }
 }
