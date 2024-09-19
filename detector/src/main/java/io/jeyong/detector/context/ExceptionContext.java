@@ -7,7 +7,7 @@ public final class ExceptionContext {
 
     private NPlusOneQueryException primaryException;
 
-    public void saveException(final NPlusOneQueryException nPlusOneQueryException) {
+    public synchronized void saveException(final NPlusOneQueryException nPlusOneQueryException) {
         if (primaryException != null) {
             primaryException.addSuppressed(nPlusOneQueryException);
         } else {
@@ -15,11 +15,11 @@ public final class ExceptionContext {
         }
     }
 
-    public Optional<NPlusOneQueryException> getContext() {
+    public synchronized Optional<NPlusOneQueryException> getContext() {
         return Optional.ofNullable(primaryException);
     }
 
-    public void clearContext() {
+    public synchronized void clearContext() {
         primaryException = null;
     }
 }
