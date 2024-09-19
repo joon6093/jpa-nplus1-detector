@@ -1,7 +1,8 @@
-package io.jeyong.detector.test;
+package io.jeyong.detector.annotation;
 
 import io.jeyong.detector.context.ExceptionContext;
 import io.jeyong.detector.context.QueryContextHolder;
+import io.jeyong.detector.exception.NPlusOneQueryException;
 import java.util.Optional;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
@@ -11,7 +12,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-public class DetectNPlusOneExtension implements BeforeAllCallback, BeforeEachCallback, AfterEachCallback {
+public class NPlusOneTestExtension implements BeforeAllCallback, BeforeEachCallback, AfterEachCallback {
 
     private ExceptionContext exceptionContext;
 

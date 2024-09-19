@@ -1,8 +1,8 @@
-package io.jeyong.detector.test;
+package io.jeyong.detector.annotation;
 
+import io.jeyong.detector.annotation.NPlusOneTest.Mode;
 import io.jeyong.detector.config.NPlusOneDetectorExceptionConfig;
 import io.jeyong.detector.config.NPlusOneDetectorLoggingConfig;
-import io.jeyong.detector.test.NPlusOneTest.Mode;
 import java.util.Map;
 import java.util.Objects;
 import org.slf4j.event.Level;

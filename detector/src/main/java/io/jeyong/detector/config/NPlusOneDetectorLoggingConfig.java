@@ -1,8 +1,8 @@
 package io.jeyong.detector.config;
 
+import io.jeyong.detector.annotation.NPlusOneTest.Mode;
 import io.jeyong.detector.template.NPlusOneQueryLogger;
 import io.jeyong.detector.template.NPlusOneQueryTemplate;
-import io.jeyong.detector.test.NPlusOneTest.Mode;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,9 +1,9 @@
 package io.jeyong.detector.config;
 
+import io.jeyong.detector.annotation.NPlusOneTest.Mode;
 import io.jeyong.detector.context.ExceptionContext;
-import io.jeyong.detector.template.NPlusOneQueryExceptionCollector;
+import io.jeyong.detector.template.NPlusOneQueryCollector;
 import io.jeyong.detector.template.NPlusOneQueryTemplate;
-import io.jeyong.detector.test.NPlusOneTest.Mode;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +38,7 @@ public class NPlusOneDetectorExceptionConfig extends NPlusOneDetectorBaseConfig 
     @Bean
     @Override
     public NPlusOneQueryTemplate nPlusOneQueryTemplate() {
-        return new NPlusOneQueryExceptionCollector(
+        return new NPlusOneQueryCollector(
                 nPlusOneDetectorProperties.getThreshold(), exceptionContext());
     }
 }

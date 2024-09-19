@@ -3,10 +3,10 @@ package io.jeyong.test.mode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
+import io.jeyong.detector.annotation.NPlusOneTest;
 import io.jeyong.detector.config.NPlusOneDetectorProperties;
-import io.jeyong.detector.template.NPlusOneQueryExceptionCollector;
+import io.jeyong.detector.template.NPlusOneQueryCollector;
 import io.jeyong.detector.template.NPlusOneQueryTemplate;
-import io.jeyong.detector.test.NPlusOneTest;
 import io.jeyong.test.case2.service.ProductService;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -75,7 +75,7 @@ class AnnotationExceptionModeTest {
         assertThat(nPlusOneDetectorProperties.getThreshold()).isEqualTo(5);
 
         NPlusOneQueryTemplate template = applicationContext.getBean(NPlusOneQueryTemplate.class);
-        assertThat(template).isInstanceOf(NPlusOneQueryExceptionCollector.class);
+        assertThat(template).isInstanceOf(NPlusOneQueryCollector.class);
     }
 
     @Test

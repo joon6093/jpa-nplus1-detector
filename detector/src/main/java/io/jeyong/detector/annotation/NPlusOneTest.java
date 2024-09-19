@@ -1,5 +1,6 @@
-package io.jeyong.detector.test;
+package io.jeyong.detector.annotation;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -8,9 +9,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.event.Level;
 import org.springframework.context.annotation.Import;
 
+@Documented
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@ExtendWith(DetectNPlusOneExtension.class)
+@ExtendWith(NPlusOneTestExtension.class)
 @Import(NplusOneTestImportSelector.class)
 public @interface NPlusOneTest {
 
