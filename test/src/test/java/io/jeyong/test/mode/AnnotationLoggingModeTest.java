@@ -21,6 +21,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.TestPropertySource;
 
 @NPlusOneTest(threshold = 3, level = Level.DEBUG, mode = NPlusOneTest.Mode.LOGGING)
 @ExtendWith(OutputCaptureExtension.class)
@@ -28,6 +29,12 @@ import org.springframework.http.ResponseEntity;
         webEnvironment = RANDOM_PORT,
         properties = {
                 "logging.level.io.jeyong=debug"
+        })
+@TestPropertySource(
+        properties = {
+                "spring.jpa.properties.hibernate.detector.enabled=false",
+                "spring.jpa.properties.hibernate.detector.threshold=10",
+                "spring.jpa.properties.hibernate.detector.level=warn"
         })
 class AnnotationLoggingModeTest {
 
@@ -47,7 +54,7 @@ class AnnotationLoggingModeTest {
     private ProductService productService;
 
     @Test
-    @DisplayName("LOGGING 모드의 설정이 동작한다.")
+    @DisplayName("LOGGING 모드의 설정이 우선적으로 적용된다.")
     void testLoggingModeConfiguration() {
         assertThat(nPlusOneDetectorProperties.isEnabled()).isTrue();
         assertThat(nPlusOneDetectorProperties.getThreshold()).isEqualTo(3);

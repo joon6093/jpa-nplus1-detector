@@ -17,6 +17,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.TestPropertySource;
 // @formatter:off
 /**
  * <p>
@@ -45,6 +46,11 @@ import org.springframework.http.ResponseEntity;
 // @formatter:on
 @NPlusOneTest(threshold = 5, mode = NPlusOneTest.Mode.EXCEPTION)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
+@TestPropertySource(
+        properties = {
+                "spring.jpa.properties.hibernate.detector.enabled=false",
+                "spring.jpa.properties.hibernate.detector.threshold=10",
+        })
 class AnnotationExceptionModeTest {
 
     @Autowired
@@ -64,7 +70,7 @@ class AnnotationExceptionModeTest {
 
 
     @Test
-    @DisplayName("EXCEPTION 모드의 설정이 동작한다.")
+    @DisplayName("EXCEPTION 모드의 설정이 우선적으로 적용된다.")
     void testExceptionModeConfiguration() {
         AssertionsForClassTypes.assertThat(nPlusOneDetectorProperties.isEnabled()).isTrue();
         AssertionsForClassTypes.assertThat(nPlusOneDetectorProperties.getThreshold()).isEqualTo(5);
