@@ -16,8 +16,8 @@ public class DetectNPlusOneExtension implements BeforeAllCallback, BeforeEachCal
     private ExceptionContext exceptionContext;
 
     @Override
-    public void beforeAll(ExtensionContext extensionContext) {
-        ApplicationContext applicationContext = SpringExtension.getApplicationContext(extensionContext);
+    public void beforeAll(final ExtensionContext extensionContext) {
+        final ApplicationContext applicationContext = SpringExtension.getApplicationContext(extensionContext);
         exceptionContext = getExceptionContext(applicationContext);
     }
 
@@ -39,7 +39,7 @@ public class DetectNPlusOneExtension implements BeforeAllCallback, BeforeEachCal
     public void afterEach(final ExtensionContext extensionContext) {
         getOptionalExceptionContext().ifPresent(context -> {
             try {
-                NPlusOneQueryException primaryException = context.getException();
+                final NPlusOneQueryException primaryException = context.getException();
                 if (primaryException != null) {
                     throw primaryException;
                 }
