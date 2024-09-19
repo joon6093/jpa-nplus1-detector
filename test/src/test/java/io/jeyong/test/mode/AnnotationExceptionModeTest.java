@@ -8,6 +8,7 @@ import io.jeyong.detector.config.NPlusOneDetectorProperties;
 import io.jeyong.detector.template.NPlusOneQueryCollector;
 import io.jeyong.detector.template.NPlusOneQueryTemplate;
 import io.jeyong.test.case2.service.ProductService;
+import io.jeyong.test.case4.service.AddressService;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -68,6 +69,9 @@ class AnnotationExceptionModeTest {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private AddressService addressService;
+
     @Test
     @DisplayName("EXCEPTION 모드의 설정이 우선적으로 적용된다.")
     void testExceptionModeConfiguration() {
@@ -91,5 +95,12 @@ class AnnotationExceptionModeTest {
     @DisplayName("Business Logic 호출에서 EXCEPTION 모드가 동작한다.")
     void testExceptionModeInBusinessLogicCall() {
         productService.findAllProducts();
+    }
+
+    @Test
+    @DisplayName("여러번의 예외에서 EXCEPTION 모드가 동작한다.")
+    void testExceptionModeInMultipleExceptions() {
+        productService.findAllProducts();
+        addressService.findAllAddresses();
     }
 }
