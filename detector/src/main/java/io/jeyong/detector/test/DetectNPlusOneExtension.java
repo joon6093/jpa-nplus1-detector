@@ -1,31 +1,55 @@
 package io.jeyong.detector.test;
 
+import io.jeyong.detector.context.ExceptionContext;
 import io.jeyong.detector.context.QueryContextHolder;
-import io.jeyong.detector.template.NPlusOneQueryExceptionThrower;
-import io.jeyong.detector.template.NPlusOneQueryTemplate;
+import java.util.Optional;
 import org.junit.jupiter.api.extension.AfterEachCallback;
+import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-public class DetectNPlusOneExtension implements BeforeEachCallback, AfterEachCallback {
+public class DetectNPlusOneExtension implements BeforeAllCallback, BeforeEachCallback, AfterEachCallback {
 
-    private final NPlusOneQueryTemplate nPlusOneQueryTemplate;
+    private ExceptionContext exceptionContext;
 
-    public DetectNPlusOneExtension() {
-        this(2);
+    @Override
+    public void beforeAll(ExtensionContext extensionContext) {
+        ApplicationContext applicationContext = SpringExtension.getApplicationContext(extensionContext);
+        exceptionContext = getExceptionContext(applicationContext);
     }
 
-    public DetectNPlusOneExtension(int queryThreshold) {
-        this.nPlusOneQueryTemplate = new NPlusOneQueryExceptionThrower(queryThreshold);
+    private ExceptionContext getExceptionContext(final ApplicationContext applicationContext) {
+        try {
+            return applicationContext.getBean(ExceptionContext.class);
+        } catch (BeansException e) {
+            return null;
+        }
     }
 
     @Override
-    public void beforeEach(ExtensionContext context) throws Exception {
+    public void beforeEach(final ExtensionContext extensionContext) {
         QueryContextHolder.clearContext();
+        getOptionalExceptionContext().ifPresent(ExceptionContext::clearException);
     }
 
     @Override
-    public void afterEach(ExtensionContext context) throws Exception {
-        nPlusOneQueryTemplate.handleNPlusOneIssues();
+    public void afterEach(final ExtensionContext extensionContext) {
+        getOptionalExceptionContext().ifPresent(context -> {
+            try {
+                NPlusOneQueryException primaryException = context.getException();
+                if (primaryException != null) {
+                    throw primaryException;
+                }
+            } finally {
+                context.clearException();
+            }
+        });
+    }
+
+    private Optional<ExceptionContext> getOptionalExceptionContext() {
+        return Optional.ofNullable(exceptionContext);
     }
 }
