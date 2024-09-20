@@ -44,7 +44,7 @@ public class LoggerPerformanceTest {
 
     @Test
     @DisplayName("forEach 성능 테스트")
-    public void testForEach() {
+    public void testForEachPerformance() {
         long startTime = System.nanoTime();
         queryContext.getQueryCounts().forEach((query, count) -> {
             if (count >= queryThreshold) {
@@ -61,7 +61,7 @@ public class LoggerPerformanceTest {
 
     @Test
     @DisplayName("Stream 성능 테스트")
-    public void testStream() {
+    public void testStreamPerformance() {
         long startTime = System.nanoTime();
         queryContext.getQueryCounts().entrySet().stream().forEach(entry -> {
             String query = entry.getKey();
@@ -80,7 +80,7 @@ public class LoggerPerformanceTest {
 
     @Test
     @DisplayName("ParallelStream 성능 테스트")
-    public void testParallelStream() {
+    public void testParallelStreamPerformance() {
         long startTime = System.nanoTime();
         queryContext.getQueryCounts().entrySet().parallelStream().forEach(entry -> {
             String query = entry.getKey();
