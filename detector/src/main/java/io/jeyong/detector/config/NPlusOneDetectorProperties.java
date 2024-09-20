@@ -47,6 +47,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *
  * @author jeyong
  * @since 1.0
+ * @see NPlusOneDetectorBaseConfig
+ * @see NPlusOneDetectorLoggingConfig
+ * @see NPlusOneDetectorExceptionConfig
  */
 // @formatter:on
 @ConfigurationProperties(prefix = "spring.jpa.properties.hibernate.detector")
