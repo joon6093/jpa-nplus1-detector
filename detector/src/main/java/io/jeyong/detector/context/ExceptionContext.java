@@ -1,24 +1,25 @@
 package io.jeyong.detector.context;
 
-import io.jeyong.detector.test.NPlusOneQueryException;
+import io.jeyong.detector.exception.NPlusOneQueryException;
+import java.util.Optional;
 
-public final class ExceptionContext { // Todo: Consider concurrency issues
+public final class ExceptionContext {
 
     private NPlusOneQueryException primaryException;
 
-    public void saveException(final NPlusOneQueryException exception) {
+    public synchronized void saveException(final NPlusOneQueryException nPlusOneQueryException) {
         if (primaryException != null) {
-            primaryException.addSuppressed(exception);
+            primaryException.addSuppressed(nPlusOneQueryException);
         } else {
-            primaryException = exception;
+            primaryException = nPlusOneQueryException;
         }
     }
 
-    public NPlusOneQueryException getException() {
-        return primaryException;
+    public synchronized Optional<NPlusOneQueryException> getContext() {
+        return Optional.ofNullable(primaryException);
     }
 
-    public void clearException() {
+    public synchronized void clearContext() {
         primaryException = null;
     }
 }

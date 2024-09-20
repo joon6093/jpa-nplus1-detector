@@ -1,4 +1,4 @@
-package io.jeyong.detector.test;
+package io.jeyong.detector.exception;
 
 public class NPlusOneQueryException extends RuntimeException {
 

@@ -1,16 +1,12 @@
 package io.jeyong.detector.config;
 
-import static org.hibernate.cfg.AvailableSettings.STATEMENT_INSPECTOR;
-
-import io.jeyong.detector.aspect.ConnectionProxyAspect;
-import io.jeyong.detector.interceptor.QueryStatementInspector;
+import io.jeyong.detector.annotation.NPlusOneTest.Mode;
 import io.jeyong.detector.template.NPlusOneQueryLogger;
 import io.jeyong.detector.template.NPlusOneQueryTemplate;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,42 +19,29 @@ import org.springframework.context.annotation.Configuration;
         matchIfMissing = false
 )
 @EnableConfigurationProperties(NPlusOneDetectorProperties.class)
-public class NPlusOneDetectorConfig {
+public class NPlusOneDetectorLoggingConfig extends NPlusOneDetectorBaseConfig {
 
-    private static final Logger logger = LoggerFactory.getLogger(NPlusOneDetectorConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(NPlusOneDetectorLoggingConfig.class);
     private final NPlusOneDetectorProperties nPlusOneDetectorProperties;
 
-    public NPlusOneDetectorConfig(final NPlusOneDetectorProperties nPlusOneDetectorProperties) {
+    public NPlusOneDetectorLoggingConfig(final NPlusOneDetectorProperties nPlusOneDetectorProperties) {
         this.nPlusOneDetectorProperties = nPlusOneDetectorProperties;
     }
 
     @PostConstruct
     public void logInitialization() {
-        logger.info("N+1 Detector is enabled with threshold: {}, log level: {}",
+        logger.info(
+                "N+1 Detector enabled in '{}' mode. Monitoring queries with a threshold of '{}' and logging at '{}' level.",
+                Mode.LOGGING,
                 nPlusOneDetectorProperties.getThreshold(),
                 nPlusOneDetectorProperties.getLevel().toString().toLowerCase());
     }
 
     @Bean
-    public NPlusOneQueryTemplate nPlusOneQueryLogger() {
+    @Override
+    public NPlusOneQueryTemplate nPlusOneQueryTemplate() {
         return new NPlusOneQueryLogger(
                 nPlusOneDetectorProperties.getThreshold(),
                 nPlusOneDetectorProperties.getLevel());
-    }
-
-    @Bean
-    public ConnectionProxyAspect connectionProxyAspect(final NPlusOneQueryTemplate nPlusOneQueryTemplate) {
-        return new ConnectionProxyAspect(nPlusOneQueryTemplate);
-    }
-
-    @Bean
-    public QueryStatementInspector queryStatementInspector() {
-        return new QueryStatementInspector();
-    }
-
-    @Bean
-    public HibernatePropertiesCustomizer hibernatePropertiesCustomizer(
-            final QueryStatementInspector queryStatementInspector) {
-        return hibernateProperties -> hibernateProperties.put(STATEMENT_INSPECTOR, queryStatementInspector);
     }
 }

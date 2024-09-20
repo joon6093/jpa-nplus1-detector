@@ -1,8 +1,7 @@
-package io.jeyong.detector.test;
+package io.jeyong.detector.annotation;
 
 import io.jeyong.detector.context.ExceptionContext;
 import io.jeyong.detector.context.QueryContextHolder;
-import java.util.Optional;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
@@ -11,13 +10,13 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-public class DetectNPlusOneExtension implements BeforeAllCallback, BeforeEachCallback, AfterEachCallback {
+public final class NPlusOneTestExtension implements BeforeAllCallback, BeforeEachCallback, AfterEachCallback {
 
     private ExceptionContext exceptionContext;
 
     @Override
-    public void beforeAll(ExtensionContext extensionContext) {
-        ApplicationContext applicationContext = SpringExtension.getApplicationContext(extensionContext);
+    public void beforeAll(final ExtensionContext extensionContext) {
+        final ApplicationContext applicationContext = SpringExtension.getApplicationContext(extensionContext);
         exceptionContext = getExceptionContext(applicationContext);
     }
 
@@ -32,24 +31,22 @@ public class DetectNPlusOneExtension implements BeforeAllCallback, BeforeEachCal
     @Override
     public void beforeEach(final ExtensionContext extensionContext) {
         QueryContextHolder.clearContext();
-        getOptionalExceptionContext().ifPresent(ExceptionContext::clearException);
+        if (exceptionContext != null) {
+            exceptionContext.clearContext();
+        }
     }
 
     @Override
     public void afterEach(final ExtensionContext extensionContext) {
-        getOptionalExceptionContext().ifPresent(context -> {
-            try {
-                NPlusOneQueryException primaryException = context.getException();
-                if (primaryException != null) {
-                    throw primaryException;
-                }
-            } finally {
-                context.clearException();
-            }
-        });
-    }
-
-    private Optional<ExceptionContext> getOptionalExceptionContext() {
-        return Optional.ofNullable(exceptionContext);
+        if (exceptionContext == null) {
+            return;
+        }
+        try {
+            exceptionContext.getContext().ifPresent(exception -> {
+                throw exception;
+            });
+        } finally {
+            exceptionContext.clearContext();
+        }
     }
 }
