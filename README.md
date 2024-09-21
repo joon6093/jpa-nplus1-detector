@@ -73,12 +73,12 @@ Example log when an N+1 issue is detected.
 ```
 
 ## 🔍 Test
-The N+1 Query Detector can be used in test code with two modes, in combination with @SpringBootTest or similar annotations.
+The N+1 Query Detector can be used in test code with two modes, in combination with @SpringBootTest or similar annotations, and any test-specific settings will take precedence over global configuration.
 
 ### Logging mode
 In Logging mode, the N+1 detector logs detected issues for you to review without interrupting the test flow.
 ```
-@NPlusOneTest(threshold = 3, level = Level.DEBUG, mode = NPlusOneTest.Mode.LOGGING) 
+@NPlusOneTest(mode = NPlusOneTest.Mode.LOGGING, threshold = 3, level = Level.DEBUG) 
 ```
 
 If an N+1 issue is detected during test execution, it will be logged as follows.
@@ -89,12 +89,13 @@ If an N+1 issue is detected during test execution, it will be logged as follows.
 ### Exception mode
 In Exception mode, the N+1 detector throws an exception whenever an N+1 issue is detected, enforcing stricter query checks during tests.
 ```
-@NPlusOneTest(threshold = 5, mode = NPlusOneTest.Mode.EXCEPTION)
+@NPlusOneTest(mode = NPlusOneTest.Mode.EXCEPTION, threshold = 5)
 ```
 
 If an N+1 issue is detected during test execution, an exception is thrown. When multiple N+1 exceptions occur within the same test, they are consolidated into a single exception, with additional exceptions being suppressed and thrown together.
 ```
 io.jeyong.detector.exception.NPlusOneQueryException: N+1 issue detected: 'select o1_0.id,o1_0.order_number from "order" o1_0 where o1_0.id=?' was executed 3 times.
+Suppressed: io.jeyong.detector.exception.NPlusOneQueryException: N+1 issue detected: 'select a1_0.id,a1_0.city,a1_0.street from address a1_0 where a1_0.id=?' was executed 3 times.
 Suppressed: io.jeyong.detector.exception.NPlusOneQueryException: N+1 issue detected: 'select p1_0.id,p1_0.address_id,p1_0.name from person p1_0 where p1_0.address_id=?' was executed 3 times.
 ```
 
