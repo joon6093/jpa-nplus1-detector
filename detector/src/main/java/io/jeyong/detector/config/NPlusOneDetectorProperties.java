@@ -23,6 +23,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *
  * <pre>
  * Example configuration (YAML):
+ * {@code
  * spring:
  *   jpa:
  *     properties:
@@ -31,13 +32,16 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *           enabled: true
  *           threshold: 2
  *           level: warn
+ * }
  * </pre>
  *
  * <pre>
  * Example configuration (Properties):
+ * {@code
  * spring.jpa.properties.hibernate.detector.enabled=true
  * spring.jpa.properties.hibernate.detector.threshold=2
  * spring.jpa.properties.hibernate.detector.level=warn
+ * }
  * </pre>
  *
  * <p>

@@ -15,6 +15,9 @@ import org.springframework.core.annotation.AliasFor;
 /**
  * <p>
  * Annotation to enable N+1 Query Detection in JPA (Hibernate) based applications.
+ * </p>
+ *
+ * <p>
  * This annotation can be applied at the class level to detect and log or throw exceptions
  * for N+1 query issues during the execution of test cases.
  * </p>
