@@ -9,6 +9,7 @@ import io.jeyong.detector.template.NPlusOneQueryCollector;
 import io.jeyong.detector.template.NPlusOneQueryTemplate;
 import io.jeyong.test.case2.service.ProductService;
 import io.jeyong.test.case4.service.AddressService;
+import io.jeyong.test.case4.service.PersonService;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,7 +46,7 @@ import org.springframework.test.context.TestPropertySource;
  * </pre>
  */
 // @formatter:on
-@NPlusOneTest(threshold = 5, mode = NPlusOneTest.Mode.EXCEPTION)
+@NPlusOneTest(mode = NPlusOneTest.Mode.EXCEPTION, threshold = 5)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @TestPropertySource(
         properties = {
@@ -71,6 +72,9 @@ class AnnotationExceptionModeTest {
 
     @Autowired
     private AddressService addressService;
+
+    @Autowired
+    private PersonService personService;
 
     @Test
     @DisplayName("EXCEPTION 모드의 설정이 우선적으로 적용된다.")
@@ -102,5 +106,6 @@ class AnnotationExceptionModeTest {
     void testExceptionModeInMultipleExceptions() {
         productService.findAllProducts();
         addressService.findAllAddresses();
+        personService.findAllPersons();
     }
 }

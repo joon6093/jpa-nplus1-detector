@@ -23,7 +23,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 
-@NPlusOneTest(threshold = 3, level = Level.DEBUG, mode = NPlusOneTest.Mode.LOGGING)
+@NPlusOneTest(mode = NPlusOneTest.Mode.LOGGING, threshold = 3, level = Level.DEBUG)
 @ExtendWith(OutputCaptureExtension.class)
 @SpringBootTest(
         webEnvironment = RANDOM_PORT,
