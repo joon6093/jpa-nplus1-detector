@@ -19,26 +19,21 @@ import org.springframework.core.annotation.AliasFor;
  * for N+1 query issues during the execution of test cases.
  * </p>
  *
- * <p>
- * When applied to a test class, it integrates with the {@code NPlusOneTestExtension} to automatically detect N+1 queries
- * and applies the configured threshold, log level, and behavior (logging or exception) based on the provided parameters.
- * </p>
- *
  * <ul>
- *     <li><b>threshold:</b> The number of times a query must be executed before an N+1 issue is flagged (default: 2).</li>
- *     <li><b>level:</b> The log level for detected N+1 issues (default: WARN).</li>
- *     <li><b>mode:</b> The mode in which the detector operates:
+ *     <li><b>mode:</b> The mode in which the detector operates (default: LOGGING).
  *         <ul>
  *             <li><b>LOGGING:</b> Logs the detected N+1 issues at the specified log level.</li>
  *             <li><b>EXCEPTION:</b> Throws an {@code NPlusOneQueryException} when an N+1 issue is detected.</li>
  *         </ul>
  *     </li>
+ *     <li><b>threshold:</b> The number of times a query must be executed before an N+1 issue is flagged (default: 2).</li>
+ *     <li><b>level:</b> The log level for detected N+1 issues (default: WARN).</li>
  * </ul>
  *
  * <pre>
  * Example usage:
  * {@code
- * @NPlusOneTest(threshold = 3, mode = NPlusOneTest.Mode.EXCEPTION)
+ * @NPlusOneTest(mode = NPlusOneTest.Mode.EXCEPTION, threshold = 5)
  * @SpringBootTest
  * class MyJpaTest {
  *     // Test cases here
