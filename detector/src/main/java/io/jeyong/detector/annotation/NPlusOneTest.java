@@ -8,6 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.event.Level;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.annotation.AliasFor;
 
@@ -55,9 +56,10 @@ import org.springframework.core.annotation.AliasFor;
  * @see NPlusOneQueryException
  */
 // @formatter:on
-@Documented
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
+@Documented
+@EnableAspectJAutoProxy
 @ExtendWith(NPlusOneTestExtension.class)
 @Import(NplusOneTestImportSelector.class)
 public @interface NPlusOneTest {
