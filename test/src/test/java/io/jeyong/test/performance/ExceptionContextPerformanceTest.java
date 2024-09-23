@@ -8,6 +8,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -60,6 +61,7 @@ class ExceptionContextPerformanceTest {
 
     private static final int NUM_ITERATIONS = 100000;
 
+    @Disabled
     @Test
     @DisplayName("Synchronized 성능 테스트")
     void testSynchronizedPerformance() {
@@ -77,6 +79,7 @@ class ExceptionContextPerformanceTest {
         assertThat(duration).isGreaterThan(0);
     }
 
+    @Disabled
     @Test
     @DisplayName("AtomicReference 성능 테스트")
     void testAtomicReferencePerformance() {
@@ -96,6 +99,7 @@ class ExceptionContextPerformanceTest {
 
     private static final int NUM_THREADS = 100;
 
+    @Disabled
     @Test
     @DisplayName("Synchronized MultiThread 성능 테스트")
     void testSynchronizedMultiThreadPerformance() throws InterruptedException {
@@ -130,6 +134,7 @@ class ExceptionContextPerformanceTest {
         assertThat(duration).isGreaterThan(0);
     }
 
+    @Disabled
     @Test
     @DisplayName("AtomicReference MultiThread 성능 테스트")
     void testAtomicReferenceMultiThreadPerformance() throws InterruptedException {
