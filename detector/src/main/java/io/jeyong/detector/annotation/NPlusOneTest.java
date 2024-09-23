@@ -38,7 +38,7 @@ import org.springframework.core.annotation.AliasFor;
  * Example usage:
  * {@code
  * @NPlusOneTest(mode = NPlusOneTest.Mode.EXCEPTION, threshold = 5)
- * @SpringBootTest
+ * @SpringBootTest or @DataJpaTest
  * class MyJpaTest {
  *     // Test cases here
  * }
