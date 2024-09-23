@@ -62,7 +62,7 @@ class ExceptionModeIntegrationTest {
         assertThat(template).isInstanceOf(NPlusOneQueryCollector.class);
     }
 
-    @Disabled
+    @Disabled("BeforeEach 메서드에서 발생하는 예외는 테스트할 수 없다.")
     @Test
     @DisplayName("API 호출에서 EXCEPTION 모드가 동작한다.")
     void testExceptionModeInApiCall() {
@@ -72,14 +72,14 @@ class ExceptionModeIntegrationTest {
         assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
     }
 
-    @Disabled
+    @Disabled("BeforeEach 메서드에서 발생하는 예외는 테스트할 수 없다.")
     @Test
     @DisplayName("Business Logic 호출에서 EXCEPTION 모드가 동작한다.")
     void testExceptionModeInBusinessLogicCall() {
         productService.findAllProducts();
     }
 
-    @Disabled
+    @Disabled("BeforeEach 메서드에서 발생하는 예외는 테스트할 수 없다.")
     @Test
     @DisplayName("여러번의 예외에서 EXCEPTION 모드가 동작한다.")
     void testExceptionModeInMultipleExceptions() {

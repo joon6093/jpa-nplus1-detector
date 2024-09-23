@@ -61,7 +61,7 @@ class ExceptionContextPerformanceTest {
 
     private static final int NUM_ITERATIONS = 100000;
 
-    @Disabled
+    @Disabled("성능 테스트는 반복적인 실행이 불필요하다.")
     @Test
     @DisplayName("Synchronized 성능 테스트")
     void testSynchronizedPerformance() {
@@ -79,11 +79,11 @@ class ExceptionContextPerformanceTest {
         assertThat(duration).isGreaterThan(0);
     }
 
-    @Disabled
+    @Disabled("성능 테스트는 반복적인 실행이 불필요하다.")
     @Test
     @DisplayName("AtomicReference 성능 테스트")
     void testAtomicReferencePerformance() {
-        AtomicExceptionContext atomicExceptionContext = new AtomicExceptionContext();
+        ExceptionContextPerformanceTest.AtomicExceptionContext atomicExceptionContext = new AtomicExceptionContext();
 
         long startTime = System.nanoTime();
         for (int i = 0; i < NUM_ITERATIONS; i++) {
@@ -99,11 +99,11 @@ class ExceptionContextPerformanceTest {
 
     private static final int NUM_THREADS = 100;
 
-    @Disabled
+    @Disabled("성능 테스트는 반복적인 실행이 불필요하다.")
     @Test
     @DisplayName("Synchronized MultiThread 성능 테스트")
     void testSynchronizedMultiThreadPerformance() throws InterruptedException {
-        SyncExceptionContext syncExceptionContext = new SyncExceptionContext();
+        ExceptionContextPerformanceTest.SyncExceptionContext syncExceptionContext = new SyncExceptionContext();
         ExecutorService executorService = Executors.newFixedThreadPool(NUM_THREADS);
         CountDownLatch countDownLatch = new CountDownLatch(NUM_THREADS);
 
@@ -134,7 +134,7 @@ class ExceptionContextPerformanceTest {
         assertThat(duration).isGreaterThan(0);
     }
 
-    @Disabled
+    @Disabled("성능 테스트는 반복적인 실행이 불필요하다.")
     @Test
     @DisplayName("AtomicReference MultiThread 성능 테스트")
     void testAtomicReferenceMultiThreadPerformance() throws InterruptedException {

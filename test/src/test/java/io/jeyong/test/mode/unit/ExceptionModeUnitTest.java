@@ -46,7 +46,7 @@ class ExceptionModeUnitTest {
         assertThat(template).isInstanceOf(NPlusOneQueryCollector.class);
     }
 
-    @Disabled
+    @Disabled("BeforeEach 메서드에서 발생하는 예외는 테스트할 수 없다.")
     @Test
     @DisplayName("Repository 호출에서 EXCEPTION 모드가 동작한다.")
     void testExceptionModeInBusinessLogicCall() {

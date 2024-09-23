@@ -43,7 +43,7 @@ public class LoggerPerformanceTest {
         queryContext.initTestData(DATA_SIZE);
     }
 
-    @Disabled
+    @Disabled("성능 테스트는 반복적인 실행이 불필요하다.")
     @Test
     @DisplayName("forEach 성능 테스트")
     public void testForEachPerformance() {
@@ -61,7 +61,7 @@ public class LoggerPerformanceTest {
         assertThat(duration).isGreaterThan(0);
     }
 
-    @Disabled
+    @Disabled("성능 테스트는 반복적인 실행이 불필요하다.")
     @Test
     @DisplayName("Stream 성능 테스트")
     public void testStreamPerformance() {
@@ -81,7 +81,7 @@ public class LoggerPerformanceTest {
         assertThat(duration).isGreaterThan(0);
     }
 
-    @Disabled
+    @Disabled("성능 테스트는 반복적인 실행이 불필요하다.")
     @Test
     @DisplayName("ParallelStream 성능 테스트")
     public void testParallelStreamPerformance() {
