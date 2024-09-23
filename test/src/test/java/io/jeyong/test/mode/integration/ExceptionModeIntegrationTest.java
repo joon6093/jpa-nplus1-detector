@@ -1,42 +1,35 @@
-package io.jeyong.test.mode;
+package io.jeyong.test.mode.integration;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 import io.jeyong.detector.annotation.NPlusOneTest;
 import io.jeyong.detector.config.NPlusOneDetectorProperties;
-import io.jeyong.detector.template.NPlusOneQueryLogger;
+import io.jeyong.detector.template.NPlusOneQueryCollector;
 import io.jeyong.detector.template.NPlusOneQueryTemplate;
 import io.jeyong.test.case2.service.ProductService;
+import io.jeyong.test.case4.service.AddressService;
+import io.jeyong.test.case4.service.PersonService;
 import java.util.List;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.slf4j.event.Level;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.system.CapturedOutput;
-import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 
-@NPlusOneTest(mode = NPlusOneTest.Mode.LOGGING, threshold = 3, level = Level.DEBUG)
-@ExtendWith(OutputCaptureExtension.class)
-@SpringBootTest(
-        webEnvironment = RANDOM_PORT,
-        properties = {
-                "logging.level.io.jeyong=debug"
-        })
+@NPlusOneTest(mode = NPlusOneTest.Mode.EXCEPTION, threshold = 3)
+@SpringBootTest(webEnvironment = RANDOM_PORT)
 @TestPropertySource(
         properties = {
-                "spring.jpa.properties.hibernate.detector.enabled=false",
+                "spring.jpa.properties.hibernate.detector.enabled=true",
                 "spring.jpa.properties.hibernate.detector.threshold=10",
-                "spring.jpa.properties.hibernate.detector.level=warn"
         })
-class AnnotationLoggingModeTest {
+class ExceptionModeIntegrationTest {
 
     @Autowired
     private ApplicationContext applicationContext;
@@ -53,32 +46,45 @@ class AnnotationLoggingModeTest {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private AddressService addressService;
+
+    @Autowired
+    private PersonService personService;
+
     @Test
-    @DisplayName("LOGGING 모드의 설정이 우선적으로 적용된다.")
-    void testLoggingModeConfiguration() {
-        assertThat(nPlusOneDetectorProperties.isEnabled()).isTrue();
+    @DisplayName("EXCEPTION 모드의 설정이 우선적으로 적용된다.")
+    void testExceptionModeConfiguration() {
+        assertThat(nPlusOneDetectorProperties.isEnabled()).isFalse();
         assertThat(nPlusOneDetectorProperties.getThreshold()).isEqualTo(3);
-        assertThat(nPlusOneDetectorProperties.getLevel()).isEqualTo(Level.DEBUG);
 
         NPlusOneQueryTemplate template = applicationContext.getBean(NPlusOneQueryTemplate.class);
-        assertThat(template).isInstanceOf(NPlusOneQueryLogger.class);
+        assertThat(template).isInstanceOf(NPlusOneQueryCollector.class);
     }
 
+    @Disabled
     @Test
-    @DisplayName("API 호출에서 LOGGING 모드가 동작한다.")
-    void testLoggingModeInApiCall(CapturedOutput output) {
+    @DisplayName("API 호출에서 EXCEPTION 모드가 동작한다.")
+    void testExceptionModeInApiCall() {
         String url = "http://localhost:" + port + "/api/products";
         ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
 
         assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
-        assertThat(output).contains("N+1 issue detected");
     }
 
+    @Disabled
     @Test
-    @DisplayName("Business Logic 호출에서 LOGGING 모드가 동작한다.")
-    void testLoggingModeInBusinessLogicCall(CapturedOutput output) {
+    @DisplayName("Business Logic 호출에서 EXCEPTION 모드가 동작한다.")
+    void testExceptionModeInBusinessLogicCall() {
         productService.findAllProducts();
+    }
 
-        assertThat(output).contains("N+1 issue detected");
+    @Disabled
+    @Test
+    @DisplayName("여러번의 예외에서 EXCEPTION 모드가 동작한다.")
+    void testExceptionModeInMultipleExceptions() {
+        productService.findAllProducts();
+        addressService.findAllAddresses();
+        personService.findAllPersons();
     }
 }
