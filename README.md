@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {  
-    implementation 'com.github.joon6093:jpa-nplus1-detector:2.0.2'  
+    implementation 'com.github.joon6093:jpa-nplus1-detector:2.1.0'  
 }
 ```
 
@@ -35,7 +35,7 @@ dependencies {
 <dependency>  
     <groupId>com.github.joon6093</groupId>  
     <artifactId>jpa-nplus1-detector</artifactId>  
-    <version>2.0.2</version>  
+    <version>2.1.0</version>  
 </dependency>
 ```
 
@@ -73,7 +73,7 @@ Example log when an N+1 issue is detected.
 ```
 
 ## 🔍 Test
-The N+1 Query Detector can be used in test code with two modes, in combination with @SpringBootTest or similar annotations, and any test-specific settings will take precedence over global configuration.
+The N+1 Query Detector can be used in test code with two modes, in combination with @SpringBootTest or @DataJpaTest, and any test-specific settings will take precedence over global configuration.
 
 ### Logging mode
 In Logging mode, the N+1 detector logs detected issues for you to review without interrupting the test flow.
@@ -117,3 +117,4 @@ Suppressed: io.jeyong.detector.exception.NPlusOneQueryException: N+1 issue detec
 - [Version 2.0.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/2.0.0) - Released on 2024/09/19
 - [Version 2.0.1](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/2.0.1) - Released on 2024/09/19
 - [Version 2.0.2](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/2.0.2) - Released on 2024/09/20
+- [Version 2.1.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/2.1.0) - Released on 2024/09/24
