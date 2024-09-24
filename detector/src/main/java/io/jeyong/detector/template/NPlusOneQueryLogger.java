@@ -15,7 +15,7 @@ public final class NPlusOneQueryLogger extends NPlusOneQueryTemplate {
     }
 
     @Override
-    protected void handleDetectedNPlusOneIssue(final String query, final Long count) {
+    protected void handleDetectedNPlusOneQuery(final String query, final Long count) {
         if (level == Level.WARN && logger.isWarnEnabled()) {
             logger.warn("N+1 issue detected: '{}' was executed {} times.", query, count);
         } else if (level == Level.TRACE && logger.isTraceEnabled()) {

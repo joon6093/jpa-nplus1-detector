@@ -10,11 +10,11 @@ public abstract class NPlusOneQueryTemplate {
         this.queryThreshold = queryThreshold;
     }
 
-    public final void handleNPlusOneIssues() {
+    public final void handleQueryContext() {
         try {
             QueryContextHolder.getContext().getQueryCounts().forEach((query, count) -> {
                 if (count >= queryThreshold) {
-                    handleDetectedNPlusOneIssue(query, count);
+                    handleDetectedNPlusOneQuery(query, count);
                 }
             });
         } finally {
@@ -22,5 +22,5 @@ public abstract class NPlusOneQueryTemplate {
         }
     }
 
-    protected abstract void handleDetectedNPlusOneIssue(final String query, final Long count);
+    protected abstract void handleDetectedNPlusOneQuery(final String query, final Long count);
 }
