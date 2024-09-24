@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'io.jeyong'
-version = '2.0.2'
+version = '2.1.0'
 
 java {
     toolchain {
@@ -20,7 +20,7 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter:3.0.0'
-    implementation 'org.hibernate.orm:hibernate-core:6.0.0.Final'
+    implementation 'org.hibernate.orm:hibernate-core:6.1.5.Final'
     implementation 'org.springframework.boot:spring-boot-starter-aop:3.0.0'
     implementation 'org.springframework.boot:spring-boot-starter-test:3.0.0'
 }

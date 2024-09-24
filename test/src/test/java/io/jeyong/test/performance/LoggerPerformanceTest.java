@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -42,9 +43,10 @@ public class LoggerPerformanceTest {
         queryContext.initTestData(DATA_SIZE);
     }
 
+    @Disabled("성능 테스트는 반복적인 실행이 불필요하다.")
     @Test
     @DisplayName("forEach 성능 테스트")
-    public void testForEach() {
+    public void testForEachPerformance() {
         long startTime = System.nanoTime();
         queryContext.getQueryCounts().forEach((query, count) -> {
             if (count >= queryThreshold) {
@@ -59,9 +61,10 @@ public class LoggerPerformanceTest {
         assertThat(duration).isGreaterThan(0);
     }
 
+    @Disabled("성능 테스트는 반복적인 실행이 불필요하다.")
     @Test
     @DisplayName("Stream 성능 테스트")
-    public void testStream() {
+    public void testStreamPerformance() {
         long startTime = System.nanoTime();
         queryContext.getQueryCounts().entrySet().stream().forEach(entry -> {
             String query = entry.getKey();
@@ -78,9 +81,10 @@ public class LoggerPerformanceTest {
         assertThat(duration).isGreaterThan(0);
     }
 
+    @Disabled("성능 테스트는 반복적인 실행이 불필요하다.")
     @Test
     @DisplayName("ParallelStream 성능 테스트")
-    public void testParallelStream() {
+    public void testParallelStreamPerformance() {
         long startTime = System.nanoTime();
         queryContext.getQueryCounts().entrySet().parallelStream().forEach(entry -> {
             String query = entry.getKey();

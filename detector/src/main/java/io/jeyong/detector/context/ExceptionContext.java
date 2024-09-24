@@ -2,24 +2,28 @@ package io.jeyong.detector.context;
 
 import io.jeyong.detector.exception.NPlusOneQueryException;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 public final class ExceptionContext {
 
-    private NPlusOneQueryException primaryException;
+    private final AtomicReference<NPlusOneQueryException> primaryException = new AtomicReference<>();
 
-    public synchronized void saveException(final NPlusOneQueryException nPlusOneQueryException) {
-        if (primaryException != null) {
-            primaryException.addSuppressed(nPlusOneQueryException);
-        } else {
-            primaryException = nPlusOneQueryException;
-        }
+    public void saveException(final NPlusOneQueryException nPlusOneQueryException) {
+        primaryException.updateAndGet(existingException -> {
+            if (existingException != null) {
+                existingException.addSuppressed(nPlusOneQueryException);
+                return existingException;
+            } else {
+                return nPlusOneQueryException;
+            }
+        });
     }
 
-    public synchronized Optional<NPlusOneQueryException> getContext() {
-        return Optional.ofNullable(primaryException);
+    public Optional<NPlusOneQueryException> getContext() {
+        return Optional.ofNullable(primaryException.get());
     }
 
-    public synchronized void clearContext() {
-        primaryException = null;
+    public void clearContext() {
+        primaryException.set(null);
     }
 }

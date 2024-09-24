@@ -7,6 +7,9 @@ public final class QueryContext {
 
     private final Map<String, Long> queryCounts = new HashMap<>();
 
+    QueryContext() {
+    }
+
     void incrementQueryCount(final String query) {
         queryCounts.put(query, queryCounts.getOrDefault(query, 0L) + 1);
     }

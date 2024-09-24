@@ -13,7 +13,7 @@ public final class NPlusOneQueryCollector extends NPlusOneQueryTemplate {
     }
 
     @Override
-    protected void handleDetectedNPlusOneIssue(final String query, final Long count) {
+    protected void handleDetectedNPlusOneQuery(final String query, final Long count) {
         exceptionContext.saveException(new NPlusOneQueryException(query, count));
     }
 }
