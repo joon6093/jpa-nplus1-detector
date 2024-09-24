@@ -24,7 +24,7 @@ jobs:
         id: validation-cache
         run: echo "key=$(echo validation-${{ runner.os }}-gradle-${{ hashFiles('test/**/*.gradle*', 'test/**/gradle-wrapper.properties') }})" >> $GITHUB_OUTPUT
 
-      - name: validation start time
+      - name: Output start time
         shell: bash
         run: echo "START_TIME=$(TZ=":Asia/Seoul" date -R|sed 's/.....$//')"
 
