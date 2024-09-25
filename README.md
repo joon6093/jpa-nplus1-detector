@@ -40,7 +40,7 @@ dependencies {
 ```
 
 ## 🔧 Configuration
-To enable the N+1 query detector, update your Spring Boot configuration file.
+To enable the N+1 Query Detector, update your Spring Boot configuration file.
 
 #### YAML (application.yml)
 ```
@@ -49,20 +49,20 @@ spring:
     properties:  
       hibernate:  
         detector:  
-          enabled: true     # Enable N+1 query detection (default: false)  
+          enabled: true     # Enable N+1 issues detection (default: false)  
           threshold: 2      # Set the threshold for query execution count (default: 2)
           level: warn       # Set the log level for detected N+1 issues (default: warn)
 ```
 
 #### Properties (application.properties)
 ```
-spring.jpa.properties.hibernate.detector.enabled=true     # Enable N+1 query detection (default: false)
+spring.jpa.properties.hibernate.detector.enabled=true     # Enable N+1 issues detection (default: false)
 spring.jpa.properties.hibernate.detector.threshold=2      # Set the threshold for query execution count (default: 2)
 spring.jpa.properties.hibernate.detector.level=warn       # Set the log level for detected N+1 issues (default: warn)
 ```
 
 ## 📄 Log
-When the N+1 Detector is enabled, a startup log shows the activation status, threshold, and log level.
+When the N+1 Query Detector is enabled, a startup log shows the activation status, threshold, and log level.
 ```
 2024-08-27T14:59:54.307+09:00 INFO --- i.j.detector.config.NPlusOneDetectorLoggingConfig : N+1 Detector enabled in 'LOGGING' mode. Monitoring queries with a threshold of '2' and logging at 'warn' level.
 ```
@@ -76,7 +76,7 @@ Example log when an N+1 issue is detected.
 The N+1 Query Detector can be used in test code with two modes, in combination with @SpringBootTest or @DataJpaTest, and any test-specific settings will take precedence over global configuration.
 
 ### Logging mode
-In Logging mode, the N+1 detector logs detected issues for you to review without interrupting the test flow.
+In Logging mode, the N+1 Query Detector logs detected issues for you to review without interrupting the test flow.
 ```
 @NPlusOneTest(mode = NPlusOneTest.Mode.LOGGING, threshold = 3, level = Level.DEBUG) 
 ```
@@ -87,7 +87,7 @@ If an N+1 issue is detected during test execution, it will be logged as follows.
 ```
 
 ### Exception mode
-In Exception mode, the N+1 detector throws an exception whenever an N+1 issue is detected, enforcing stricter query checks during tests.
+In Exception mode, the N+1 Query Detector throws an exception whenever an N+1 issue is detected, enforcing stricter query checks during tests.
 ```
 @NPlusOneTest(mode = NPlusOneTest.Mode.EXCEPTION, threshold = 5)
 ```
@@ -100,7 +100,7 @@ Suppressed: io.jeyong.detector.exception.NPlusOneQueryException: N+1 issue detec
 ```
 
 ## ✏️ Note
-- Please be aware that the N+1 query detector is disabled by default (enabled: false) due to potential performance implications. It is recommended to enable this feature only in your local or development environment to avoid any negative impact on production performance.
+- Please be aware that the N+1 Query Detector is disabled by default (enabled: false) due to potential performance implications. It is recommended to enable this feature only in your local or development environment to avoid any negative impact on production performance.
 - If you encounter any types of N+1 issues that the detector does not catch, please report them by creating an issue in the project repository. This will help us improve the tool by updating and enhancing its detection capabilities.
 - If you found this project helpful or interesting, please consider giving it a star on GitHub! ⭐
 
