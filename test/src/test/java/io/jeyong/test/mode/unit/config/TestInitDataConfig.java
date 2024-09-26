@@ -28,7 +28,8 @@ public class TestInitDataConfig {
             PersonRepository personRepository,
             AddressRepository addressRepository,
             CourseRepository courseRepository,
-            StudentRepository studentRepository) {
+            StudentRepository studentRepository
+    ) {
         return new InitData(
                 authorRepository, bookRepository, orderRepository, productRepository,
                 teamRepository, memberRepository, personRepository,

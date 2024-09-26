@@ -16,19 +16,19 @@ class ExceptionContextConcurrencyTest {
     @DisplayName("ExceptionContext 동시성 테스트")
     void testSaveExceptionConcurrency() throws InterruptedException {
         // given
-        final ExceptionContext exceptionContext = new ExceptionContext();
-        final int numberOfThreads = 10;
-        final ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
-        final CountDownLatch countDownLatch = new CountDownLatch(numberOfThreads);
+        ExceptionContext exceptionContext = new ExceptionContext();
+        int numberOfThreads = 10;
+        ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
+        CountDownLatch countDownLatch = new CountDownLatch(numberOfThreads);
 
         // when
         for (int i = 0; i < numberOfThreads; i++) {
-            final int threadIndex = i;
+            int threadIndex = i;
             executorService.submit(() -> {
                 try {
-                    final NPlusOneQueryException exception = new NPlusOneQueryException("Exception-" + threadIndex);
+                    NPlusOneQueryException exception = new NPlusOneQueryException("Exception-" + threadIndex);
                     exceptionContext.saveException(exception);
-                } catch (final Exception e) {
+                } catch (Exception e) {
                     System.out.println(e.getMessage());
                 } finally {
                     countDownLatch.countDown();
@@ -40,7 +40,7 @@ class ExceptionContextConcurrencyTest {
         executorService.shutdown();
 
         // then
-        final NPlusOneQueryException primaryException = exceptionContext.getContext().get();
+        NPlusOneQueryException primaryException = exceptionContext.getContext().get();
         assertThat(primaryException.getSuppressed()).hasSize(numberOfThreads - 1);
     }
 }
