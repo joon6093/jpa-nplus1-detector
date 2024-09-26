@@ -42,6 +42,7 @@ public class NPlusOneDetectorLoggingConfig extends NPlusOneDetectorBaseConfig {
     public NPlusOneQueryTemplate nPlusOneQueryTemplate() {
         return new NPlusOneQueryLogger(
                 nPlusOneDetectorProperties.getThreshold(),
+                nPlusOneDetectorProperties.getExclude(),
                 nPlusOneDetectorProperties.getLevel());
     }
 }

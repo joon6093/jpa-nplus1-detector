@@ -7,18 +7,21 @@ spring:
     url: jdbc:h2:mem:test
     username: sa
     password:
-  # hikari:
-    # auto-commit: false
+    # hikari:
+      # auto-commit: false
 
   jpa:
     properties:
       hibernate:
-    # format_sql: true
-    # highlight_sql: true
         hbm2ddl.auto: create-drop
         detector:
           enabled: true
           threshold: 2
           level: warn
     # open-in-view: false
-  # show-sql: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug

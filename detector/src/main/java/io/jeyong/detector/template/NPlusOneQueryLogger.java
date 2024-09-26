@@ -1,5 +1,6 @@
 package io.jeyong.detector.template;
 
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.event.Level;
@@ -9,8 +10,8 @@ public final class NPlusOneQueryLogger extends NPlusOneQueryTemplate {
     private static final Logger logger = LoggerFactory.getLogger(NPlusOneQueryLogger.class);
     private final Level level;
 
-    public NPlusOneQueryLogger(final int queryThreshold, final Level level) {
-        super(queryThreshold);
+    public NPlusOneQueryLogger(final int threshold, final List<String> exclude, final Level level) {
+        super(threshold, exclude);
         this.level = level;
     }
 

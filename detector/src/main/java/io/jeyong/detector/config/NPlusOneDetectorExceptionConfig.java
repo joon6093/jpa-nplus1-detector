@@ -39,6 +39,8 @@ public class NPlusOneDetectorExceptionConfig extends NPlusOneDetectorBaseConfig 
     @Override
     public NPlusOneQueryTemplate nPlusOneQueryTemplate() {
         return new NPlusOneQueryCollector(
-                nPlusOneDetectorProperties.getThreshold(), exceptionContext());
+                nPlusOneDetectorProperties.getThreshold(),
+                nPlusOneDetectorProperties.getExclude(),
+                exceptionContext());
     }
 }

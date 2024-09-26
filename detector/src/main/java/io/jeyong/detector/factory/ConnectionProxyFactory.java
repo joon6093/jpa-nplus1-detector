@@ -1,6 +1,6 @@
 package io.jeyong.detector.factory;
 
-import io.jeyong.detector.interceptor.ConnectionMethodInterceptor;
+import io.jeyong.detector.interceptor.ConnectionCloseInterceptor;
 import java.sql.Connection;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
@@ -21,7 +21,7 @@ public final class ConnectionProxyFactory {
         pointcut.setMappedName(CLOSE_METHOD_NAME);
 
         final DefaultPointcutAdvisor advisor =
-                new DefaultPointcutAdvisor(pointcut, new ConnectionMethodInterceptor(onClose));
+                new DefaultPointcutAdvisor(pointcut, new ConnectionCloseInterceptor(onClose));
         proxyFactory.addAdvisor(advisor);
 
         return (Connection) proxyFactory.getProxy();
