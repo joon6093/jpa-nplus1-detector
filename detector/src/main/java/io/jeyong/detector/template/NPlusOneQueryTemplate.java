@@ -19,13 +19,20 @@ public abstract class NPlusOneQueryTemplate {
     public final void handleQueryContext() {
         try {
             QueryContextHolder.getContext().getQueryCounts().forEach((query, count) -> {
-                if (isSelectQuery(query) && !isBatchSizeQuery(query) && isExceedingThreshold(count)) {
+                if (isValidQuery(query, count)) {
                     handleDetectedNPlusOneQuery(query, count);
                 }
             });
         } finally {
             QueryContextHolder.clearContext();
         }
+    }
+
+    private boolean isValidQuery(final String query, final Long count) {
+        return isSelectQuery(query)
+                && !isBatchSizeQuery(query)
+                && isExceedingThreshold(count)
+                && !isExcludedQuery(query);
     }
 
     private boolean isSelectQuery(final String query) {
@@ -38,6 +45,10 @@ public abstract class NPlusOneQueryTemplate {
 
     private boolean isExceedingThreshold(final Long count) {
         return count >= threshold;
+    }
+
+    private boolean isExcludedQuery(final String query) {
+        return exclude.stream().anyMatch(query::equals);
     }
 
     protected abstract void handleDetectedNPlusOneQuery(final String query, final Long count);

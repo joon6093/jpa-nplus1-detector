@@ -17,6 +17,9 @@ spring:
         detector:
           enabled: true
           threshold: 2
+          exclude:
+            # - select b1_0.author_id,b1_0.id,b1_0.title from book b1_0 where b1_0.author_id=?
+            # - select o1_0.id,o1_0.order_number from "order" o1_0 where o1_0.id=?
           level: warn
     # open-in-view: false
 
