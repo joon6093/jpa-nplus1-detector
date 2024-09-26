@@ -3,11 +3,11 @@ package io.jeyong.detector.interceptor;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
-public final class ConnectionMethodInterceptor implements MethodInterceptor {
+public final class ConnectionCloseInterceptor implements MethodInterceptor {
 
     private final Runnable onClose;
 
-    public ConnectionMethodInterceptor(final Runnable onClose) {
+    public ConnectionCloseInterceptor(final Runnable onClose) {
         this.onClose = onClose;
     }
 
