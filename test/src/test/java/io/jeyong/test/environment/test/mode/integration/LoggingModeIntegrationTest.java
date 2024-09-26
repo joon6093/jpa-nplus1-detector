@@ -32,7 +32,7 @@ class LoggingModeIntegrationTest {
     private ProductService productService;
 
     @Test
-    @DisplayName("통합 테스트에서 API를 호출하는 상황에서 LOGGING 모드가 동작한다.")
+    @DisplayName("@SpringBootTest를 이용한 API를 호출하는 상황에서 LOGGING 모드가 동작한다.")
     void testLoggingModeInApiCall(CapturedOutput output) {
         String url = "http://localhost:" + port + "/api/products";
         ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
@@ -42,7 +42,7 @@ class LoggingModeIntegrationTest {
     }
 
     @Test
-    @DisplayName("통합 테스트에서 Business Logic을 호출에서 상황에서 LOGGING 모드가 동작한다.")
+    @DisplayName("@SpringBootTest를 이용한 Business Logic을 호출에서 상황에서 LOGGING 모드가 동작한다.")
     void testLoggingModeInBusinessLogicCall(CapturedOutput output) {
         productService.findAllProducts();
 

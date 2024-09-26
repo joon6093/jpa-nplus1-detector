@@ -18,7 +18,7 @@ class LoggingModeUnitTest {
     private AddressRepository addressRepository;
 
     @Test
-    @DisplayName("단위 테스트에서 Repository를 호출하는 상황에서 LOGGING 모드가 동작한다.")
+    @DisplayName("@DataJpaTest를 이용한 Repository를 호출하는 상황에서 LOGGING 모드가 동작한다.")
     void testLoggingModeInRepositoryCall() {
         addressRepository.findAll();  // N+1 문제 발생
     }

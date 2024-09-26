@@ -20,7 +20,7 @@ class ExceptionModeUnitTest {
 
     @Disabled("BeforeEach 메서드에서 발생하는 예외는 테스트할 수 없다.")
     @Test
-    @DisplayName("단위 테스트에서 Repository를 호출하는 상황에서 EXCEPTION 모드가 동작한다.")
+    @DisplayName("@DataJpaTest를 이용한 Repository를 호출하는 상황에서 EXCEPTION 모드가 동작한다.")
     void testExceptionModeInRepositoryCall() {
         addressRepository.findAll();  // N+1 문제 발생
     }
