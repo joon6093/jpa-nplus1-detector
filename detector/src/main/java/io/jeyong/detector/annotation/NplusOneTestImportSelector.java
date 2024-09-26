@@ -3,6 +3,7 @@ package io.jeyong.detector.annotation;
 import io.jeyong.detector.annotation.NPlusOneTest.Mode;
 import io.jeyong.detector.config.NPlusOneDetectorExceptionConfig;
 import io.jeyong.detector.config.NPlusOneDetectorLoggingConfig;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import org.slf4j.event.Level;
@@ -46,25 +47,32 @@ public final class NplusOneTestImportSelector implements ImportSelector, Environ
 
     private void configureForLoggingMode(final Map<String, Object> attributes) {
         final int threshold = (int) attributes.get("threshold");
+        final String[] exclude = (String[]) attributes.get("exclude");
         final Level level = (Level) attributes.get("level");
 
-        final Map<String, Object> propertyMap = Map.of(
-                "spring.jpa.properties.hibernate.detector.enabled", "true",
-                "spring.jpa.properties.hibernate.detector.threshold", String.valueOf(threshold),
-                "spring.jpa.properties.hibernate.detector.level", level.toString()
-        );
+        final Map<String, Object> propertyMap = createBasePropertyMap(threshold, exclude);
+        propertyMap.put("spring.jpa.properties.hibernate.detector.enabled", "true");
+        propertyMap.put("spring.jpa.properties.hibernate.detector.level", level.toString());
 
         environment.getPropertySources().addFirst(new MapPropertySource("DetectorProperties", propertyMap));
     }
 
     private void configureForExceptionMode(final Map<String, Object> attributes) {
         final int threshold = (int) attributes.get("threshold");
+        final String[] exclude = (String[]) attributes.get("exclude");
 
-        final Map<String, Object> propertyMap = Map.of(
-                "spring.jpa.properties.hibernate.detector.enabled", "false",
-                "spring.jpa.properties.hibernate.detector.threshold", String.valueOf(threshold)
-        );
+        final Map<String, Object> propertyMap = createBasePropertyMap(threshold, exclude);
+        propertyMap.put("spring.jpa.properties.hibernate.detector.enabled", "false");
 
         environment.getPropertySources().addFirst(new MapPropertySource("DetectorProperties", propertyMap));
+    }
+
+    private Map<String, Object> createBasePropertyMap(final int threshold, final String[] exclude) {
+        final Map<String, Object> propertyMap = new HashMap<>();
+        propertyMap.put("spring.jpa.properties.hibernate.detector.threshold", String.valueOf(threshold));
+        for (int i = 0; i < exclude.length; i++) {
+            propertyMap.put("spring.jpa.properties.hibernate.detector.exclude[" + i + "]", exclude[i]);
+        }
+        return propertyMap;
     }
 }

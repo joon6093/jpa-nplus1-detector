@@ -15,11 +15,12 @@ import org.springframework.core.annotation.AliasFor;
 // @formatter:off
 /**
  * <p>
- * Annotation to enable N+1 Query Detection in JPA (Hibernate) based applications.
+ * Annotation for enabling the N+1 Detector in JPA (Hibernate).
  * </p>
  *
  * <p>
- * This annotation can be applied at the class level to detect and log or throw exceptions
+ * To enable the N+1 Detector and customize its behavior, users
+ * can apply this annotation at the class level to detect and log or throw exceptions
  * for N+1 query issues during the execution of test cases.
  * </p>
  *
@@ -31,14 +32,20 @@ import org.springframework.core.annotation.AliasFor;
  *         </ul>
  *     </li>
  *     <li><b>threshold:</b> Set the threshold for the number of query executions to detect N+1 queries (default: 2).</li>
- *     <li><b>exclude:</b> Set the list of table names to be excluded from N+1 queries (optional).</li>
+ *     <li><b>exclude:</b> Set the list of specific queries to be excluded from N+1 queries (optional).</li>
  *     <li><b>level:</b> Set the log level for detected N+1 queries (default: WARN).</li>
  * </ul>
  *
  * <pre>
  * Example usage:
  * {@code
- * @NPlusOneTest(mode = NPlusOneTest.Mode.EXCEPTION, threshold = 5, exclude = {"person", "address"})
+ * @NPlusOneTest(
+ *      mode = NPlusOneTest.Mode.EXCEPTION,
+ *      threshold = 5,
+ *      exclude = {
+ *          "select ... from table1 where ...",
+ *          "select ... from table2 where ..."
+ *      })
  * @SpringBootTest or @DataJpaTest
  * class MyJpaTest {
  *     // Test cases here
