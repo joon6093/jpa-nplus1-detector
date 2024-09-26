@@ -12,14 +12,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@NPlusOneTest(threshold = 3, level = Level.DEBUG)
+@NPlusOneTest(
+        threshold = 3,
+        level = Level.DEBUG,
+        exclude = {
+                "annotationExcludeQuery1",
+                "annotationExcludeQuery2"
+        }
+)
 @ExtendWith(SpringExtension.class)
 @TestPropertySource(
         properties = {
                 "spring.jpa.properties.hibernate.detector.threshold=10",
-                "spring.jpa.properties.hibernate.detector.level=warn"
+                "spring.jpa.properties.hibernate.detector.level=warn",
+                "spring.jpa.properties.hibernate.detector.exclude[0]=envExcludeQuery1",
+                "spring.jpa.properties.hibernate.detector.exclude[1]=envExcludeQuery2"
         })
-class AnnotationConfigurationTest {
+class AnnotationTest {
 
     @Autowired
     private NPlusOneDetectorProperties nPlusOneDetectorProperties;
@@ -29,5 +38,11 @@ class AnnotationConfigurationTest {
     void testAnnotationConfiguration() {
         assertThat(nPlusOneDetectorProperties.getThreshold()).isEqualTo(3);
         assertThat(nPlusOneDetectorProperties.getLevel()).isEqualTo(Level.DEBUG);
+
+        assertThat(nPlusOneDetectorProperties.getExclude())
+                .containsExactly(
+                        "annotationExcludeQuery1",
+                        "annotationExcludeQuery2"
+                );
     }
 }
