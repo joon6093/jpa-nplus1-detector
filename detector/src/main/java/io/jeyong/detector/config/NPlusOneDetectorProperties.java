@@ -1,5 +1,6 @@
 package io.jeyong.detector.config;
 
+import java.util.List;
 import org.slf4j.event.Level;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -16,9 +17,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * </p>
  *
  * <ul>
- *     <li><b>spring.jpa.properties.hibernate.detector.enabled:</b> Enable or disable the detector (default: false).</li>
- *     <li><b>spring.jpa.properties.hibernate.detector.threshold:</b> Set the threshold for the number of query executions to detect an N+1 issue (default: 2).</li>
- *     <li><b>spring.jpa.properties.hibernate.detector.level:</b> Set the log level for detected N+1 issues (default: WARN).</li>
+ *     <li><b>spring.jpa.properties.hibernate.detector.enabled:</b> Set whether the detector is enabled or disabled (default: false).</li>
+ *     <li><b>spring.jpa.properties.hibernate.detector.threshold:</b> Set the threshold for the number of query executions to detect N+1 queries (default: 2).</li>
+ *     <li><b>spring.jpa.properties.hibernate.detector.exclude:</b> Set the list of table names to be excluded from N+1 queries (optional).</li>
+ *     <li><b>spring.jpa.properties.hibernate.detector.level:</b> Set the log level for detected N+1 queries (default: WARN).</li>
  * </ul>
  *
  * <pre>
@@ -31,6 +33,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *         detector:
  *           enabled: true
  *           threshold: 2
+ *           exclude:
+ *             - address
+ *             - person
  *           level: warn
  * }
  * </pre>
@@ -40,6 +45,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * {@code
  * spring.jpa.properties.hibernate.detector.enabled=true
  * spring.jpa.properties.hibernate.detector.threshold=2
+ * spring.jpa.properties.hibernate.detector.exclude=address,person
  * spring.jpa.properties.hibernate.detector.level=warn
  * }
  * </pre>
@@ -63,6 +69,8 @@ public class NPlusOneDetectorProperties {
 
     private int threshold = 2;
 
+    private List<String> exclude;
+
     private Level level = Level.WARN;
 
     public boolean isEnabled() {
@@ -79,6 +87,14 @@ public class NPlusOneDetectorProperties {
 
     public void setThreshold(final int threshold) {
         this.threshold = threshold;
+    }
+
+    public List<String> getExclude() {
+        return exclude;
+    }
+
+    public void setExclude(final List<String> exclude) {
+        this.exclude = exclude;
     }
 
     public Level getLevel() {
