@@ -14,12 +14,21 @@ public abstract class NPlusOneQueryTemplate {
         try {
             QueryContextHolder.getContext().getQueryCounts().forEach((query, count) -> {
                 if (count >= queryThreshold) {
+                if (isSelectQuery(query) && !isBatchSizeQuery(query) && isExceedingThreshold(count)) {
                     handleDetectedNPlusOneQuery(query, count);
                 }
             });
         } finally {
             QueryContextHolder.clearContext();
         }
+    }
+
+    private boolean isSelectQuery(final String query) {
+        return query.stripLeading().startsWith(SELECT_KEYWORD);
+    }
+
+    private boolean isBatchSizeQuery(final String query) {
+        return query.contains(IN_CLAUSE_KEYWORD);
     }
 
     protected abstract void handleDetectedNPlusOneQuery(final String query, final Long count);
