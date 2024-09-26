@@ -17,8 +17,8 @@ spring:
     # highlight_sql: true
         hbm2ddl.auto: create-drop
         detector:
-          enabled: true    # N+1 문제 감지 기능 활성화 여부 / 기본 값 : false
-          threshold: 2     # 쿼리 실행 횟수 기준 설정 (예: 3회 이상 실행된 쿼리에 대해 N+1 문제 감지) / 기본 값 : 2
-          level: warn      # 감지된 N+1 문제에 대한 로깅 레벨 설정 (error, warn, info, debug, trace) / 기본 값 : warn
+          enabled: true
+          threshold: 2
+          level: warn
     # open-in-view: false
   # show-sql: true
