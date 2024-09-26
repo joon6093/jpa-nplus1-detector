@@ -22,6 +22,6 @@ public class TeamServiceTest {
     void testFindAllTeams(CapturedOutput output) {
         teamService.findAllTeams();
 
-        assertThat(output).doesNotContain("N+1 issue detected");
+        assertThat(output).doesNotContain("N+1 query detected");
     }
 }

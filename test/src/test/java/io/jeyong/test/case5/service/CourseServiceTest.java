@@ -22,6 +22,6 @@ public class CourseServiceTest {
     void testFindAllCourses(CapturedOutput output) {
         courseService.findAllCourses();
 
-        assertThat(output).contains("N+1 issue detected");
+        assertThat(output).contains("N+1 query detected");
     }
 }

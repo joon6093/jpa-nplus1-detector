@@ -32,6 +32,6 @@ class TeamControllerTest {
         ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
 
         assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
-        assertThat(output).doesNotContain("N+1 issue detected");
+        assertThat(output).doesNotContain("N+1 query detected");
     }
 }

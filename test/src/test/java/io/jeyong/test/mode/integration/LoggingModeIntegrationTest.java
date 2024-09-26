@@ -71,7 +71,7 @@ class LoggingModeIntegrationTest {
         ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
 
         assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
-        assertThat(output).contains("N+1 issue detected");
+        assertThat(output).contains("N+1 query detected");
     }
 
     @Test
@@ -79,6 +79,6 @@ class LoggingModeIntegrationTest {
     void testLoggingModeInBusinessLogicCall(CapturedOutput output) {
         productService.findAllProducts();
 
-        assertThat(output).contains("N+1 issue detected");
+        assertThat(output).contains("N+1 query detected");
     }
 }

@@ -22,6 +22,6 @@ public class AddressServiceTest {
     void testFindAllAddresses(CapturedOutput output) {
         addressService.findAllAddresses();
 
-        assertThat(output).contains("N+1 issue detected");
+        assertThat(output).contains("N+1 query detected");
     }
 }

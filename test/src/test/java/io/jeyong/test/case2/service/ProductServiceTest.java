@@ -22,6 +22,6 @@ public class ProductServiceTest {
     void testFindAllProducts(CapturedOutput output) {
         productService.findAllProducts();
 
-        assertThat(output).contains("N+1 issue detected");
+        assertThat(output).contains("N+1 query detected");
     }
 }

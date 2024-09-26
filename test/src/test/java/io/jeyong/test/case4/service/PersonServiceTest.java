@@ -22,6 +22,6 @@ public class PersonServiceTest {
     void testFindAllPersons(CapturedOutput output) {
         personService.findAllPersons();
 
-        assertThat(output).contains("N+1 issue detected");
+        assertThat(output).contains("N+1 query detected");
     }
 }

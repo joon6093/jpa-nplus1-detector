@@ -28,7 +28,7 @@ public class AuthorServiceTest {
     void testFindAllAuthorsV1(CapturedOutput output) {
         authorServiceV1.findAllAuthors();
 
-        assertThat(output).contains("N+1 issue detected");
+        assertThat(output).contains("N+1 query detected");
     }
 
     @Test
@@ -36,7 +36,7 @@ public class AuthorServiceTest {
     void testFindAllAuthorsV2(CapturedOutput output) {
         authorServiceV2.findAllAuthors();
 
-        assertThat(output).contains("N+1 issue detected");
+        assertThat(output).contains("N+1 query detected");
     }
 
     @Test
@@ -44,6 +44,6 @@ public class AuthorServiceTest {
     void testFindAllAuthorsV3(CapturedOutput output) {
         authorServiceV3.findAllAuthors();
 
-        assertThat(output).doesNotContain("N+1 issue detected");
+        assertThat(output).doesNotContain("N+1 query detected");
     }
 }
