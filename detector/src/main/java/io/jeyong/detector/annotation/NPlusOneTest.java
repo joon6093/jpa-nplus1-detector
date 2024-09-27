@@ -15,29 +15,37 @@ import org.springframework.core.annotation.AliasFor;
 // @formatter:off
 /**
  * <p>
- * Annotation to enable N+1 Query Detection in JPA (Hibernate) based applications.
+ * Annotation for enabling the N+1 Detector in JPA (Hibernate).
  * </p>
  *
  * <p>
- * This annotation can be applied at the class level to detect and log or throw exceptions
+ * To enable the N+1 Detector and customize its behavior, users
+ * can apply this annotation at the class level to detect and log or throw exceptions
  * for N+1 query issues during the execution of test cases.
  * </p>
  *
  * <ul>
- *     <li><b>mode:</b> The mode in which the detector operates (default: LOGGING).
+ *     <li><b>mode:</b> Set the mode in which the detector operates (default: LOGGING).
  *         <ul>
- *             <li><b>LOGGING:</b> Logs the detected N+1 issues at the specified log level.</li>
- *             <li><b>EXCEPTION:</b> Throws an {@code NPlusOneQueryException} when an N+1 issue is detected.</li>
+ *             <li><b>LOGGING:</b> Logs the detected N+1 queries at the specified log level.</li>
+ *             <li><b>EXCEPTION:</b> Throws an {@code NPlusOneQueryException} for the detected N+1 queries.</li>
  *         </ul>
  *     </li>
- *     <li><b>threshold:</b> The number of times a query must be executed before an N+1 issue is flagged (default: 2).</li>
- *     <li><b>level:</b> The log level for detected N+1 issues (default: WARN).</li>
+ *     <li><b>threshold:</b> Set the threshold for the number of query executions to detect N+1 queries (default: 2).</li>
+ *     <li><b>exclude:</b> Set the list of specific queries to be excluded from N+1 queries (optional).</li>
+ *     <li><b>level:</b> Set the log level for detected N+1 queries (default: WARN).</li>
  * </ul>
  *
  * <pre>
  * Example usage:
  * {@code
- * @NPlusOneTest(mode = NPlusOneTest.Mode.EXCEPTION, threshold = 5)
+ * @NPlusOneTest(
+ *      mode = NPlusOneTest.Mode.EXCEPTION,
+ *      threshold = 5,
+ *      exclude = {
+ *          "select ... from table1 where ...",
+ *          "select ... from table2 where ..."
+ *      })
  * @SpringBootTest or @DataJpaTest
  * class MyJpaTest {
  *     // Test cases here
@@ -46,7 +54,7 @@ import org.springframework.core.annotation.AliasFor;
  * </pre>
  *
  * <p>
- * This annotation is intended for use in <b>test code only</b> to detect N+1 query issues during unit and integration testing.
+ * This annotation is intended for use in <b>test code only</b> to detect N+1 queries during unit and integration testing.
  * </p>
  *
  * @author jeyong
@@ -76,6 +84,8 @@ public @interface NPlusOneTest {
     }
 
     int threshold() default 2;
+
+    String[] exclude() default {};
 
     Level level() default Level.WARN;
 }

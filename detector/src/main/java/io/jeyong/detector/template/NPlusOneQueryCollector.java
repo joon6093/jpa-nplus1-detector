@@ -2,13 +2,15 @@ package io.jeyong.detector.template;
 
 import io.jeyong.detector.context.ExceptionContext;
 import io.jeyong.detector.exception.NPlusOneQueryException;
+import java.util.List;
 
 public final class NPlusOneQueryCollector extends NPlusOneQueryTemplate {
 
     private final ExceptionContext exceptionContext;
 
-    public NPlusOneQueryCollector(final int queryThreshold, final ExceptionContext exceptionContext) {
-        super(queryThreshold);
+    public NPlusOneQueryCollector(final int threshold, final List<String> exclude,
+                                  final ExceptionContext exceptionContext) {
+        super(threshold, exclude);
         this.exceptionContext = exceptionContext;
     }
 
