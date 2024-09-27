@@ -1,28 +1,17 @@
 name: 'pre-release-tagging'
 
 on:
-  pull_request:
-    types: [closed]
+  push:
+    branches:
+      - main
 
 jobs:
   create-tag:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-    
-      - name: Extract version
-        id: extract_version
-        run: |
-          VERSION=$(echo "${{ github.event.pull_request.title }}" | grep -oP '\d+\.\d+\.\d+')
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Create a tag
-        if: steps.extract_version.outputs.version != ''
         uses: rickstaa/action-create-tag@v1
         with:
-          tag: "${{ steps.extract_version.outputs.version }}"
-
-      - name: Output created tag
-        if: steps.extract_version.outputs.version != ''
-        run: echo "Created tag v${{ steps.extract_version.outputs.version }}"
+          tag: "2.2.0"
