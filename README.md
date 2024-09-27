@@ -152,4 +152,4 @@ Suppressed: io.jeyong.detector.exception.NPlusOneQueryException: N+1 query detec
 - [Version 2.0.1](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/2.0.1) - Released on 2024/09/19
 - [Version 2.0.2](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/2.0.2) - Released on 2024/09/20
 - [Version 2.1.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/2.1.0) - Released on 2024/09/24
-- [Version 2.2.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/2.1.0) - Released on 2024/09/27
+- [Version 2.2.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/2.2.0) - Released on 2024/09/27
