@@ -86,7 +86,7 @@ Example log when an N+1 query is detected.
 ## 🔍 Test
 The N+1 Detector can be used in test code with two modes, in combination with @SpringBootTest or @DataJpaTest, and any test-specific settings will take precedence over global configuration.
 
-### Logging mode
+#### Logging mode
 In Logging mode, the N+1 Detector logs detected issues for you to review without interrupting the test flow.
 ```
 @NPlusOneTest(
@@ -109,7 +109,7 @@ If an N+1 query is detected during test execution, it will be logged as follows.
 2024-09-20T12:18:19.828+09:00 WARN --- i.j.detector.template.NPlusOneQueryLogger : N+1 query detected: 'select o1_0.id,o1_0.order_number from "order" o1_0 where o1_0.id=?' was executed 3 times.
 ```
 
-### Exception mode
+#### Exception mode
 In Exception mode, the N+1 Detector throws an exception whenever an N+1 query is detected, enforcing stricter query checks during tests.
 ```
 @NPlusOneTest(
