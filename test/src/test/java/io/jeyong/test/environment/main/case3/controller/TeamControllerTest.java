@@ -16,7 +16,14 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 
 @ExtendWith(OutputCaptureExtension.class)
-@SpringBootTest(webEnvironment = RANDOM_PORT)
+@SpringBootTest(
+        webEnvironment = RANDOM_PORT,
+        properties = {
+                "spring.jpa.properties.hibernate.detector.enabled=true",
+                "spring.jpa.properties.hibernate.detector.threshold=2",
+                "spring.jpa.properties.hibernate.detector.exclude=",
+                "spring.jpa.properties.hibernate.detector.level=warn"
+        })
 class TeamControllerTest {
 
     @LocalServerPort
