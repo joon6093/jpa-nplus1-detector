@@ -13,9 +13,9 @@ public final class ExceptionContext {
             if (existingException != null) {
                 existingException.addSuppressed(nPlusOneQueryException);
                 return existingException;
-            } else {
-                return nPlusOneQueryException;
             }
+
+            return nPlusOneQueryException;
         });
     }
 

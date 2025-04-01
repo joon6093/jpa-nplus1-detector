@@ -19,8 +19,11 @@ import org.springframework.http.ResponseEntity;
 @SpringBootTest(
         webEnvironment = RANDOM_PORT,
         properties = {
-                "logging.level.io.jeyong=info",
-                "spring.jpa.properties.hibernate.detector.level=info"
+                "spring.jpa.properties.hibernate.detector.enabled=true",
+                "spring.jpa.properties.hibernate.detector.threshold=2",
+                "spring.jpa.properties.hibernate.detector.exclude=",
+                "spring.jpa.properties.hibernate.detector.level=info",
+                "logging.level.io.jeyong=info"
         })
 class LoggerLevelInfoTest {
 

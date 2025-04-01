@@ -12,7 +12,13 @@ import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.boot.test.system.OutputCaptureExtension;
 
 @ExtendWith(OutputCaptureExtension.class)
-@SpringBootTest
+@SpringBootTest(
+        properties = {
+                "spring.jpa.properties.hibernate.detector.enabled=true",
+                "spring.jpa.properties.hibernate.detector.threshold=2",
+                "spring.jpa.properties.hibernate.detector.exclude=",
+                "spring.jpa.properties.hibernate.detector.level=warn"
+        })
 public class ProductServiceTest {
 
     @Autowired
