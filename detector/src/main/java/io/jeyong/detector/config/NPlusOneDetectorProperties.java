@@ -70,7 +70,7 @@ public class NPlusOneDetectorProperties {
 
     private int threshold = 2;
 
-    private List<String> exclude;
+    private List<String> exclude = List.of();
 
     private Level level = Level.WARN;
 

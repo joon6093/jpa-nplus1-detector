@@ -26,5 +26,5 @@ public abstract class NPlusOneDetectorBaseConfig {
         return hibernateProperties -> hibernateProperties.put(STATEMENT_INSPECTOR, queryCaptureInspector);
     }
 
-    protected abstract NPlusOneQueryTemplate nPlusOneQueryTemplate();
+    public abstract NPlusOneQueryTemplate nPlusOneQueryTemplate();
 }
