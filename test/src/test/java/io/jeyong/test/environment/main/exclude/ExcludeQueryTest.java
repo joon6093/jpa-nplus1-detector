@@ -23,7 +23,7 @@ import org.springframework.http.ResponseEntity;
                 "spring.jpa.properties.hibernate.detector.threshold=2",
                 "spring.jpa.properties.hibernate.detector.exclude[0]=select b1_0.author_id,b1_0.id,b1_0.title from book b1_0 where b1_0.author_id=?",
                 "spring.jpa.properties.hibernate.detector.exclude[1]=select o1_0.id,o1_0.order_number from \"order\" o1_0 where o1_0.id=?",
-                "spring.jpa.properties.hibernate.detector.level=info",
+                "spring.jpa.properties.hibernate.detector.level=warn",
         })
 class ExcludeQueryTest {
 
