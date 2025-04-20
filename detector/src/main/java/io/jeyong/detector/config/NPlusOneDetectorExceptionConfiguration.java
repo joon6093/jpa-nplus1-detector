@@ -15,13 +15,13 @@ import org.springframework.context.annotation.Import;
 
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(NPlusOneDetectorProperties.class)
-@Import(NPlusOneDetectorBaseConfig.class)
-public class NPlusOneDetectorExceptionConfig {
+@Import(NPlusOneDetectorBaseConfiguration.class)
+public class NPlusOneDetectorExceptionConfiguration {
 
-    private static final Logger logger = LoggerFactory.getLogger(NPlusOneDetectorExceptionConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(NPlusOneDetectorExceptionConfiguration.class);
     private final NPlusOneDetectorProperties nPlusOneDetectorProperties;
 
-    public NPlusOneDetectorExceptionConfig(final NPlusOneDetectorProperties nPlusOneDetectorProperties) {
+    public NPlusOneDetectorExceptionConfiguration(final NPlusOneDetectorProperties nPlusOneDetectorProperties) {
         this.nPlusOneDetectorProperties = nPlusOneDetectorProperties;
     }
 
