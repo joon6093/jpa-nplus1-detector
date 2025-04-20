@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(NPlusOneDetectorProperties.class)
 public class NPlusOneDetectorExceptionConfig extends NPlusOneDetectorBaseConfig {
 
@@ -36,11 +36,10 @@ public class NPlusOneDetectorExceptionConfig extends NPlusOneDetectorBaseConfig 
     }
 
     @Bean
-    @Override
-    public NPlusOneQueryTemplate nPlusOneQueryTemplate() {
+    public NPlusOneQueryTemplate nPlusOneQueryTemplate(final ExceptionContext exceptionContext) {
         return new NPlusOneQueryCollector(
                 nPlusOneDetectorProperties.getThreshold(),
                 nPlusOneDetectorProperties.getExclude(),
-                exceptionContext());
+                exceptionContext);
     }
 }

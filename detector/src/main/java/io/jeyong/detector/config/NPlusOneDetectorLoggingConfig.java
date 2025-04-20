@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(
         prefix = "spring.jpa.properties.hibernate.detector",
         name = "enabled",
@@ -38,7 +38,6 @@ public class NPlusOneDetectorLoggingConfig extends NPlusOneDetectorBaseConfig {
     }
 
     @Bean
-    @Override
     public NPlusOneQueryTemplate nPlusOneQueryTemplate() {
         return new NPlusOneQueryLogger(
                 nPlusOneDetectorProperties.getThreshold(),
