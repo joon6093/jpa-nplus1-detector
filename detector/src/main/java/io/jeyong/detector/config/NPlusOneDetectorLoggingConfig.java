@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(
@@ -19,7 +20,8 @@ import org.springframework.context.annotation.Configuration;
         matchIfMissing = false
 )
 @EnableConfigurationProperties(NPlusOneDetectorProperties.class)
-public class NPlusOneDetectorLoggingConfig extends NPlusOneDetectorBaseConfig {
+@Import(NPlusOneDetectorBaseConfig.class)
+public class NPlusOneDetectorLoggingConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(NPlusOneDetectorLoggingConfig.class);
     private final NPlusOneDetectorProperties nPlusOneDetectorProperties;
