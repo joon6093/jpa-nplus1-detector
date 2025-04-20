@@ -20,13 +20,13 @@ import org.springframework.context.annotation.Import;
         matchIfMissing = false
 )
 @EnableConfigurationProperties(NPlusOneDetectorProperties.class)
-@Import(NPlusOneDetectorBaseConfig.class)
-public class NPlusOneDetectorLoggingConfig {
+@Import(NPlusOneDetectorBaseConfiguration.class)
+public class NPlusOneDetectorLoggingConfiguration {
 
-    private static final Logger logger = LoggerFactory.getLogger(NPlusOneDetectorLoggingConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(NPlusOneDetectorLoggingConfiguration.class);
     private final NPlusOneDetectorProperties nPlusOneDetectorProperties;
 
-    public NPlusOneDetectorLoggingConfig(final NPlusOneDetectorProperties nPlusOneDetectorProperties) {
+    public NPlusOneDetectorLoggingConfiguration(final NPlusOneDetectorProperties nPlusOneDetectorProperties) {
         this.nPlusOneDetectorProperties = nPlusOneDetectorProperties;
     }
 

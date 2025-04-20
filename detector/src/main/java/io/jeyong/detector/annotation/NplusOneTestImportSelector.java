@@ -1,8 +1,8 @@
 package io.jeyong.detector.annotation;
 
 import io.jeyong.detector.annotation.NPlusOneTest.Mode;
-import io.jeyong.detector.config.NPlusOneDetectorExceptionConfig;
-import io.jeyong.detector.config.NPlusOneDetectorLoggingConfig;
+import io.jeyong.detector.config.NPlusOneDetectorExceptionConfiguration;
+import io.jeyong.detector.config.NPlusOneDetectorLoggingConfiguration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -36,10 +36,10 @@ public final class NplusOneTestImportSelector implements ImportSelector, Environ
 
         if (mode == Mode.LOGGING) {
             configureForLoggingMode(attributes);
-            return new String[]{NPlusOneDetectorLoggingConfig.class.getName()};
+            return new String[]{NPlusOneDetectorLoggingConfiguration.class.getName()};
         } else if (mode == Mode.EXCEPTION) {
             configureForExceptionMode(attributes);
-            return new String[]{NPlusOneDetectorExceptionConfig.class.getName()};
+            return new String[]{NPlusOneDetectorExceptionConfiguration.class.getName()};
         } else {
             throw new IllegalArgumentException("Invalid mode provided for @NPlusOneTest: " + mode);
         }
