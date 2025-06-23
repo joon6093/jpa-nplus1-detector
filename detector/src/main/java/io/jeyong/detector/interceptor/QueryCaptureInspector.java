@@ -8,6 +8,7 @@ public final class QueryCaptureInspector implements StatementInspector {
     @Override
     public String inspect(final String query) {
         QueryContextHolder.saveQuery(query);
+        
         return query;
     }
 }
