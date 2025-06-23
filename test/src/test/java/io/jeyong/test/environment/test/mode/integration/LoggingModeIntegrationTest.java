@@ -5,7 +5,6 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 import io.jeyong.detector.annotation.NPlusOneTest;
 import io.jeyong.test.case2.service.ProductService;
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,7 +34,7 @@ class LoggingModeIntegrationTest {
     @DisplayName("@SpringBootTest를 이용한 API를 호출하는 상황에서 LOGGING 모드가 동작한다.")
     void testLoggingModeInApiCall(CapturedOutput output) {
         String url = "http://localhost:" + port + "/api/products";
-        ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
+        ResponseEntity<Void> response = restTemplate.getForEntity(url, Void.class);
 
         assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
         assertThat(output).contains("N+1 query detected");

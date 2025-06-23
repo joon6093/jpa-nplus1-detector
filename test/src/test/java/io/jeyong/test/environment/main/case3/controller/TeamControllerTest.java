@@ -3,7 +3,6 @@ package io.jeyong.test.environment.main.case3.controller;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,7 +35,7 @@ class TeamControllerTest {
     @DisplayName("@BatchSize 상황에서 감지하지 않는다.")
     void testGetAllTeams(CapturedOutput output) {
         String url = "http://localhost:" + port + "/api/teams";
-        ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
+        ResponseEntity<Void> response = restTemplate.getForEntity(url, Void.class);
 
         assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
         assertThat(output).doesNotContain("N+1 query detected");

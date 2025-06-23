@@ -3,7 +3,6 @@ package io.jeyong.test.environment.main.level;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,7 +36,7 @@ class LoggerLevelTraceTest {
     @DisplayName("TRACE 레벨에서 로그가 출력된다.")
     void testTraceLogLevel(CapturedOutput output) {
         String url = "http://localhost:" + port + "/api/products";
-        ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
+        ResponseEntity<Void> response = restTemplate.getForEntity(url, Void.class);
 
         assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
         assertThat(output).contains("N+1 query detected");

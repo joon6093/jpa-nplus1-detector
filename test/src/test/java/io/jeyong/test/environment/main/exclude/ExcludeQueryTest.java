@@ -3,7 +3,6 @@ package io.jeyong.test.environment.main.exclude;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,7 +36,7 @@ class ExcludeQueryTest {
     @DisplayName("첫 번째로 제외된 쿼리는 감지하지 않는다.")
     void testFirstExcludedQuery(CapturedOutput output) {
         String url = "http://localhost:" + port + "/api/v1/authors";
-        ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
+        ResponseEntity<Void> response = restTemplate.getForEntity(url, Void.class);
 
         assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
         assertThat(output).doesNotContain("N+1 query detected");
@@ -47,7 +46,7 @@ class ExcludeQueryTest {
     @DisplayName("두 번째로 제외된 쿼리는 감지하지 않는다.")
     void testSecondExcludedQuery(CapturedOutput output) {
         String url = "http://localhost:" + port + "/api/products";
-        ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
+        ResponseEntity<Void> response = restTemplate.getForEntity(url, Void.class);
 
         assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
         assertThat(output).doesNotContain("N+1 query detected");
@@ -57,7 +56,7 @@ class ExcludeQueryTest {
     @DisplayName("제외되지 않은 쿼리는 감지한다.")
     void testNonExcludedQuery(CapturedOutput output) {
         String url = "http://localhost:" + port + "/api/addresses";
-        ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
+        ResponseEntity<Void> response = restTemplate.getForEntity(url, Void.class);
 
         assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
         assertThat(output).contains("N+1 query detected");

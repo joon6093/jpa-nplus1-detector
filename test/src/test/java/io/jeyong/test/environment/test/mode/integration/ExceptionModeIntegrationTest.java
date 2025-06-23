@@ -7,7 +7,6 @@ import io.jeyong.detector.annotation.NPlusOneTest;
 import io.jeyong.test.case2.service.ProductService;
 import io.jeyong.test.case4.service.AddressService;
 import io.jeyong.test.case4.service.PersonService;
-import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,7 +40,7 @@ class ExceptionModeIntegrationTest {
     @DisplayName("@SpringBootTest를 이용한 API를 호출하는 상황에서 EXCEPTION 모드가 동작한다.")
     void testExceptionModeInApiCall() {
         String url = "http://localhost:" + port + "/api/products";
-        ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
+        ResponseEntity<Void> response = restTemplate.getForEntity(url, Void.class);
 
         assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
     }
