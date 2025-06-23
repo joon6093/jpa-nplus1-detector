@@ -36,7 +36,7 @@ public abstract class NPlusOneQueryTemplate {
     }
 
     private boolean isSelectQuery(final String query) {
-        return query.stripLeading().startsWith(SELECT_KEYWORD);
+        return query.startsWith(SELECT_KEYWORD);
     }
 
     private boolean isBatchSizeQuery(final String query) {
@@ -48,7 +48,7 @@ public abstract class NPlusOneQueryTemplate {
     }
 
     private boolean isExcludedQuery(final String query) {
-        return exclude.stream().anyMatch(query::equals);
+        return exclude.contains(query);
     }
 
     protected abstract void handleDetectedNPlusOneQuery(final String query, final Long count);
