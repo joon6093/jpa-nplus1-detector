@@ -19,6 +19,7 @@ public final class ConnectionProxyAspect {
     @Around("execution(* javax.sql.DataSource.getConnection())")
     public Object wrapConnectionWithProxy(final ProceedingJoinPoint joinPoint) throws Throwable {
         final Connection originalConnection = (Connection) joinPoint.proceed();
+
         return ConnectionProxyFactory.createProxy(originalConnection, nPlusOneQueryTemplate::handleQueryContext);
     }
 }

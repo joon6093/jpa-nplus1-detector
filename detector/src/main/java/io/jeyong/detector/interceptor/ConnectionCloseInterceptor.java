@@ -14,6 +14,7 @@ public final class ConnectionCloseInterceptor implements MethodInterceptor {
     @Override
     public Object invoke(final MethodInvocation invocation) throws Throwable {
         onClose.run();
+        
         return invocation.proceed();
     }
 }

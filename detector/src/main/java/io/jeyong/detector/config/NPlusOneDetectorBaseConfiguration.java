@@ -7,8 +7,10 @@ import io.jeyong.detector.interceptor.QueryCaptureInspector;
 import io.jeyong.detector.template.NPlusOneQueryTemplate;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-public abstract class NPlusOneDetectorBaseConfig {
+@Configuration(proxyBeanMethods = false)
+public class NPlusOneDetectorBaseConfiguration {
 
     @Bean
     public ConnectionProxyAspect connectionProxyAspect(final NPlusOneQueryTemplate nPlusOneQueryTemplate) {
@@ -21,10 +23,7 @@ public abstract class NPlusOneDetectorBaseConfig {
     }
 
     @Bean
-    public HibernatePropertiesCustomizer hibernatePropertiesCustomizer(
-            final QueryCaptureInspector queryCaptureInspector) {
+    public HibernatePropertiesCustomizer hibernatePropertiesCustomizer(final QueryCaptureInspector queryCaptureInspector) {
         return hibernateProperties -> hibernateProperties.put(STATEMENT_INSPECTOR, queryCaptureInspector);
     }
-
-    public abstract NPlusOneQueryTemplate nPlusOneQueryTemplate();
 }

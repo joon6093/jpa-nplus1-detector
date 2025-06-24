@@ -10,15 +10,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
-@Configuration
+
+@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(NPlusOneDetectorProperties.class)
-public class NPlusOneDetectorExceptionConfig extends NPlusOneDetectorBaseConfig {
+@Import(NPlusOneDetectorBaseConfiguration.class)
+public class NPlusOneDetectorExceptionConfiguration {
 
-    private static final Logger logger = LoggerFactory.getLogger(NPlusOneDetectorExceptionConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(NPlusOneDetectorExceptionConfiguration.class);
     private final NPlusOneDetectorProperties nPlusOneDetectorProperties;
 
-    public NPlusOneDetectorExceptionConfig(final NPlusOneDetectorProperties nPlusOneDetectorProperties) {
+    public NPlusOneDetectorExceptionConfiguration(final NPlusOneDetectorProperties nPlusOneDetectorProperties) {
         this.nPlusOneDetectorProperties = nPlusOneDetectorProperties;
     }
 
@@ -36,11 +39,10 @@ public class NPlusOneDetectorExceptionConfig extends NPlusOneDetectorBaseConfig 
     }
 
     @Bean
-    @Override
-    public NPlusOneQueryTemplate nPlusOneQueryTemplate() {
+    public NPlusOneQueryTemplate nPlusOneQueryTemplate(final ExceptionContext exceptionContext) {
         return new NPlusOneQueryCollector(
                 nPlusOneDetectorProperties.getThreshold(),
                 nPlusOneDetectorProperties.getExclude(),
-                exceptionContext());
+                exceptionContext);
     }
 }

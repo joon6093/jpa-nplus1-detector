@@ -6,12 +6,13 @@ import io.jeyong.detector.template.NPlusOneQueryTemplate;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
-@Configuration
+@AutoConfiguration
 @ConditionalOnProperty(
         prefix = "spring.jpa.properties.hibernate.detector",
         name = "enabled",
@@ -19,12 +20,13 @@ import org.springframework.context.annotation.Configuration;
         matchIfMissing = false
 )
 @EnableConfigurationProperties(NPlusOneDetectorProperties.class)
-public class NPlusOneDetectorLoggingConfig extends NPlusOneDetectorBaseConfig {
+@Import(NPlusOneDetectorBaseConfiguration.class)
+public class NPlusOneDetectorLoggingConfiguration {
 
-    private static final Logger logger = LoggerFactory.getLogger(NPlusOneDetectorLoggingConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(NPlusOneDetectorLoggingConfiguration.class);
     private final NPlusOneDetectorProperties nPlusOneDetectorProperties;
 
-    public NPlusOneDetectorLoggingConfig(final NPlusOneDetectorProperties nPlusOneDetectorProperties) {
+    public NPlusOneDetectorLoggingConfiguration(final NPlusOneDetectorProperties nPlusOneDetectorProperties) {
         this.nPlusOneDetectorProperties = nPlusOneDetectorProperties;
     }
 
@@ -38,7 +40,6 @@ public class NPlusOneDetectorLoggingConfig extends NPlusOneDetectorBaseConfig {
     }
 
     @Bean
-    @Override
     public NPlusOneQueryTemplate nPlusOneQueryTemplate() {
         return new NPlusOneQueryLogger(
                 nPlusOneDetectorProperties.getThreshold(),

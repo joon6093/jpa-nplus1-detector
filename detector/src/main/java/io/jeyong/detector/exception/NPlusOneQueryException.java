@@ -6,15 +6,7 @@ public class NPlusOneQueryException extends RuntimeException {
         super(String.format("N+1 query detected: '%s' was executed %d times.", query, count));
     }
 
-    public NPlusOneQueryException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public NPlusOneQueryException(String message) {
+    public NPlusOneQueryException(final String message) {
         super(message);
-    }
-
-    public NPlusOneQueryException(Throwable cause) {
-        super(cause);
     }
 }
