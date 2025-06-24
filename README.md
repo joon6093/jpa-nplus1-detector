@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {  
-    implementation 'com.github.joon6093:jpa-nplus1-detector:2.3.0'  
+    implementation 'com.github.joon6093:jpa-nplus1-detector:2.3.1'  
 }
 ```
 
@@ -35,7 +35,7 @@ dependencies {
 <dependency>  
     <groupId>com.github.joon6093</groupId>  
     <artifactId>jpa-nplus1-detector</artifactId>  
-    <version>2.3.0</version>  
+    <version>2.3.1</version>  
 </dependency>
 ```
 
@@ -154,3 +154,4 @@ Suppressed: io.jeyong.detector.exception.NPlusOneQueryException: N+1 query detec
 - [Version 2.1.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/2.1.0) - Released on 2024/09/24
 - [Version 2.2.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/2.2.0) - Released on 2024/09/27
 - [Version 2.3.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/2.3.0) - Released on 2025/04/01
+- [Version 2.3.1](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/2.3.1) - Released on 2025/06/24
