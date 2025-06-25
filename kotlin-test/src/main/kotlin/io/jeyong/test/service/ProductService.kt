@@ -9,11 +9,11 @@ import org.springframework.transaction.annotation.Transactional
 class ProductService(
     private val productRepository: ProductRepository
 ) {
-
+    
     @Transactional
     fun findAllProducts(): List<Product> {
         val products = productRepository.findAll()
-        products.forEach { it.order?.orderNumber }  // N+1 문제 유도
+        products.forEach { it.order?.orderNumber }  // N+1 문제 발생
         return products
     }
 }
