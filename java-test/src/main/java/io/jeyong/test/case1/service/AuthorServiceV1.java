@@ -16,7 +16,7 @@ public class AuthorServiceV1 {
 
     public List<Author> findAllAuthors() {
         List<Author> authors = authorRepository.findAll();
-        authors.forEach(author -> author.getBooks().size());  // N+1 문제 발생 가능
+        authors.forEach(author -> author.getBooks().size());  // N+1 문제 발생
         return authors;
     }
 }

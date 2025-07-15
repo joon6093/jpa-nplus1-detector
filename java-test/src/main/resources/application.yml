@@ -1,6 +1,6 @@
 spring:
   application:
-    name: test
+    name: java-test
 
   datasource:
     driver-class-name: org.h2.Driver
