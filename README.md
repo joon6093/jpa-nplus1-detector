@@ -5,6 +5,7 @@ To use the N+1 Detector, ensure that your project meets the following requiremen
 
 - **Spring Boot:** 3.0.0 or higher
 - **Java:** 17 or higher
+- **Kotlin:** 1.7.x or higher
 - **Hibernate:** 6.x (compatible with Spring Boot 3.x)
 
 ## 📦 Dependence
@@ -18,7 +19,7 @@ repositories {
 }
 
 dependencies {  
-    implementation 'com.github.joon6093:jpa-nplus1-detector:2.3.1'  
+    implementation 'com.github.joon6093:jpa-nplus1-detector:3.0.0'  
 }
 ```
 
@@ -35,7 +36,7 @@ dependencies {
 <dependency>  
     <groupId>com.github.joon6093</groupId>  
     <artifactId>jpa-nplus1-detector</artifactId>  
-    <version>2.3.1</version>  
+    <version>3.0.0</version>  
 </dependency>
 ```
 
@@ -139,6 +140,7 @@ Suppressed: io.jeyong.detector.exception.NPlusOneQueryException: N+1 query detec
 - If you found this project helpful or interesting, please consider giving it a star on GitHub! ⭐
 
 ## 🗓️ Release
+#### Initial Release
 - [Version 1.0.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.0.0) - Released on 2024/08/19
 - [Version 1.1.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.1.0) - Released on 2024/08/21
 - [Version 1.1.1](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.1.1) - Released on 2024/08/24
@@ -148,6 +150,8 @@ Suppressed: io.jeyong.detector.exception.NPlusOneQueryException: N+1 query detec
 - [Version 1.3.1](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.3.1) - Released on 2024/09/07
 - [Version 1.3.2](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.3.2) - Released on 2024/09/16
 - [Version 1.4.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/1.4.0) - Released on 2024/09/17
+
+#### Test Annotation Support
 - [Version 2.0.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/2.0.0) - Released on 2024/09/19
 - [Version 2.0.1](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/2.0.1) - Released on 2024/09/19
 - [Version 2.0.2](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/2.0.2) - Released on 2024/09/20
@@ -155,3 +159,6 @@ Suppressed: io.jeyong.detector.exception.NPlusOneQueryException: N+1 query detec
 - [Version 2.2.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/2.2.0) - Released on 2024/09/27
 - [Version 2.3.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/2.3.0) - Released on 2025/04/01
 - [Version 2.3.1](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/2.3.1) - Released on 2025/06/24
+
+#### Kotlin Support 
+- [Version 3.0.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/3.0.0) - Released on 2025/07/15
