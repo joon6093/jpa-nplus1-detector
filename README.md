@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {  
-    implementation 'com.github.joon6093:jpa-nplus1-detector:3.0.0'  
+    implementation 'com.github.joon6093:jpa-nplus1-detector:3.0.1'  
 }
 ```
 
@@ -36,7 +36,7 @@ dependencies {
 <dependency>  
     <groupId>com.github.joon6093</groupId>  
     <artifactId>jpa-nplus1-detector</artifactId>  
-    <version>3.0.0</version>  
+    <version>3.0.1</version>  
 </dependency>
 ```
 
@@ -162,3 +162,4 @@ Suppressed: io.jeyong.detector.exception.NPlusOneQueryException: N+1 query detec
 
 #### Kotlin Support 
 - [Version 3.0.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/3.0.0) - Released on 2025/07/15
+- [Version 3.0.1](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/3.0.1) - Released on 2025/08/29
