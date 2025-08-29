@@ -73,6 +73,7 @@ public final class NplusOneTestImportSelector implements ImportSelector, Environ
         for (int i = 0; i < exclude.length; i++) {
             propertyMap.put("spring.jpa.properties.hibernate.detector.exclude[" + i + "]", exclude[i]);
         }
+        
         return propertyMap;
     }
 }

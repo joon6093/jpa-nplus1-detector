@@ -35,7 +35,7 @@ class ExceptionModeIntegrationTest {
     @Autowired
     private PersonService personService;
 
-    @Disabled("AfterEachCallback을 통해 발생하는 예외는 테스트할 수 없다.")
+    @Disabled("TestExecutionListener를 통해 발생하는 예외는 테스트할 수 없다.")
     @Test
     @DisplayName("@SpringBootTest를 이용한 API를 호출하는 상황에서 EXCEPTION 모드가 동작한다.")
     void testExceptionModeInApiCall() {
@@ -45,14 +45,14 @@ class ExceptionModeIntegrationTest {
         assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
     }
 
-    @Disabled("AfterEachCallback을 통해 발생하는 예외는 테스트할 수 없다.")
+    @Disabled("TestExecutionListener를 통해 발생하는 예외는 테스트할 수 없다.")
     @Test
     @DisplayName("@SpringBootTest를 이용한 Business Logic을 호출에서 상황에서 EXCEPTION 모드가 동작한다.")
     void testExceptionModeInBusinessLogicCall() {
         productService.findAllProducts();
     }
 
-    @Disabled("AfterEachCallback을 통해 발생하는 예외는 테스트할 수 없다.")
+    @Disabled("TestExecutionListener를 통해 발생하는 예외는 테스트할 수 없다.")
     @Test
     @DisplayName("@SpringBootTest를 이용한 여러번의 예외 발생 상황에서 EXCEPTION 모드가 동작한다.")
     void testExceptionModeInMultipleExceptions() {

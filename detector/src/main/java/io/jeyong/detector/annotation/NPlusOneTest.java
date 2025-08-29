@@ -1,16 +1,15 @@
 package io.jeyong.detector.annotation;
 
-import io.jeyong.detector.exception.NPlusOneQueryException;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.event.Level;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.annotation.AliasFor;
+import org.springframework.test.context.TestExecutionListeners;
 
 // @formatter:off
 /**
@@ -59,17 +58,19 @@ import org.springframework.core.annotation.AliasFor;
  *
  * @author jeyong
  * @since 2.0
- * @see NPlusOneTestExtension
  * @see NplusOneTestImportSelector
- * @see NPlusOneQueryException
+ * @see NPlusOneTestListener
  */
 // @formatter:on
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @EnableAspectJAutoProxy
-@ExtendWith(NPlusOneTestExtension.class)
 @Import(NplusOneTestImportSelector.class)
+@TestExecutionListeners(
+        value = NPlusOneTestListener.class,
+        mergeMode = TestExecutionListeners.MergeMode.MERGE_WITH_DEFAULTS
+)
 public @interface NPlusOneTest {
 
     @AliasFor("mode")
