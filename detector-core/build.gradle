@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-aop:3.0.0'
+    implementation 'org.hibernate.orm:hibernate-core:6.1.5.Final'
+}

@@ -8,5 +8,5 @@ before_install:
   - mvn -v
 
 install:
-  - chmod +x ./detector/gradlew
-  - ./detector/gradlew build publishToMavenLocal
+  - chmod +x ./gradlew
+  - ./gradlew build publishToMavenLocal

@@ -18,13 +18,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Generate cache key for java-test
+      - name: Generate cache key for java-tests
         id: cache-java
-        run: echo "key=validation-${{ runner.os }}-gradle-java-${{ hashFiles('java-test/**/*.gradle*', 'java-test/**/gradle-wrapper.properties') }}" >> $GITHUB_OUTPUT
+        run: echo "key=validation-${{ runner.os }}-gradle-java-${{ hashFiles('java-tests/**/*.gradle*', 'java-tests/**/gradle-wrapper.properties') }}" >> $GITHUB_OUTPUT
 
-      - name: Generate cache key for kotlin-test
+      - name: Generate cache key for kotlin-tests
         id: cache-kotlin
-        run: echo "key=validation-${{ runner.os }}-gradle-kotlin-${{ hashFiles('kotlin-test/**/*.gradle*', 'kotlin-test/**/gradle-wrapper.properties') }}" >> $GITHUB_OUTPUT
+        run: echo "key=validation-${{ runner.os }}-gradle-kotlin-${{ hashFiles('kotlin-tests/**/*.gradle*', 'kotlin-tests/**/gradle-wrapper.properties') }}" >> $GITHUB_OUTPUT
 
   validation:
     needs: setup
@@ -32,9 +32,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - module: java-test
+          - module: java-tests
             cache-key: cache-key-java
-          - module: kotlin-test
+          - module: kotlin-tests
             cache-key: cache-key-kotlin
     steps:
       - uses: actions/checkout@v4
@@ -71,9 +71,11 @@ jobs:
 
       - name: Publish validation results for ${{ matrix.module }}
         uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
+        if: github.event_name == 'pull_request' && always()
         with:
           files: ${{ github.workspace }}/${{ matrix.module }}/build/test-results/test/TEST-*.xml
+          check_name: "Test Results - ${{ matrix.module }}"
+          comment_title: "Test Results - ${{ matrix.module }}"
 
       - name: Comment test results on PR for ${{ matrix.module }}
         uses: mikepenz/action-junit-report@v4
