@@ -1,0 +1,14 @@
+configure([project(":detector-core"), project(":detector-test")]) {
+    apply plugin: "maven-publish"
+
+    afterEvaluate {
+        publishing {
+            publications {
+                maven(MavenPublication) {
+                    artifactId = project.name
+                    from components.java
+                }
+            }
+        }
+    }
+}
