@@ -1,5 +1,7 @@
-package io.jeyong.core.annotation;
+package io.jeyong.test.annotation;
 
+import io.jeyong.test.annotation.support.NPlusOneTestListener;
+import io.jeyong.test.annotation.support.NplusOneTestImportSelector;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -35,9 +37,8 @@ import org.springframework.test.context.TestExecutionListeners;
  *     <li><b>level:</b> Set the log level for detected N+1 queries (default: WARN).</li>
  * </ul>
  *
- * <pre>
  * Example usage:
- * {@code
+ * <pre>{@code
  * @NPlusOneTest(
  *      mode = NPlusOneTest.Mode.EXCEPTION,
  *      threshold = 5,

@@ -149,9 +149,9 @@ same test, they are consolidated into a single exception, with additional except
 together.
 
 ```
-io.jeyong.core.exception.NPlusOneQueryException: N+1 query detected: 'select o1_0.id,o1_0.order_number from "order" o1_0 where o1_0.id=?' was executed 3 times.
-Suppressed: io.jeyong.core.exception.NPlusOneQueryException: N+1 query detected: 'select a1_0.id,a1_0.city,a1_0.street from address a1_0 where a1_0.id=?' was executed 3 times.
-Suppressed: io.jeyong.core.exception.NPlusOneQueryException: N+1 query detected: 'select p1_0.id,p1_0.address_id,p1_0.name from person p1_0 where p1_0.address_id=?' was executed 3 times.
+io.jeyong.test.exception.NPlusOneQueryException: N+1 query detected: 'select o1_0.id,o1_0.order_number from "order" o1_0 where o1_0.id=?' was executed 3 times.
+Suppressed: io.jeyong.test.exception.NPlusOneQueryException: N+1 query detected: 'select a1_0.id,a1_0.city,a1_0.street from address a1_0 where a1_0.id=?' was executed 3 times.
+Suppressed: io.jeyong.test.exception.NPlusOneQueryException: N+1 query detected: 'select p1_0.id,p1_0.address_id,p1_0.name from person p1_0 where p1_0.address_id=?' was executed 3 times.
 ```
 
 ## ✏️ Note

@@ -1,6 +1,6 @@
-package io.jeyong.core.interceptor;
+package io.jeyong.core.query.interceptor;
 
-import io.jeyong.core.context.QueryContextHolder;
+import io.jeyong.core.query.context.QueryContextHolder;
 import org.hibernate.resource.jdbc.spi.StatementInspector;
 
 public final class QueryCaptureInspector implements StatementInspector {

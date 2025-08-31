@@ -1,19 +1,20 @@
-package io.jeyong.core.config;
+package io.jeyong.test.config;
 
-import io.jeyong.core.annotation.NPlusOneTest.Mode;
-import io.jeyong.core.context.ExceptionContext;
-import io.jeyong.core.template.NPlusOneQueryCollector;
+import io.jeyong.core.config.NPlusOneDetectorBaseConfiguration;
+import io.jeyong.core.config.NPlusOneDetectorProperties;
 import io.jeyong.core.template.NPlusOneQueryTemplate;
+import io.jeyong.test.exception.context.ExceptionContext;
+import io.jeyong.test.template.NPlusOneQueryCollector;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 
-@Configuration(proxyBeanMethods = false)
+@TestConfiguration(proxyBeanMethods = false)
 @EnableConfigurationProperties(NPlusOneDetectorProperties.class)
 @Import(NPlusOneDetectorBaseConfiguration.class)
 public class NPlusOneDetectorExceptionConfiguration {
@@ -28,8 +29,7 @@ public class NPlusOneDetectorExceptionConfiguration {
     @PostConstruct
     public void logInitialization() {
         logger.info(
-                "N+1 Detector enabled in '{}' mode. Monitoring queries with a threshold of '{}'.",
-                Mode.EXCEPTION,
+                "N+1 Detector enabled in 'EXCEPTION' mode. Monitoring queries with a threshold of '{}'.",
                 nPlusOneDetectorProperties.getThreshold());
     }
 

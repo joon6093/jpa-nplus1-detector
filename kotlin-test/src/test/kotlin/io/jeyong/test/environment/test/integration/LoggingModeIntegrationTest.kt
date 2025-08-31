@@ -1,6 +1,6 @@
 package io.jeyong.test.environment.test.integration
 
-import io.jeyong.core.annotation.NPlusOneTest
+import io.jeyong.test.annotation.NPlusOneTest
 import io.jeyong.test.service.ProductService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName

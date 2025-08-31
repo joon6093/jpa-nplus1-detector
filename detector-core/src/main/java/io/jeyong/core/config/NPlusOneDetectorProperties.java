@@ -23,9 +23,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *     <li><b>spring.jpa.properties.hibernate.detector.level:</b> Set the log level for detected N+1 queries (default: WARN).</li>
  * </ul>
  *
- * <pre>
  * Example configuration (YAML):
- * {@code
+ * <pre>{@code
  * spring:
  *   jpa:
  *     properties:
@@ -40,9 +39,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * }
  * </pre>
  *
- * <pre>
  * Example configuration (Properties):
- * {@code
+ * <pre>{@code
  * spring.jpa.properties.hibernate.detector.enabled=true
  * spring.jpa.properties.hibernate.detector.threshold=2
  * spring.jpa.properties.hibernate.detector.exclude[0]=select ... from table1 where ...
@@ -60,7 +58,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @since 1.0
  * @see NPlusOneDetectorBaseConfiguration
  * @see NPlusOneDetectorLoggingConfiguration
- * @see NPlusOneDetectorExceptionConfiguration
  */
 // @formatter:on
 @ConfigurationProperties(prefix = "spring.jpa.properties.hibernate.detector")

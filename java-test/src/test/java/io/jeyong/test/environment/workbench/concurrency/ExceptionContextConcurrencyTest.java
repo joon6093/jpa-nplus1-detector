@@ -2,8 +2,8 @@ package io.jeyong.test.environment.workbench.concurrency;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import io.jeyong.core.context.ExceptionContext;
-import io.jeyong.core.exception.NPlusOneQueryException;
+import io.jeyong.test.exception.NPlusOneQueryException;
+import io.jeyong.test.exception.context.ExceptionContext;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -26,7 +26,7 @@ class ExceptionContextConcurrencyTest {
             int threadIndex = i;
             executorService.submit(() -> {
                 try {
-                    NPlusOneQueryException exception = new NPlusOneQueryException("Exception-" + threadIndex);
+                    NPlusOneQueryException exception = new NPlusOneQueryException("testQuery", 1L);
                     exceptionContext.saveException(exception);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());

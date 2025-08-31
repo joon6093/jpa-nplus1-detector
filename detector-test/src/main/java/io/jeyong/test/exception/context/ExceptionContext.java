@@ -1,6 +1,6 @@
-package io.jeyong.core.context;
+package io.jeyong.test.exception.context;
 
-import io.jeyong.core.exception.NPlusOneQueryException;
+import io.jeyong.test.exception.NPlusOneQueryException;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 

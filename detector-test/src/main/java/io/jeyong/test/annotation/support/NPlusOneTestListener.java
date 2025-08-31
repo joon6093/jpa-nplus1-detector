@@ -1,7 +1,7 @@
-package io.jeyong.core.annotation;
+package io.jeyong.test.annotation.support;
 
-import io.jeyong.core.context.ExceptionContext;
-import io.jeyong.core.context.QueryContextHolder;
+import io.jeyong.core.query.context.QueryContextHolder;
+import io.jeyong.test.exception.context.ExceptionContext;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.TestContext;

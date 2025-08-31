@@ -1,6 +1,5 @@
 package io.jeyong.core.config;
 
-import io.jeyong.core.annotation.NPlusOneTest.Mode;
 import io.jeyong.core.template.NPlusOneQueryLogger;
 import io.jeyong.core.template.NPlusOneQueryTemplate;
 import jakarta.annotation.PostConstruct;
@@ -33,8 +32,7 @@ public class NPlusOneDetectorLoggingConfiguration {
     @PostConstruct
     public void logInitialization() {
         logger.info(
-                "N+1 Detector enabled in '{}' mode. Monitoring queries with a threshold of '{}' and logging at '{}' level.",
-                Mode.LOGGING,
+                "N+1 Detector enabled in 'LOGGING' mode. Monitoring queries with a threshold of '{}' and logging at '{}' level.",
                 nPlusOneDetectorProperties.getThreshold(),
                 nPlusOneDetectorProperties.getLevel().toString().toLowerCase());
     }

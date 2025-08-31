@@ -1,6 +1,6 @@
 package io.jeyong.core.template;
 
-import io.jeyong.core.context.QueryContextHolder;
+import io.jeyong.core.query.context.QueryContextHolder;
 import java.util.List;
 
 public abstract class NPlusOneQueryTemplate {

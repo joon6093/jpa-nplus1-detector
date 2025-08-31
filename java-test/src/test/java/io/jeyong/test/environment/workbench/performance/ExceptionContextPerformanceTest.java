@@ -2,7 +2,7 @@ package io.jeyong.test.environment.workbench.performance;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import io.jeyong.core.exception.NPlusOneQueryException;
+import io.jeyong.test.exception.NPlusOneQueryException;
 import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -69,7 +69,7 @@ class ExceptionContextPerformanceTest {
 
         long startTime = System.nanoTime();
         for (int i = 0; i < NUM_ITERATIONS; i++) {
-            syncExceptionContext.saveException(new NPlusOneQueryException("Exception " + i));
+            syncExceptionContext.saveException(new NPlusOneQueryException("testQuery", 1L));
         }
         long endTime = System.nanoTime();
         long duration = endTime - startTime;
@@ -87,7 +87,7 @@ class ExceptionContextPerformanceTest {
 
         long startTime = System.nanoTime();
         for (int i = 0; i < NUM_ITERATIONS; i++) {
-            atomicExceptionContext.saveException(new NPlusOneQueryException("Exception " + i));
+            atomicExceptionContext.saveException(new NPlusOneQueryException("testQuery", 1L));
         }
         long endTime = System.nanoTime();
         long duration = endTime - startTime;
@@ -115,7 +115,7 @@ class ExceptionContextPerformanceTest {
                 try {
                     for (int j = 0; j < NUM_ITERATIONS / NUM_THREADS; j++) {
                         syncExceptionContext.saveException(
-                                new NPlusOneQueryException("Exception-" + threadIndex + "-" + j));
+                                new NPlusOneQueryException("testQuery", 1L));
                     }
                 } finally {
                     countDownLatch.countDown();
@@ -150,7 +150,7 @@ class ExceptionContextPerformanceTest {
                 try {
                     for (int j = 0; j < NUM_ITERATIONS / NUM_THREADS; j++) {
                         atomicExceptionContext.saveException(
-                                new NPlusOneQueryException("Exception-" + threadIndex + "-" + j));
+                                new NPlusOneQueryException("testQuery", 1L));
                     }
                 } finally {
                     countDownLatch.countDown();

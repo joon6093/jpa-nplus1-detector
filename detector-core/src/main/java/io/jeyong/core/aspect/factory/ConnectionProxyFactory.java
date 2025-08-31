@@ -1,6 +1,6 @@
-package io.jeyong.core.factory;
+package io.jeyong.core.aspect.factory;
 
-import io.jeyong.core.interceptor.ConnectionCloseInterceptor;
+import io.jeyong.core.aspect.factory.interceptor.ConnectionCloseInterceptor;
 import java.sql.Connection;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.DefaultPointcutAdvisor;

@@ -1,5 +1,6 @@
 rootProject.name = 'jpa-nplus1-detector'
 
 include('detector-core')
+include('detector-test')
 include('kotlin-test')
 include('java-test')

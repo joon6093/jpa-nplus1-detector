@@ -1,4 +1,4 @@
-package io.jeyong.core.context;
+package io.jeyong.core.query.context;
 
 public final class QueryContextHolder {
 

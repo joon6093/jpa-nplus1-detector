@@ -1,6 +1,6 @@
 package io.jeyong.core.aspect;
 
-import io.jeyong.core.factory.ConnectionProxyFactory;
+import io.jeyong.core.aspect.factory.ConnectionProxyFactory;
 import io.jeyong.core.template.NPlusOneQueryTemplate;
 import java.sql.Connection;
 import org.aspectj.lang.ProceedingJoinPoint;

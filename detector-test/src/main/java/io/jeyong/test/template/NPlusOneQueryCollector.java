@@ -1,7 +1,8 @@
-package io.jeyong.core.template;
+package io.jeyong.test.template;
 
-import io.jeyong.core.context.ExceptionContext;
-import io.jeyong.core.exception.NPlusOneQueryException;
+import io.jeyong.core.template.NPlusOneQueryTemplate;
+import io.jeyong.test.exception.NPlusOneQueryException;
+import io.jeyong.test.exception.context.ExceptionContext;
 import java.util.List;
 
 public final class NPlusOneQueryCollector extends NPlusOneQueryTemplate {

@@ -1,8 +1,9 @@
-package io.jeyong.core.annotation;
+package io.jeyong.test.annotation.support;
 
-import io.jeyong.core.annotation.NPlusOneTest.Mode;
-import io.jeyong.core.config.NPlusOneDetectorExceptionConfiguration;
 import io.jeyong.core.config.NPlusOneDetectorLoggingConfiguration;
+import io.jeyong.test.annotation.NPlusOneTest;
+import io.jeyong.test.annotation.NPlusOneTest.Mode;
+import io.jeyong.test.config.NPlusOneDetectorExceptionConfiguration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
