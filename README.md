@@ -84,13 +84,13 @@ spring.jpa.properties.hibernate.detector.level=warn
 When the N+1 Detector is enabled, a startup log shows the activation status, threshold, and log level.
 
 ```
-2024-08-27T14:59:54.307+09:00 INFO --- i.j.detector.config.NPlusOneDetectorLoggingConfig : N+1 Detector enabled in 'LOGGING' mode. Monitoring queries with a threshold of '2' and logging at 'warn' level.
+2024-08-27T14:59:54.307+09:00 INFO --- i.j.nplus1detector.config.NPlusOneDetectorLoggingConfiguration : N+1 Detector enabled in 'LOGGING' mode. Monitoring queries with a threshold of '2' and logging at 'warn' level.
 ```
 
 Example log when an N+1 query is detected.
 
 ```
-2024-08-19T13:04:22.645+09:00 WARN --- i.j.detector.template.NPlusOneQueryLogger : N+1 query detected: 'select b1_0.author_id,b1_0.id,b1_0.title from book b1_0 where b1_0.author_id=?' was executed 2 times.
+2024-08-19T13:04:22.645+09:00 WARN --- i.j.nplus1detector.template.NPlusOneQueryLogger : N+1 query detected: 'select b1_0.author_id,b1_0.id,b1_0.title from book b1_0 where b1_0.author_id=?' was executed 2 times.
 ```
 
 ## 🔍 Test
@@ -121,7 +121,7 @@ class Test {
 If an N+1 query is detected during test execution, it will be logged as follows.
 
 ```
-2024-09-20T12:18:19.828+09:00 WARN --- i.j.detector.template.NPlusOneQueryLogger : N+1 query detected: 'select o1_0.id,o1_0.order_number from "order" o1_0 where o1_0.id=?' was executed 3 times.
+2024-09-20T12:18:19.828+09:00 WARN --- i.j.nplus1detector.template.NPlusOneQueryLogger : N+1 query detected: 'select o1_0.id,o1_0.order_number from "order" o1_0 where o1_0.id=?' was executed 3 times.
 ```
 
 #### Exception mode
@@ -149,9 +149,9 @@ same test, they are consolidated into a single exception, with additional except
 together.
 
 ```
-io.jeyong.test.exception.NPlusOneQueryException: N+1 query detected: 'select o1_0.id,o1_0.order_number from "order" o1_0 where o1_0.id=?' was executed 3 times.
-Suppressed: io.jeyong.test.exception.NPlusOneQueryException: N+1 query detected: 'select a1_0.id,a1_0.city,a1_0.street from address a1_0 where a1_0.id=?' was executed 3 times.
-Suppressed: io.jeyong.test.exception.NPlusOneQueryException: N+1 query detected: 'select p1_0.id,p1_0.address_id,p1_0.name from person p1_0 where p1_0.address_id=?' was executed 3 times.
+io.jeyong.nplus1detector.test.exception.NPlusOneQueryException: N+1 query detected: 'select o1_0.id,o1_0.order_number from "order" o1_0 where o1_0.id=?' was executed 3 times.
+Suppressed: io.jeyong.nplus1detector.test.exception.NPlusOneQueryException: N+1 query detected: 'select a1_0.id,a1_0.city,a1_0.street from address a1_0 where a1_0.id=?' was executed 3 times.
+Suppressed: io.jeyong.nplus1detector.test.exception.NPlusOneQueryException: N+1 query detected: 'select p1_0.id,p1_0.address_id,p1_0.name from person p1_0 where p1_0.address_id=?' was executed 3 times.
 ```
 
 ## ✏️ Note
