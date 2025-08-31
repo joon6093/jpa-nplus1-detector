@@ -2,10 +2,10 @@ package io.jeyong.test.environment.test.mode.configuration;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import io.jeyong.detector.annotation.NPlusOneTest;
-import io.jeyong.detector.config.NPlusOneDetectorProperties;
-import io.jeyong.detector.template.NPlusOneQueryLogger;
-import io.jeyong.detector.template.NPlusOneQueryTemplate;
+import io.jeyong.core.annotation.NPlusOneTest;
+import io.jeyong.core.config.NPlusOneDetectorProperties;
+import io.jeyong.core.template.NPlusOneQueryLogger;
+import io.jeyong.core.template.NPlusOneQueryTemplate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

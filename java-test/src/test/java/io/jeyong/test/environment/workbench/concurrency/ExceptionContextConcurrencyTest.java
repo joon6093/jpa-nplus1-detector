@@ -2,8 +2,8 @@ package io.jeyong.test.environment.workbench.concurrency;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import io.jeyong.detector.context.ExceptionContext;
-import io.jeyong.detector.exception.NPlusOneQueryException;
+import io.jeyong.core.context.ExceptionContext;
+import io.jeyong.core.exception.NPlusOneQueryException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

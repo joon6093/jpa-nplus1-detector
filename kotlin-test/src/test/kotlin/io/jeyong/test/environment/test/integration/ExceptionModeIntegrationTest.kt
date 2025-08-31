@@ -1,6 +1,6 @@
 package io.jeyong.test.environment.test.mode.integration
 
-import io.jeyong.detector.annotation.NPlusOneTest
+import io.jeyong.core.annotation.NPlusOneTest
 import io.jeyong.test.service.ProductService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled

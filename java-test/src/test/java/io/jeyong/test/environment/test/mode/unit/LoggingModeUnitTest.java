@@ -1,6 +1,6 @@
 package io.jeyong.test.environment.test.mode.unit;
 
-import io.jeyong.detector.annotation.NPlusOneTest;
+import io.jeyong.core.annotation.NPlusOneTest;
 import io.jeyong.test.case4.repository.AddressRepository;
 import io.jeyong.test.environment.test.mode.unit.config.TestInitDataConfig;
 import org.junit.jupiter.api.DisplayName;

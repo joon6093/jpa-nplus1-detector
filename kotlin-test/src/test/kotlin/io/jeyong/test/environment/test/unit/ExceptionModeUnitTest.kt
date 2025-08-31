@@ -1,6 +1,6 @@
 package io.jeyong.test.environment.test.unit
 
-import io.jeyong.detector.annotation.NPlusOneTest
+import io.jeyong.core.annotation.NPlusOneTest
 import io.jeyong.test.environment.test.unit.config.TestInitDataConfig
 import io.jeyong.test.repository.ProductRepository
 import org.junit.jupiter.api.Disabled

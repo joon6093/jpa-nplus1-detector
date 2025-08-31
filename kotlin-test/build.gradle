@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-    implementation project(':detector')
+    implementation project(':detector-core')
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'com.h2database:h2'
