@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.0.0' apply false
     id 'maven-publish'
 }
 
@@ -15,23 +14,10 @@ java {
 
 repositories {
     mavenCentral()
-    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter:3.0.0'
-    implementation 'org.hibernate.orm:hibernate-core:6.1.5.Final'
     implementation 'org.springframework.boot:spring-boot-starter-aop:3.0.0'
+    implementation 'org.hibernate.orm:hibernate-core:6.1.5.Final'
     implementation 'org.springframework.boot:spring-boot-starter-test:3.0.0'
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            groupId = project.group
-            artifactId = 'jpa-nplus1-detector'
-            version = project.version
-        }
-    }
 }
