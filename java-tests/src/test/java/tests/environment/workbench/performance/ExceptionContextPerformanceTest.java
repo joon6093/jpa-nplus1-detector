@@ -2,7 +2,7 @@ package tests.environment.workbench.performance;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import io.jeyong.test.exception.NPlusOneQueryException;
+import io.jeyong.nplus1detector.test.exception.NPlusOneQueryException;
 import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;

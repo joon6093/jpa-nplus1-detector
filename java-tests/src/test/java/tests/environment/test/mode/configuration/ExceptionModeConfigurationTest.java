@@ -1,10 +1,12 @@
 package tests.environment.test.mode.configuration;
 
-import io.jeyong.core.config.NPlusOneDetectorProperties;
-import io.jeyong.core.template.NPlusOneQueryTemplate;
-import io.jeyong.test.annotation.NPlusOneTest;
-import io.jeyong.test.exception.context.ExceptionContext;
-import io.jeyong.test.template.NPlusOneQueryCollector;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import io.jeyong.nplus1detector.core.config.NPlusOneDetectorProperties;
+import io.jeyong.nplus1detector.core.template.NPlusOneQueryTemplate;
+import io.jeyong.nplus1detector.test.annotation.NPlusOneTest;
+import io.jeyong.nplus1detector.test.exception.context.ExceptionContext;
+import io.jeyong.nplus1detector.test.template.NPlusOneQueryCollector;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,6 +1,6 @@
 package tests.environment.test.mode.unit;
 
-import io.jeyong.test.annotation.NPlusOneTest;
+import io.jeyong.nplus1detector.test.annotation.NPlusOneTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

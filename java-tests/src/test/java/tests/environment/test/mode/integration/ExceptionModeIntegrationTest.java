@@ -3,7 +3,7 @@ package tests.environment.test.mode.integration;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
-import io.jeyong.test.annotation.NPlusOneTest;
+import io.jeyong.nplus1detector.test.annotation.NPlusOneTest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

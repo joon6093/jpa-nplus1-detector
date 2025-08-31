@@ -1,7 +1,9 @@
 package tests.environment.test.annotation;
 
-import io.jeyong.core.config.NPlusOneDetectorProperties;
-import io.jeyong.test.annotation.NPlusOneTest;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import io.jeyong.nplus1detector.core.config.NPlusOneDetectorProperties;
+import io.jeyong.nplus1detector.test.annotation.NPlusOneTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
