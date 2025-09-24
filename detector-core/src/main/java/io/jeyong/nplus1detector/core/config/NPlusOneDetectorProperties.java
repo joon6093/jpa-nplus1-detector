@@ -5,24 +5,16 @@ import org.slf4j.event.Level;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 // @formatter:off
-/**
+ /**
  * <p>
  * Configuration properties for the N+1 Detector in JPA (Hibernate).
  * </p>
  *
  * <p>
- * To enable the N+1 Detector and customize its behavior, users
- * can configure the following properties in the application configuration
- * (e.g., application.yml or application.properties):
+ * To enable and customize the N+1 Detector, configure the following properties
+ * in your {@code application.yml} or {@code application.properties}.
  * </p>
- *
- * <ul>
- *     <li><b>nplus1detector.enabled:</b> Set whether the detector is enabled or disabled (default: false).</li>
- *     <li><b>nplus1detector.threshold:</b> Set the threshold for the number of query executions to detect N+1 queries (default: 2).</li>
- *     <li><b>nplus1detector.exclude:</b> Set the list of specific queries to be excluded from N+1 queries (optional).</li>
- *     <li><b>nplus1detector.level:</b> Set the log level for detected N+1 queries (default: WARN).</li>
- * </ul>
- *
+
  * Example configuration (YAML):
  * <pre>{@code
  * nplus1detector:
@@ -46,7 +38,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * </pre>
  *
  * <p>
- * The N+1 Detector is disabled by default to avoid potential performance overhead in production environments.
+ * <p><b>Note:</b> The N+1 Detector is disabled by default
+ * to avoid potential performance overhead in production environments.
  * It is recommended to enable it only in development or testing environments.
  * </p>
  *
@@ -56,46 +49,58 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @see NPlusOneDetectorLoggingConfiguration
  */
 // @formatter:on
-@ConfigurationProperties(prefix = "nplus1detector")
-public class NPlusOneDetectorProperties {
+ @ConfigurationProperties(prefix = "nplus1detector")
+ public class NPlusOneDetectorProperties {
 
-    private boolean enabled = false;
+     /**
+      * Set whether the detector is enabled or disabled (default: false).
+      */
+     private boolean enabled = false;
 
-    private int threshold = 2;
+     /**
+      * Set the threshold for the number of query executions to detect N+1 queries (default: 2).
+      */
+     private int threshold = 2;
 
-    private List<String> exclude = List.of();
+     /**
+      * Set the list of specific queries to be excluded from N+1 queries (optional).
+      */
+     private List<String> exclude = List.of();
 
-    private Level level = Level.WARN;
+     /**
+      * Set the log level for detected N+1 queries (default: WARN).
+      */
+     private Level level = Level.WARN;
 
-    public boolean isEnabled() {
-        return enabled;
-    }
+     public boolean isEnabled() {
+         return enabled;
+     }
 
-    public void setEnabled(final boolean enabled) {
-        this.enabled = enabled;
-    }
+     public void setEnabled(final boolean enabled) {
+         this.enabled = enabled;
+     }
 
-    public int getThreshold() {
-        return threshold;
-    }
+     public int getThreshold() {
+         return threshold;
+     }
 
-    public void setThreshold(final int threshold) {
-        this.threshold = threshold;
-    }
+     public void setThreshold(final int threshold) {
+         this.threshold = threshold;
+     }
 
-    public List<String> getExclude() {
-        return exclude;
-    }
+     public List<String> getExclude() {
+         return exclude;
+     }
 
-    public void setExclude(final List<String> exclude) {
-        this.exclude = exclude;
-    }
+     public void setExclude(final List<String> exclude) {
+         this.exclude = exclude;
+     }
 
-    public Level getLevel() {
-        return level;
-    }
+     public Level getLevel() {
+         return level;
+     }
 
-    public void setLevel(final Level level) {
-        this.level = level;
-    }
-}
+     public void setLevel(final Level level) {
+         this.level = level;
+     }
+ }
