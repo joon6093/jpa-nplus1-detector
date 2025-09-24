@@ -12,11 +12,12 @@ spring:
     properties:
       hibernate:
         hbm2ddl.auto: create-drop
-        detector:
-          enabled: true
 
 logging:
   level:
     org:
       hibernate:
         SQL: debug
+
+nplus1detector:
+  enabled: true

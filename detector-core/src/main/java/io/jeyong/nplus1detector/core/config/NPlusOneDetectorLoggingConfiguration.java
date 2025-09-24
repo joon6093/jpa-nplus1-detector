@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Import;
 
 @AutoConfiguration
 @ConditionalOnProperty(
-        prefix = "spring.jpa.properties.hibernate.detector",
+        prefix = "nplus1detector",
         name = "enabled",
         havingValue = "true",
         matchIfMissing = false

@@ -23,10 +23,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 @TestPropertySource(
         properties = {
-                "spring.jpa.properties.hibernate.detector.threshold=10",
-                "spring.jpa.properties.hibernate.detector.level=warn",
-                "spring.jpa.properties.hibernate.detector.exclude[0]=envExcludeQuery1",
-                "spring.jpa.properties.hibernate.detector.exclude[1]=envExcludeQuery2"
+                "nplus1detector.threshold=10",
+                "nplus1detector.level=warn",
+                "nplus1detector.exclude[0]=envExcludeQuery1",
+                "nplus1detector.exclude[1]=envExcludeQuery2"
         })
 class AnnotationTest {
 

@@ -17,35 +17,31 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * </p>
  *
  * <ul>
- *     <li><b>spring.jpa.properties.hibernate.detector.enabled:</b> Set whether the detector is enabled or disabled (default: false).</li>
- *     <li><b>spring.jpa.properties.hibernate.detector.threshold:</b> Set the threshold for the number of query executions to detect N+1 queries (default: 2).</li>
- *     <li><b>spring.jpa.properties.hibernate.detector.exclude:</b> Set the list of specific queries to be excluded from N+1 queries (optional).</li>
- *     <li><b>spring.jpa.properties.hibernate.detector.level:</b> Set the log level for detected N+1 queries (default: WARN).</li>
+ *     <li><b>nplus1detector.enabled:</b> Set whether the detector is enabled or disabled (default: false).</li>
+ *     <li><b>nplus1detector.threshold:</b> Set the threshold for the number of query executions to detect N+1 queries (default: 2).</li>
+ *     <li><b>nplus1detector.exclude:</b> Set the list of specific queries to be excluded from N+1 queries (optional).</li>
+ *     <li><b>nplus1detector.level:</b> Set the log level for detected N+1 queries (default: WARN).</li>
  * </ul>
  *
  * Example configuration (YAML):
  * <pre>{@code
- * spring:
- *   jpa:
- *     properties:
- *       hibernate:
- *         detector:
- *           enabled: true
- *           threshold: 2
- *           exclude:
- *             - select ... from table1 where ...
- *             - select ... from table2 where ...
- *           level: warn
+ * nplus1detector:
+ *   enabled: true
+ *   threshold: 2
+ *   exclude:
+ *     - select ... from table1 where ...
+ *     - select ... from table2 where ...
+ *   level: warn
  * }
  * </pre>
  *
  * Example configuration (Properties):
  * <pre>{@code
- * spring.jpa.properties.hibernate.detector.enabled=true
- * spring.jpa.properties.hibernate.detector.threshold=2
- * spring.jpa.properties.hibernate.detector.exclude[0]=select ... from table1 where ...
- * spring.jpa.properties.hibernate.detector.exclude[1]=select ... from table2 where ...
- * spring.jpa.properties.hibernate.detector.level=warn
+ * nplus1detector.enabled=true
+ * nplus1detector.threshold=2
+ * nplus1detector.exclude[0]=select ... from table1 where ...
+ * nplus1detector.exclude[1]=select ... from table2 where ...
+ * nplus1detector.level=warn
  * }
  * </pre>
  *
@@ -60,7 +56,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @see NPlusOneDetectorLoggingConfiguration
  */
 // @formatter:on
-@ConfigurationProperties(prefix = "spring.jpa.properties.hibernate.detector")
+@ConfigurationProperties(prefix = "nplus1detector")
 public class NPlusOneDetectorProperties {
 
     private boolean enabled = false;

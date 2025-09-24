@@ -14,10 +14,10 @@ import tests.case5.service.CourseService;
 @ExtendWith(OutputCaptureExtension.class)
 @SpringBootTest(
         properties = {
-                "spring.jpa.properties.hibernate.detector.enabled=true",
-                "spring.jpa.properties.hibernate.detector.threshold=2",
-                "spring.jpa.properties.hibernate.detector.exclude=",
-                "spring.jpa.properties.hibernate.detector.level=warn"
+                "nplus1detector.enabled=true",
+                "nplus1detector.threshold=2",
+                "nplus1detector.exclude=",
+                "nplus1detector.level=warn"
         })
 public class CourseServiceTest {
 
