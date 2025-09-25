@@ -20,22 +20,9 @@ import org.springframework.test.context.TestExecutionListeners;
  * </p>
  *
  * <p>
- * To enable the N+1 Detector and customize its behavior, users
- * can apply this annotation at the class level to detect and log or throw exceptions
- * for N+1 query issues during the execution of test cases.
+ * To enable and customize the N+1 Detector, apply this annotation at the class level
+ * during test execution to detect N+1 queries and either log them or throw exceptions.
  * </p>
- *
- * <ul>
- *     <li><b>mode:</b> Set the mode in which the detector operates (default: LOGGING).
- *         <ul>
- *             <li><b>LOGGING:</b> Logs the detected N+1 queries at the specified log level.</li>
- *             <li><b>EXCEPTION:</b> Throws an {@code NPlusOneQueryException} for the detected N+1 queries.</li>
- *         </ul>
- *     </li>
- *     <li><b>threshold:</b> Set the threshold for the number of query executions to detect N+1 queries (default: 2).</li>
- *     <li><b>exclude:</b> Set the list of specific queries to be excluded from N+1 queries (optional).</li>
- *     <li><b>level:</b> Set the log level for detected N+1 queries (default: WARN).</li>
- * </ul>
  *
  * Example usage:
  * <pre>{@code
@@ -54,7 +41,8 @@ import org.springframework.test.context.TestExecutionListeners;
  * </pre>
  *
  * <p>
- * This annotation is intended for use in <b>test code only</b> to detect N+1 queries during unit and integration testing.
+ * <b>Note:</b> This annotation is intended for use in <b>test code only</b>
+ * to detect N+1 queries during unit and integration testing.
  * </p>
  *
  * @author jeyong
@@ -74,20 +62,44 @@ import org.springframework.test.context.TestExecutionListeners;
 )
 public @interface NPlusOneTest {
 
+    /**
+     * Set the mode in which the detector operates (default: LOGGING).
+     */
     @AliasFor("mode")
     Mode value() default Mode.LOGGING;
 
+    /**
+     * Set the mode in which the detector operates (default: LOGGING).
+     */
     @AliasFor("value")
     Mode mode() default Mode.LOGGING;
 
-    enum Mode {
-        LOGGING,
-        EXCEPTION
-    }
-
+    /**
+     * Set the threshold for the number of query executions to detect N+1 queries (default: 2).
+     */
     int threshold() default 2;
 
+    /**
+     * Set the list of specific queries to be excluded from N+1 queries (optional).
+     */
     String[] exclude() default {};
 
+    /**
+     * Set the log level for detected N+1 queries (default: WARN).
+     */
     Level level() default Level.WARN;
+
+    /**
+     * Mode in which the N+1 Detector operates.
+     */
+    enum Mode {
+        /**
+         * Logs the detected N+1 queries at the specified log level.
+         */
+        LOGGING,
+        /**
+         * Throws an {@code NPlusOneQueryException} for the detected N+1 queries.
+         */
+        EXCEPTION
+    }
 }

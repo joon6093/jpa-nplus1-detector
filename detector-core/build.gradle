@@ -6,6 +6,8 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
+    withSourcesJar()
+    withJavadocJar()
 }
 
 repositories {
@@ -15,4 +17,5 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-aop:3.0.0'
     implementation 'org.hibernate.orm:hibernate-core:6.1.5.Final'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:3.0.0'
 }

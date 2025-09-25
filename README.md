@@ -59,26 +59,22 @@ To enable the N+1 Detector, configure the following options in your Spring Boot 
 
 #### YAML (application.yml)
 ```
-spring:
-  jpa:  
-    properties:  
-      hibernate:  
-        detector:  
-          enabled: true
-          threshold: 2
-          exclude:
-              - select ... from table1 where ...
-              - select ... from table2 where ...
-          level: warn
+nplus1detector:  
+  enabled: true
+  threshold: 2
+  exclude:
+      - select ... from table1 where ...
+      - select ... from table2 where ...
+  level: warn
 ```
 
 #### Properties (application.properties)
 ```
-spring.jpa.properties.hibernate.detector.enabled=true
-spring.jpa.properties.hibernate.detector.threshold=2
-spring.jpa.properties.hibernate.detector.exclude[0]=select ... from table1 where ...      
-spring.jpa.properties.hibernate.detector.exclude[1]=select ... from table2 where ...
-spring.jpa.properties.hibernate.detector.level=warn
+nplus1detector.enabled=true
+nplus1detector.threshold=2
+nplus1detector.exclude[0]=select ... from table1 where ...      
+nplus1detector.exclude[1]=select ... from table2 where ...
+nplus1detector.level=warn
 ```
 
 ## 📄 Log

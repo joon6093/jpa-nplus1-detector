@@ -52,8 +52,8 @@ public final class NplusOneTestImportSelector implements ImportSelector, Environ
         final Level level = (Level) attributes.get("level");
 
         final Map<String, Object> propertyMap = createBasePropertyMap(threshold, exclude);
-        propertyMap.put("spring.jpa.properties.hibernate.detector.enabled", "true");
-        propertyMap.put("spring.jpa.properties.hibernate.detector.level", level.toString());
+        propertyMap.put("nplus1detector.enabled", "true");
+        propertyMap.put("nplus1detector.level", level.toString());
 
         environment.getPropertySources().addFirst(new MapPropertySource("DetectorProperties", propertyMap));
     }
@@ -63,16 +63,16 @@ public final class NplusOneTestImportSelector implements ImportSelector, Environ
         final String[] exclude = (String[]) attributes.get("exclude");
 
         final Map<String, Object> propertyMap = createBasePropertyMap(threshold, exclude);
-        propertyMap.put("spring.jpa.properties.hibernate.detector.enabled", "false");
+        propertyMap.put("nplus1detector.enabled", "false");
 
         environment.getPropertySources().addFirst(new MapPropertySource("DetectorProperties", propertyMap));
     }
 
     private Map<String, Object> createBasePropertyMap(final int threshold, final String[] exclude) {
         final Map<String, Object> propertyMap = new HashMap<>();
-        propertyMap.put("spring.jpa.properties.hibernate.detector.threshold", String.valueOf(threshold));
+        propertyMap.put("nplus1detector.threshold", String.valueOf(threshold));
         for (int i = 0; i < exclude.length; i++) {
-            propertyMap.put("spring.jpa.properties.hibernate.detector.exclude[" + i + "]", exclude[i]);
+            propertyMap.put("nplus1detector.exclude[" + i + "]", exclude[i]);
         }
 
         return propertyMap;
