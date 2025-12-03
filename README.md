@@ -77,7 +77,7 @@ nplus1detector.exclude[1]=select ... from table2 where ...
 nplus1detector.level=warn
 ```
 
-## 📄 Log
+## 📄 Runtime Logging
 When the N+1 Detector is enabled, a startup log shows the activation status, threshold, and log level.
 ```
 2024-08-27T14:59:54.307+09:00 INFO --- i.j.nplus1detector.core.config.NPlusOneDetectorLoggingConfiguration : N+1 Detector enabled in 'LOGGING' mode. Monitoring queries with a threshold of '2' and logging at 'warn' level.
@@ -88,7 +88,7 @@ Example log when an N+1 query is detected.
 2024-08-19T13:04:22.645+09:00 WARN --- i.j.nplus1detector.core.template.NPlusOneQueryLogger : N+1 query detected: 'select b1_0.author_id,b1_0.id,b1_0.title from book b1_0 where b1_0.author_id=?' was executed 2 times.
 ```
 
-## 🔍 Test
+## 🔍 Test Support
 The N+1 Detector can be used in test code with two modes, in combination with @SpringBootTest or @DataJpaTest, and any test-specific settings will take precedence over global configuration.
 
 #### Logging mode
