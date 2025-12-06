@@ -1,22 +1,29 @@
 package io.jeyong.nplus1detector.core.query.context;
 
+import org.springframework.core.NamedThreadLocal;
+
 public final class QueryContextHolder {
 
-    private static final ThreadLocal<QueryContext> queryContextThreadLocal =
-            ThreadLocal.withInitial(QueryContext::new);
+    private static final ThreadLocal<QueryContext> queryContext =
+            new NamedThreadLocal<>("NPlus1Detector query context") {
+                @Override
+                protected QueryContext initialValue() {
+                    return new QueryContext();
+                }
+            };
 
     private QueryContextHolder() {
     }
 
     public static void saveQuery(final String query) {
-        queryContextThreadLocal.get().incrementQueryCount(query);
+        queryContext.get().incrementQueryCount(query);
     }
 
     public static QueryContext getContext() {
-        return queryContextThreadLocal.get();
+        return queryContext.get();
     }
 
     public static void clearContext() {
-        queryContextThreadLocal.remove();
+        queryContext.remove();
     }
 }
