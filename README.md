@@ -19,8 +19,8 @@ repositories {
 }
 
 dependencies {  
-    implementation 'com.github.joon6093.jpa-nplus1-detector:detector-core:3.2.0'
-    testImplementation 'com.github.joon6093.jpa-nplus1-detector:detector-test:3.2.0'
+    implementation 'com.github.joon6093.jpa-nplus1-detector:detector-core:3.2.1'
+    testImplementation 'com.github.joon6093.jpa-nplus1-detector:detector-test:3.2.1'
 }
 ```
 
@@ -37,13 +37,13 @@ dependencies {
 <dependency>
     <groupId>com.github.joon6093.jpa-nplus1-detector</groupId>
     <artifactId>detector-core</artifactId>
-    <version>3.2.0</version>
+    <version>3.2.1</version>
 </dependency>
 
 <dependency>
     <groupId>com.github.joon6093.jpa-nplus1-detector</groupId>
     <artifactId>detector-test</artifactId>
-    <version>3.2.0</version>
+    <version>3.2.1</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -77,7 +77,7 @@ nplus1detector.exclude[1]=select ... from table2 where ...
 nplus1detector.level=warn
 ```
 
-## 📄 Runtime Logging
+## ⚡ Runtime Logging
 When the N+1 Detector is enabled, a startup log shows the activation status, threshold, and log level.
 ```
 2024-08-27T14:59:54.307+09:00 INFO --- i.j.nplus1detector.core.config.NPlusOneDetectorLoggingConfiguration : N+1 Detector enabled in 'LOGGING' mode. Monitoring queries with a threshold of '2' and logging at 'warn' level.
@@ -164,3 +164,4 @@ Suppressed: io.jeyong.nplus1detector.test.exception.NPlusOneQueryException: N+1 
 - [Version 3.0.1](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/3.0.1) - Released on 2025/08/29
 - [Version 3.1.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/3.1.0) - Released on 2025/09/01
 - [Version 3.2.0](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/3.2.0) - Released on 2025/09/25
+- [Version 3.2.1](https://github.com/joon6093/jpa-nplus1-detector/releases/tag/3.2.1) - Released on 2025/12/07
